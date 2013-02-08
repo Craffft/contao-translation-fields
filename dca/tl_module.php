@@ -17,11 +17,4 @@
  */
 //dump($GLOBALS['TL_DCA']['tl_module']['fields']['name']);
 $GLOBALS['TL_DCA']['tl_module']['fields']['name']['inputType'] = 'languageText';
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['name']['wizard'] = array
-(
-	array('LanguageFields', 'languagePicker')
-);
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['name']['eval']['tl_class'] = 'w50 wizard';
-$GLOBALS['TL_DCA']['tl_module']['fields']['name']['eval']['datepicker'] = true;
+$GLOBALS['TL_DCA']['tl_module']['fields']['name']['sql'] = 'blob NULL';

@@ -37,7 +37,7 @@ class LanguageTextField extends \TextField
 	 * Add a for attribute
 	 * @var boolean
 	 */
-	protected $blnForAttribute = true;
+	protected $blnForAttribute = false;
 
 	/**
 	 * Template
@@ -52,12 +52,10 @@ class LanguageTextField extends \TextField
 	 */
 	public function __construct($arrAttributes=null)
 	{
+		// Import backend user
+		$this->import('BackendUser', 'User');
+		
 		parent::__construct($arrAttributes);
-
-		if ($this->multiple)
-		{
-			$this->blnForAttribute = false;
-		}
 	}
 
 
@@ -109,6 +107,20 @@ class LanguageTextField extends \TextField
 	{
 		if (is_array($varInput))
 		{
+			// Add fallback text to other languages
+			if (count($varInput) > 0)
+			{
+				$strFallbackValue = $varInput[key($varInput)];
+				
+				foreach($varInput as $key => $value)
+				{
+					if (strlen($value) < 1)
+					{
+						$varInput[$key] = $strFallbackValue;
+					}
+				}
+			}
+			
 			return parent::validator($varInput);
 		}
 
@@ -124,7 +136,7 @@ class LanguageTextField extends \TextField
 	{
 		// Get all languages
 		$arrLanguages = $this->getLanguages();
-		
+
 		// Get all used languages
 		$arrLng = array();
 
@@ -137,15 +149,32 @@ class LanguageTextField extends \TextField
 				$arrLng[$objRootPages->language] = $arrLanguages[$objRootPages->language];
 			}
 		}
-
+$arrLng = array();
+		// If langauge array is empty
 		if (count($arrLng) < 1)
 		{
-			return 'LANGUAGES NOT DEFINED SET BACKEND DEFAULT LANGUAGES';
+			// Set all available languages
+			$arrLng = \System::getLanguages(true);
+			
+			// Set the language of the user to the top
+			if ($this->User->language != null)
+			{
+				// Get langauge value
+				$strLngValue = $arrLng[$this->User->language];
+				
+				// Remove the current language from the array
+				unset($arrLng[$this->User->language]);
+				
+				// Add old array to a temp array
+				$arrLngTemp = $arrLng;
+				
+				// Generate a new array
+				$arrLng = array($this->User->language => $strLngValue);
+				
+				// Merge the old array into the new array
+				$arrLng = array_merge($arrLng, $arrLngTemp);
+			}
 		}
-
-
-
-
 
 		$type = $this->hideInput ? 'password' : 'text';
 
@@ -161,7 +190,7 @@ class LanguageTextField extends \TextField
 
 		foreach ($arrLng as $key => $value)
 		{
-			$arrFields[] = sprintf('<input type="%s" name="%s[%s]" id="ctrl_%s" class="tl_text tl_text_%s%s" value="%s"%s onfocus="Backend.getScrollOffset()">',
+			$arrFields[] = sprintf('<input type="%s" name="%s[%s]" id="ctrl_%s" class="lf_lng_field tl_text tl_text_%s%s" value="%s"%s onfocus="Backend.getScrollOffset()">',
 									$type,
 									$this->strName,
 									$key,
@@ -176,7 +205,7 @@ class LanguageTextField extends \TextField
 
 		$arrLngKeys = array_keys($arrLng);
 		
-		$strLngButton = sprintf('<span class="lf_button" onclick="Backend.LanguageTextField(this, \'ctrl_'.$this->strId.'\')"><img src="system/modules/language_fields/assets/images/flag_icons/%s.png" width="16" height="11" alt="%s"></span>',
+		$strLngButton = sprintf('<span class="lf_button"><img src="system/modules/language_fields/assets/images/flag_icons/%s.png" width="16" height="11" alt="%s"></span>',
 								$arrLngKeys[0],
 								$arrLng[$arrLngKeys[0]]);
 
@@ -191,8 +220,9 @@ class LanguageTextField extends \TextField
 									$key,
 									$value);
 			
-			$arrLngList[] = sprintf('<li id="lng_%s" class="lf_lng_item">%s%s</li>',
+			$arrLngList[] = sprintf('<li id="lng_%s" class="lf_lng_item%s">%s%s</li>',
 										$this->strId.'_'.$key,
+										(strlen(specialchars(@$this->varValue[$key])) > 0) ? ' translated' : '',
 										$strLngIcon,
 										$value);
 			$i++;
@@ -209,64 +239,6 @@ class LanguageTextField extends \TextField
 						implode(' ', $arrFields),
 						$strLngButton,
 						$strLngList,
-						$this->wizard);
-
-		//onclick="Backend.languageTextField(this, \'ctrl_'.$this->strId.'\');
-		exit;
-		
-		
-		
-		
-		
-		
-		$type = $this->hideInput ? 'password' : 'text';
-
-		if (!$this->multiple)
-		{
-			// Hide the Punycode format (see #2750)
-			if ($this->rgxp == 'email' || $this->rgxp == 'url')
-			{
-				$this->varValue = \Idna::decode($this->varValue);
-			}
-
-			return sprintf('<input type="%s" name="%s" id="ctrl_%s" class="tl_text%s" value="%s"%s onfocus="Backend.getScrollOffset()">%s',
-							$type,
-							$this->strName,
-							$this->strId,
-							(($this->strClass != '') ? ' ' . $this->strClass : ''),
-							specialchars($this->varValue),
-							$this->getAttributes(),
-							$this->wizard);
-		}
-
-		// Return if field size is missing
-		if (!$this->size)
-		{
-			return '';
-		}
-
-		if (!is_array($this->varValue))
-		{
-			$this->varValue = array($this->varValue);
-		}
-
-		$arrFields = array();
-
-		for ($i=0; $i<$this->size; $i++)
-		{
-			$arrFields[] = sprintf('<input type="%s" name="%s[]" id="ctrl_%s" class="tl_text_%s" value="%s"%s onfocus="Backend.getScrollOffset()">',
-									$type,
-									$this->strName,
-									$this->strId.'_'.$i,
-									$this->size,
-									specialchars(@$this->varValue[$i]), // see #4979
-									$this->getAttributes());
-		}
-
-		return sprintf('<div id="ctrl_%s"%s>%s</div>%s',
-						$this->strId,
-						(($this->strClass != '') ? ' class="' . $this->strClass . '"' : ''),
-						implode(' ', $arrFields),
 						$this->wizard);
 	}
 }

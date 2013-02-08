@@ -45,6 +45,7 @@
 		position: absolute;
 		top: 6px;
 		right: 6px;
+		cursor: pointer;
 	}
 	
 	.lf_lng_list
@@ -62,6 +63,11 @@
 		-moz-border-radius:0 0 3px 3px;
 		border-radius:0 0 3px 3px;
 		
+		&.active
+		{
+			left: 0px;
+		}
+		
 		.lf_lng_item
 		{
 			padding:1px 7px 3px;
@@ -69,7 +75,13 @@
 			vertical-align: middle;
 			list-style:none;
 			margin-top: 1px;
+			cursor: pointer;
 			background: #fee;
+			
+			&.translated
+			{
+				background: #fff;
+			}
 			
 			img
 			{
