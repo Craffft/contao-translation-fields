@@ -73,6 +73,24 @@ class TranslationFields extends \Controller
 	
 	
 	/**
+	 * setLanguage function.
+	 * 
+	 * @access public
+	 * @param mixed $strLanguage
+	 * @return void
+	 */
+	public function setLanguage($strLanguage)
+	{
+		if (strlen($strLanguage) < 1)
+		{
+			return;
+		}
+		
+		$this->strLanguage = $strLanguage;
+	}
+	
+	
+	/**
 	 * translateDCObject function.
 	 * 
 	 * @access public
@@ -91,7 +109,7 @@ class TranslationFields extends \Controller
 			{
 				switch ($arrValues['inputType'])
 				{
-					case 'translationTextField':
+					case 'TranslationTextField':
 						$objDC->$field = $this->translateField($objDC->$field);
 					break;
 				}
@@ -99,6 +117,36 @@ class TranslationFields extends \Controller
 		}
 		
 		return $objDC;
+	}
+	
+	
+	/**
+	 * translateDCArray function.
+	 * 
+	 * @access public
+	 * @param array $arrDC
+	 * @param string $strTable
+	 * @return void
+	 */
+	public function translateDCArray($arrDC, $strTable)
+	{
+		// Load DC
+		$this->loadDataContainer($strTable);
+
+		if (count($GLOBALS['TL_DCA'][$strTable]['fields']) > 0)
+		{
+			foreach ($GLOBALS['TL_DCA'][$strTable]['fields'] as $field => $arrValues)
+			{
+				switch ($arrValues['inputType'])
+				{
+					case 'TranslationTextField':
+						$arrDC[$field] = $this->translateField($arrDC[$field]);
+					break;
+				}
+			}
+		}
+		
+		return $arrDC;
 	}
 	
 	

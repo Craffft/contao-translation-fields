@@ -29,9 +29,5 @@ class Frontend extends \Contao\Frontend
 	protected function __construct()
 	{
 		parent::__construct();
-		
-		//dump($this);
-		//exit;
-		//echo 'CONTROLLER VON LANGUAGE FIELDS';
 	}
 }

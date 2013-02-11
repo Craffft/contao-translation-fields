@@ -18,7 +18,7 @@
 namespace TranslationFields;
 
 /**
- * Class LanguageTextField 
+ * Class TranslationTextField 
  *
  * @copyright  Daniel Kiesel 2013 
  * @author     Daniel Kiesel 
