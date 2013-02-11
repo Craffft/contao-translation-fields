@@ -5,7 +5,7 @@
  * 
  * Copyright (C) 2005-2013 Leo Feyer
  * 
- * @package   language_fields 
+ * @package   translation_fields 
  * @author    Daniel Kiesel 
  * @license   LGPL 
  * @copyright Daniel Kiesel 2013 
@@ -13,9 +13,9 @@
 
 
 /**
- * Table tl_language_fields 
+ * Table tl_translation_fields 
  */
-$GLOBALS['TL_DCA']['tl_language_fields'] = array
+$GLOBALS['TL_DCA']['tl_translation_fields'] = array
 (
 
 	// Config

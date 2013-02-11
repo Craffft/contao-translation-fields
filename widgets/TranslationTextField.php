@@ -5,7 +5,7 @@
  * 
  * Copyright (C) 2005-2013 Leo Feyer
  * 
- * @package   language_fields 
+ * @package   translation_fields 
  * @author    Daniel Kiesel 
  * @license   LGPL 
  * @copyright Daniel Kiesel 2013 
@@ -15,16 +15,16 @@
 /**
  * Namespace
  */
-namespace LanguageFields;
+namespace TranslationFields;
 
 /**
  * Class LanguageTextField 
  *
  * @copyright  Daniel Kiesel 2013 
  * @author     Daniel Kiesel 
- * @package    LanguageFields
+ * @package    translation_fields
  */
-class LanguageTextField extends \TextField
+class TranslationTextField extends \TextField
 {
 
 	/**
@@ -149,7 +149,7 @@ class LanguageTextField extends \TextField
 				$arrLng[$objRootPages->language] = $arrLanguages[$objRootPages->language];
 			}
 		}
-$arrLng = array();
+
 		// If langauge array is empty
 		if (count($arrLng) < 1)
 		{
@@ -183,21 +183,34 @@ $arrLng = array();
 			$this->varValue = array($this->varValue);
 		}
 
+		// Set new inputs array
+		$arrLngInputs = $arrLng;
+		
+		/* DIESE OPTION EVENTUELL ÜBER DIE EINSTELLUNGEN FESTLEGEN
+		// Merge value array languages into inputs array
+		if (count($this->varValue) > 0)
+		{
+			$arrLngInputs = array_merge($arrLngInputs, $this->varValue);
+		}
+		*/
+		
+		// Get array keys
+		$arrLngInputs = array_keys($arrLngInputs);
 
 		// Generate langauge fields
 		$arrFields = array();
 		$i = 0;
 
-		foreach ($arrLng as $key => $value)
+		foreach ($arrLngInputs as $value)
 		{
-			$arrFields[] = sprintf('<input type="%s" name="%s[%s]" id="ctrl_%s" class="lf_lng_field tl_text tl_text_%s%s" value="%s"%s onfocus="Backend.getScrollOffset()">',
+			$arrFields[] = sprintf('<input type="%s" name="%s[%s]" id="ctrl_%s" class="tf_lng_field tl_text tl_text_%s%s" value="%s"%s onfocus="Backend.getScrollOffset()">',
 									$type,
 									$this->strName,
-									$key,
-									$this->strId.'_'.$key,
-									$key,
+									$value,
+									$this->strId.'_'.$value,
+									$value,
 									($i > 0) ? ' hide' : '',
-									specialchars(@$this->varValue[$key]), // see #4979
+									specialchars(@$this->varValue[$value]), // see #4979
 									$this->getAttributes());
 			$i++;
 		}
@@ -205,7 +218,7 @@ $arrLng = array();
 
 		$arrLngKeys = array_keys($arrLng);
 		
-		$strLngButton = sprintf('<span class="lf_button"><img src="system/modules/language_fields/assets/images/flag_icons/%s.png" width="16" height="11" alt="%s"></span>',
+		$strLngButton = sprintf('<span class="tf_button"><img src="system/modules/translation_fields/assets/images/flag_icons/%s.png" width="16" height="11" alt="%s"></span>',
 								$arrLngKeys[0],
 								$arrLng[$arrLngKeys[0]]);
 
@@ -216,11 +229,11 @@ $arrLng = array();
 
 		foreach ($arrLng as $key => $value)
 		{
-			$strLngIcon = sprintf('<img src="system/modules/language_fields/assets/images/flag_icons/%s.png" width="16" height="11" alt="%s">',
+			$strLngIcon = sprintf('<img src="system/modules/translation_fields/assets/images/flag_icons/%s.png" width="16" height="11" alt="%s">',
 									$key,
 									$value);
 			
-			$arrLngList[] = sprintf('<li id="lng_%s" class="lf_lng_item%s">%s%s</li>',
+			$arrLngList[] = sprintf('<li id="lng_%s" class="tf_lng_item%s">%s%s</li>',
 										$this->strId.'_'.$key,
 										(strlen(specialchars(@$this->varValue[$key])) > 0) ? ' translated' : '',
 										$strLngIcon,
@@ -229,11 +242,11 @@ $arrLng = array();
 		}
 
 
-		$strLngList = sprintf('<ul class="lf_lng_list">%s</ul>',
+		$strLngList = sprintf('<ul class="tf_lng_list">%s</ul>',
 								implode(' ', $arrLngList));
 
 
-		return sprintf('<div id="ctrl_%s" class="lf_field_wrap%s">%s%s%s</div>%s',
+		return sprintf('<div id="ctrl_%s" class="tf_field_wrap%s">%s%s%s</div>%s',
 						$this->strId,
 						(($this->strClass != '') ? ' ' . $this->strClass : ''),
 						implode(' ', $arrFields),

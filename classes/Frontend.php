@@ -18,24 +18,20 @@
 namespace TranslationFields;
 
 /**
- * Class PageModel 
+ * Class TranslationFields 
  *
  * @copyright  Daniel Kiesel 2013 
  * @author     Daniel Kiesel 
  * @package    translation_fields
  */
-class PageModel extends \Contao\PageModel
+class Frontend extends \Contao\Frontend
 {
-	public static function findRootPages(array $arrOptions=array())
+	protected function __construct()
 	{
-		$t = static::$strTable;
-		$arrColumns = array("$t.type='root'");
-
-		if (!isset($arrOptions['order']))
-		{
-			$arrOptions['order'] = "$t.fallback DESC, $t.sorting ASC";
-		}
-
-		return static::findBy($arrColumns, $intPid, $arrOptions);
+		parent::__construct();
+		
+		//dump($this);
+		//exit;
+		//echo 'CONTROLLER VON LANGUAGE FIELDS';
 	}
 }

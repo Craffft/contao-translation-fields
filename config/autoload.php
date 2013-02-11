@@ -5,7 +5,7 @@
  * 
  * Copyright (C) 2005-2013 Leo Feyer
  * 
- * @package Language_fields
+ * @package translation_fields
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
@@ -16,7 +16,7 @@
  */
 ClassLoader::addNamespaces(array
 (
-	'LanguageFields',
+	'TranslationFields',
 ));
 
 
@@ -26,11 +26,13 @@ ClassLoader::addNamespaces(array
 ClassLoader::addClasses(array
 (
 	// Classes
-	'LanguageFields\LanguageFields'    => 'system/modules/language_fields/classes/LanguageFields.php',
+	'TranslationFields\Frontend'          => 'system/modules/translation_fields/classes/Frontend.php',
+	'TranslationFields\TranslationFields'    => 'system/modules/translation_fields/classes/TranslationFields.php',
+	'TranslationFields\Module'            => 'system/modules/translation_fields/classes/Module.php',
 
 	// Models
-	'LanguageFields\PageModel'         => 'system/modules/language_fields/models/PageModel.php',
+	'TranslationFields\PageModel'         => 'system/modules/translation_fields/models/PageModel.php',
 
 	// Widgets
-	'LanguageFields\LanguageTextField' => 'system/modules/language_fields/widgets/LanguageTextField.php',
+	'TranslationFields\LanguageTextField' => 'system/modules/translation_fields/widgets/LanguageTextField.php',
 ));

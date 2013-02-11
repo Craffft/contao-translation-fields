@@ -5,7 +5,7 @@
  * 
  * Copyright (C) 2005-2013 Leo Feyer
  * 
- * @package   language_fields 
+ * @package   translation_fields 
  * @author    Daniel Kiesel 
  * @license   LGPL 
  * @copyright Daniel Kiesel 2013 
@@ -14,11 +14,11 @@
 
 if (TL_MODE == 'BE')
 {
-	$GLOBALS['TL_CSS'][]        = 'system/modules/language_fields/assets/css/languagefields.css';
-	$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/language_fields/assets/js/languagefields.js';
+	$GLOBALS['TL_CSS'][]        = 'system/modules/translation_fields/assets/css/translationfields.css';
+	$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/translation_fields/assets/js/translationfields.js';
 }
 
-$GLOBALS['BE_FFL']['languageText'] = 'LanguageTextField';
+$GLOBALS['BE_FFL']['translation_text_field'] = 'TranslationTextField';
 /**
  * BACK END MODULES
  *

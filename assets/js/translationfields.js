@@ -4,7 +4,7 @@
  * 
  * Copyright (C) 2005-2013 Leo Feyer
  * 
- * @package   language_fields 
+ * @package   translation_fields 
  * @author    Daniel Kiesel 
  * @license   LGPL 
  * @copyright Daniel Kiesel 2013 
@@ -12,7 +12,7 @@
 
 
 /**
- * Languagefields functionality
+ * TranslationFields functionality
  */
 window.addEvent('domready', function() {
 	
@@ -20,7 +20,7 @@ window.addEvent('domready', function() {
 	$(document.body).addEvent('click', function(el) {
 		
 		var obj   = $(el.target);
-		var field = obj.getParent('.lf_field_wrap');
+		var field = obj.getParent('.tf_field_wrap');
 		
 		if (obj == null)
 		{
@@ -28,19 +28,19 @@ window.addEvent('domready', function() {
 		}
 		
 		// User clicked on the flag button
-		if (obj.hasClass('lf_button') || obj.getParent('.lf_button') != null)
+		if (obj.hasClass('tf_button') || obj.getParent('.tf_button') != null)
 		{
 			// Open language list
-			field.getElement('.lf_lng_list').toggleClass('active');
+			field.getElement('.tf_lng_list').toggleClass('active');
 		}
 		else
 		{
 			// User clicked on a language list item
-			if (obj.hasClass('lf_lng_item') || obj.getParent('.lf_lng_item') != null)
+			if (obj.hasClass('tf_lng_item') || obj.getParent('.tf_lng_item') != null)
 			{
-				var listItem = obj.getParent('.lf_lng_item');
+				var listItem = obj.getParent('.tf_lng_item');
 				
-				if (listItem == null && obj.hasClass('lf_lng_item'))
+				if (listItem == null && obj.hasClass('tf_lng_item'))
 				{
 					listItem = obj;
 				}
@@ -49,7 +49,7 @@ window.addEvent('domready', function() {
 				var language = listItem.get('id').replace('lng_name_', '');
 				
 				// Change the langauge button
-				field.getChildren('.lf_button').each(function(el) {
+				field.getChildren('.tf_button').each(function(el) {
 					var img = el.getElement('img');
 					var src = img.get('src');
 					
@@ -61,7 +61,7 @@ window.addEvent('domready', function() {
 				});
 				
 				// Show the requested language field and hide the others
-				field.getChildren('.lf_lng_field').each(function(el) {
+				field.getChildren('.tf_lng_field').each(function(el) {
 					el.addClass('hide');
 					
 					if (el.get('id') == 'ctrl_name_' + language)
@@ -72,13 +72,13 @@ window.addEvent('domready', function() {
 			}
 			// ELSE User clicked on the page
 			
-			$$('.lf_field_wrap').getElement('.lf_lng_list').removeClass('active');
+			$$('.tf_field_wrap').getElement('.tf_lng_list').removeClass('active');
 		}
 	});
 	
 	
 	// User translates fields
-	$$('.lf_field_wrap').getChildren('.lf_lng_field').each(function() {
+	$$('.tf_field_wrap').getChildren('.tf_lng_field').each(function() {
 		$(this).addEvent('keyup', function(el) {
 			
 			var obj = $(el.target);
@@ -87,7 +87,7 @@ window.addEvent('domready', function() {
 			var language = obj.get('id').replace('ctrl_name_', '');
 			
 			// Get list item from active language
-			var listItem = obj.getParent('.lf_field_wrap').getElement('.lf_lng_list').getElement('#lng_name_' + language);
+			var listItem = obj.getParent('.tf_field_wrap').getElement('.tf_lng_list').getElement('#lng_name_' + language);
 			
 			// Set or unset translated class on active list item
 			if (obj.get('value').length > 0)

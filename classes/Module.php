@@ -18,24 +18,19 @@
 namespace TranslationFields;
 
 /**
- * Class PageModel 
+ * Class TranslationFields 
  *
  * @copyright  Daniel Kiesel 2013 
  * @author     Daniel Kiesel 
  * @package    translation_fields
  */
-class PageModel extends \Contao\PageModel
+abstract class Module extends \Contao\Module
 {
-	public static function findRootPages(array $arrOptions=array())
+	public function __construct($objModule, $strColumn='main')
 	{
-		$t = static::$strTable;
-		$arrColumns = array("$t.type='root'");
-
-		if (!isset($arrOptions['order']))
-		{
-			$arrOptions['order'] = "$t.fallback DESC, $t.sorting ASC";
-		}
-
-		return static::findBy($arrColumns, $intPid, $arrOptions);
+		$objTranslationFields = new \TranslationFields();
+		$objModule = $objTranslationFields->translateDCObject($objModule, 'tl_module');
+		
+		parent::__construct($objModule, $strColumn);
 	}
 }

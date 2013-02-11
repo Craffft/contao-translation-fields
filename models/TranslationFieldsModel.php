@@ -5,7 +5,7 @@
  * 
  * Copyright (C) 2005-2013 Leo Feyer
  * 
- * @package   language_fields 
+ * @package   translation_fields 
  * @author    Daniel Kiesel 
  * @license   LGPL 
  * @copyright Daniel Kiesel 2013 
@@ -15,22 +15,22 @@
 /**
  * Namespace
  */
-namespace LanguageFields;
+namespace TranslationFields;
 
 /**
- * Class LanguageFieldsModel 
+ * Class TranslationFieldsModel 
  *
  * @copyright  Daniel Kiesel 2013 
  * @author     Daniel Kiesel 
- * @package    Devtools
+ * @package    translation_fields
  */
-class LanguageFieldsModel extends \Model
+class TranslationFieldsModel extends \Model
 {
 
 	/**
 	 * Name of the table
 	 * @var string
 	 */
-	protected static $strTable = 'tl_language_fields';
+	protected static $strTable = 'tl_translation_fields';
 
 }
