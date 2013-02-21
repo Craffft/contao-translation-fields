@@ -18,4 +18,6 @@ if (TL_MODE == 'BE')
 	$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/translation_fields/assets/js/translationfields.js';
 }
 
+$GLOBALS['BE_FFL']['TranslationInputUnit'] = 'TranslationInputUnit';
+$GLOBALS['BE_FFL']['TranslationTextArea']  = 'TranslationTextArea';
 $GLOBALS['BE_FFL']['TranslationTextField'] = 'TranslationTextField';

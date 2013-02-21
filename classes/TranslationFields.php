@@ -109,6 +109,14 @@ class TranslationFields extends \Controller
 			{
 				switch ($arrValues['inputType'])
 				{
+					case 'TranslationInputUnit':
+						$objDC->$field = $this->translateField($objDC->$field);
+					break;
+					
+					case 'TranslationTextArea':
+						$objDC->$field = $this->translateField($objDC->$field);
+					break;
+					
 					case 'TranslationTextField':
 						$objDC->$field = $this->translateField($objDC->$field);
 					break;

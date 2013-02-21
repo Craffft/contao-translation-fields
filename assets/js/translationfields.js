@@ -19,8 +19,9 @@ window.addEvent('domready', function() {
 	// User clicks on page
 	$(document.body).addEvent('click', function(el) {
 		
-		var obj   = $(el.target);
-		var field = obj.getParent('.tf_field_wrap');
+		var obj       = $(el.target);
+		var field     = obj.getParent('.tf_field_wrap');
+		var fieldname = field.get('id').replace('ctrl_', '');
 		
 		if (obj == null)
 		{
@@ -46,7 +47,7 @@ window.addEvent('domready', function() {
 				}
 				
 				// Get language from chosen item
-				var language = listItem.get('id').replace('lng_name_', '');
+				var language = listItem.get('id').replace('lng_list_item_', '');
 				
 				// Change the langauge button
 				field.getChildren('.tf_button').each(function(el) {
@@ -64,7 +65,7 @@ window.addEvent('domready', function() {
 				field.getChildren('.tf_lng_field').each(function(el) {
 					el.addClass('hide');
 					
-					if (el.get('id') == 'ctrl_name_' + language)
+					if (el.get('id') == 'ctrl_' + fieldname + '_' + language)
 					{
 						el.removeClass('hide');
 					}
@@ -78,16 +79,18 @@ window.addEvent('domready', function() {
 	
 	
 	// User translates fields
-	$$('.tf_field_wrap').getChildren('.tf_lng_field').each(function() {
-		$(this).addEvent('keyup', function(el) {
+	$$('.tf_field_wrap').getChildren('.tf_lng_field').each(function(el) {
+		var fieldname = el.getParent('.tf_field_wrap').get('id').toString().replace('ctrl_', '');
+		
+		el.addEvent('keyup', function(el) {
 			
 			var obj = $(el.target);
 			
 			// Get active language from field
-			var language = obj.get('id').replace('ctrl_name_', '');
+			var language = obj.get('id').replace('ctrl_' + fieldname + '_', '');
 			
 			// Get list item from active language
-			var listItem = obj.getParent('.tf_field_wrap').getElement('.tf_lng_list').getElement('#lng_name_' + language);
+			var listItem = obj.getParent('.tf_field_wrap').getElement('.tf_lng_list').getElement('#lng_list_item_' + language);
 			
 			// Set or unset translated class on active list item
 			if (obj.get('value').length > 0)

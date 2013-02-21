@@ -18,13 +18,13 @@
 namespace TranslationFields;
 
 /**
- * Class TranslationTextField 
+ * Class TranslationInputUnit 
  *
  * @copyright  Daniel Kiesel 2013 
  * @author     Daniel Kiesel 
  * @package    translation_fields
  */
-class TranslationTextField extends \TextField
+class TranslationInputUnit extends \InputUnit
 {
 
 	/**
@@ -34,29 +34,16 @@ class TranslationTextField extends \TextField
 	protected $blnSubmitInput = true;
 
 	/**
-	 * Add a for attribute
-	 * @var boolean
-	 */
-	protected $blnForAttribute = false;
-
-	/**
 	 * Template
 	 * @var string
 	 */
 	protected $strTemplate = 'be_widget';
 
-
 	/**
-	 * Disable the for attribute if the "multiple" option is set
-	 * @param array
+	 * Units
+	 * @var array
 	 */
-	public function __construct($arrAttributes=null)
-	{
-		// Import backend user
-		$this->import('BackendUser', 'User');
-		
-		parent::__construct($arrAttributes);
-	}
+	protected $arrUnits = array();
 
 
 	/**
@@ -91,6 +78,10 @@ class TranslationTextField extends \TextField
 				$this->arrAttributes['placeholder'] = $varValue;
 				break;
 
+			case 'options':
+				$this->arrUnits = deserialize($varValue);
+				break;
+
 			default:
 				parent::__set($strKey, $varValue);
 				break;
@@ -99,20 +90,20 @@ class TranslationTextField extends \TextField
 
 
 	/**
-	 * Trim values
+	 * Do not validate unit fields
 	 * @param mixed
 	 * @return mixed
 	 */
 	protected function validator($varInput)
 	{
-		if (is_array($varInput))
+		if (is_array($varInput['value']))
 		{
-			$varInput = \TranslationWidgetHelper::addFallbackValueToEmptyField($varInput);
+			$varInput['value'] = \TranslationWidgetHelper::addFallbackValueToEmptyField($varInput['value']);
 			
-			return parent::validator($varInput);
+			parent::validator($varInput['value']);
 		}
 
-		return parent::validator(trim($varInput));
+		return $varInput;
 	}
 
 
@@ -125,45 +116,56 @@ class TranslationTextField extends \TextField
 		// Get translation languages
 		$objTranslationWidgetHelper = new \TranslationWidgetHelper();
 		$arrLng = $objTranslationWidgetHelper->getTranslationLanguages();
+		
+		$arrUnits = array();
 
-		$type = $this->hideInput ? 'password' : 'text';
+		foreach ($this->arrUnits as $arrUnit)
+		{
+			$arrUnits[] = sprintf('<option value="%s"%s>%s</option>',
+								   specialchars($arrUnit['value']),
+								   $this->isSelected($arrUnit),
+								   $arrUnit['label']);
+		}
 
 		if (!is_array($this->varValue))
 		{
-			$this->varValue = array($this->varValue);
+			$this->varValue = array('value'=>$this->varValue);
 		}
 
 		// Get language button
 		$strLngButton = $objTranslationWidgetHelper->getCurrentTranslationLanguageButton();
 
 		// Get language list
-		$strLngList = $objTranslationWidgetHelper->getTranslationLanguagesList($this->varValue);
+		$strLngList = $objTranslationWidgetHelper->getTranslationLanguagesList($this->varValue['value']);
 
 		// Generate langauge fields
-		$arrLngInputs = $objTranslationWidgetHelper->getInputTranslationLanguages($this->varValue);
-
+		$arrLngInputs = $objTranslationWidgetHelper->getInputTranslationLanguages($this->varValue['value']);
+		
 		$arrFields = array();
 		$i = 0;
 
 		foreach ($arrLngInputs as $value)
 		{
-			$arrFields[] = sprintf('<input type="%s" name="%s[%s]" id="ctrl_%s" class="tf_lng_field tl_text tl_text_%s%s" value="%s"%s onfocus="Backend.getScrollOffset()">',
-									$type,
+			$arrFields[] = sprintf('<input type="text" name="%s[value][%s]" id="ctrl_%s" class="tf_lng_field tl_text_unit tl_text_unit%s%s" value="%s"%s onfocus="Backend.getScrollOffset()">',
 									$this->strName,
 									$value,
 									$this->strId.'_'.$value,
 									$value,
 									($i > 0) ? ' hide' : '',
-									specialchars(@$this->varValue[$value]), // see #4979
+									specialchars(@$this->varValue['value'][$value]),
 									$this->getAttributes());
 			$i++;
 		}
 
-
-		return sprintf('<div id="ctrl_%s" class="tf_field_wrap tf_text_wrap%s">%s%s%s</div>%s',
+		$strUnit = sprintf('<select name="%s[unit]" class="tl_select_unit" onfocus="Backend.getScrollOffset()">%s</select>',
+						$this->strName,
+						implode('', $arrUnits));
+						
+		return sprintf('<div id="ctrl_%s" class="tf_field_wrap tf_text_unit_wrap%s">%s %s%s%s</div>%s',
 						$this->strId,
 						(($this->strClass != '') ? ' ' . $this->strClass : ''),
 						implode(' ', $arrFields),
+						$strUnit,
 						$strLngButton,
 						$strLngList,
 						$this->wizard);
