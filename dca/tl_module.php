@@ -61,8 +61,9 @@ class tl_module_translation_fields extends tl_module
 	 */
 	public function listModule($row)
 	{
-		$objTranslationFields = new \TranslationFields();
-		$row = $objTranslationFields->translateDCArray($row, 'tl_module');
+		// Translate fields
+		$this->loadDataContainer('tl_module');
+		$row = \TranslationFields::translateDCArray($row, 'tl_module');
 		
 		return parent::listModule($row);
 	}

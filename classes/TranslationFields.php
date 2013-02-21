@@ -84,12 +84,13 @@ class TranslationFields extends \Controller
 	/**
 	 * translateField function.
 	 * 
-	 * @access public
+	 * @access protected
+	 * @static
 	 * @param string $strInputType
 	 * @param array $varValue
 	 * @return string
 	 */
-	public function translateField($strInputType, $varValue)
+	protected static function translateField($strInputType, $varValue)
 	{
 		switch ($strInputType)
 		{
@@ -118,20 +119,18 @@ class TranslationFields extends \Controller
 	 * translateDCObject function.
 	 * 
 	 * @access public
+	 * @static
 	 * @param object $objDC
 	 * @param string $strTable
 	 * @return object
 	 */
-	public function translateDCObject($objDC, $strTable)
+	public static function translateDCObject($objDC, $strTable)
 	{
-		// Load DC
-		$this->loadDataContainer($strTable);
-		
 		if (count($GLOBALS['TL_DCA'][$strTable]['fields']) > 0)
 		{
 			foreach ($GLOBALS['TL_DCA'][$strTable]['fields'] as $field => $arrValues)
 			{
-				$objDC->$field = $this->translateField($arrValues['inputType'], $objDC->$field);
+				$objDC->$field = self::translateField($arrValues['inputType'], $objDC->$field);
 			}
 		}
 		
@@ -143,20 +142,18 @@ class TranslationFields extends \Controller
 	 * translateDCArray function.
 	 * 
 	 * @access public
+	 * @static
 	 * @param array $arrDC
 	 * @param string $strTable
 	 * @return array
 	 */
-	public function translateDCArray($arrDC, $strTable)
+	public static function translateDCArray($arrDC, $strTable)
 	{
-		// Load DC
-		$this->loadDataContainer($strTable);
-
 		if (count($GLOBALS['TL_DCA'][$strTable]['fields']) > 0)
 		{
 			foreach ($GLOBALS['TL_DCA'][$strTable]['fields'] as $field => $arrValues)
 			{
-				$arrDC[$field] = $this->translateField($arrValues['inputType'], $arrDC[$field]);
+				$arrDC[$field] = self::translateField($arrValues['inputType'], $arrDC[$field]);
 			}
 		}
 		
