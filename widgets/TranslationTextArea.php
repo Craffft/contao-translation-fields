@@ -107,28 +107,62 @@ class TranslationTextArea extends \TextArea
 	 */
 	public function generate()
 	{
-		// Register the field name for rich text editor usage
-		if (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['rte']))
-		{
-			list ($file, $type) = explode('|', $this->rte);
-			$key = 'ctrl_' . $this->strId;
+		// Get translation languages
+		$objTranslationWidgetHelper = new \TranslationWidgetHelper();
+		$arrLng = $objTranslationWidgetHelper->getTranslationLanguages();
 
-			$GLOBALS['TL_RTE'][$file][$key] = array
-			(
-				'id'   => $key,
-				'file' => $file,
-				'type' => $type
-			);
+		// Get language button
+		$strLngButton = $objTranslationWidgetHelper->getCurrentTranslationLanguageButton();
+
+		// Get language list
+		$strLngList = $objTranslationWidgetHelper->getTranslationLanguagesList($this->varValue);
+
+		// Generate langauge fields
+		$arrLngInputs = $objTranslationWidgetHelper->getInputTranslationLanguages($this->varValue);
+
+		$arrFields = array();
+		$i = 0;
+
+		foreach ($arrLngInputs as $value)
+		{
+			$rte = false;
+
+			// Register the field name for rich text editor usage
+			if (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['rte']))
+			{
+				list ($file, $type) = explode('|', $this->rte);
+				$key = 'ctrl_' . $this->strId.'_'.$value;
+
+				$GLOBALS['TL_RTE'][$file][$key] = array
+				(
+					'id'   => $key,
+					'file' => $file,
+					'type' => $type
+				);
+
+				$rte = true;
+			}
+
+			$arrFields[] = sprintf('<textarea name="%s[%s]" id="ctrl_%s" class="tf_lng_field tl_textarea tl_textarea_%s%s" rows="%s" cols="%s"%s onfocus="Backend.getScrollOffset()">%s</textarea>',
+									$this->strName,
+									$value,
+									$this->strId.'_'.$value,
+									$value,
+									($i > 0) ? ' hide' : '',
+									$this->intRows,
+									$this->intCols,
+									$this->getAttributes(),
+									specialchars(@$this->varValue[$value]));
+			$i++;
 		}
 
-		return sprintf('<textarea name="%s" id="ctrl_%s" class="tl_textarea%s" rows="%s" cols="%s"%s onfocus="Backend.getScrollOffset()">%s</textarea>%s',
-						$this->strName,
+		return sprintf('<div id="ctrl_%s" class="tf_field_wrap tf_textarea_wrap%s%s">%s%s%s</div>%s',
 						$this->strId,
 						(($this->strClass != '') ? ' ' . $this->strClass : ''),
-						$this->intRows,
-						$this->intCols,
-						$this->getAttributes(),
-						specialchars($this->varValue),
+						($rte ? ' rte' : ''),
+						implode(' ', $arrFields),
+						$strLngButton,
+						$strLngList,
 						$this->wizard);
 	}
 }

@@ -36,9 +36,13 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea1']['eval']['tl_cl
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea2'] = $GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea1'];
 $GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea2']['eval']['rte'] = 'tinyFlash';
+$GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea2']['eval']['tl_class'] = '';
+//$GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea2']['inputType'] = 'textarea';
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea3'] = $GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea1'];
 $GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea3']['eval']['rte'] = 'tinyMCE';
+$GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea3']['eval']['tl_class'] = '';
+//$GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea3']['inputType'] = 'textarea';
 
 
 

@@ -42,6 +42,7 @@
 	.tf_button
 	{
 		position: absolute;
+		z-index: 999;
 		top: 6px;
 		right: 6px;
 		cursor: pointer;
@@ -50,7 +51,7 @@
 	.tf_lng_list
 	{
 		position: absolute;
-		z-index: 999;
+		z-index: 998;
 		top: 20px;
 		left: -9000px;
 		width:314px;
@@ -106,6 +107,26 @@
 		.tf_lng_list
 		{
 			width: 250px;
+		}
+	}
+	
+	&.tf_textarea_wrap
+	{
+		width: 684px;
+		
+		.tf_lng_list
+		{
+			top: 2px;
+			padding-top: 20px;
+			-webkit-border-radius:0 3px 3px 3px;
+			-moz-border-radius:0 3px 3px 3px;
+			border-radius:0 3px 3px 3px;
+			
+			&.active
+			{
+				left: auto;
+				right: 0px;
+			}
 		}
 	}
 }

@@ -47,19 +47,6 @@ class TranslationTextField extends \TextField
 
 
 	/**
-	 * Disable the for attribute if the "multiple" option is set
-	 * @param array
-	 */
-	public function __construct($arrAttributes=null)
-	{
-		// Import backend user
-		$this->import('BackendUser', 'User');
-		
-		parent::__construct($arrAttributes);
-	}
-
-
-	/**
 	 * Add specific attributes
 	 * @param string
 	 * @param mixed
