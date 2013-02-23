@@ -13,7 +13,7 @@
 
 
 /**
- * Table tl_translation_fields 
+ * Table tl_module 
  */
 //dump($GLOBALS['TL_DCA']['tl_module']['fields']['headline']);
 

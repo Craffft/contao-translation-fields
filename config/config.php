@@ -21,3 +21,19 @@ if (TL_MODE == 'BE')
 $GLOBALS['BE_FFL']['TranslationInputUnit'] = 'TranslationInputUnit';
 $GLOBALS['BE_FFL']['TranslationTextArea']  = 'TranslationTextArea';
 $GLOBALS['BE_FFL']['TranslationTextField'] = 'TranslationTextField';
+
+
+/**
+ * List of the ignored fields which are not be shown in tl_settings
+ */
+$GLOBALS['TL_CONFIG']['ignoreFields'] = array(
+	'alias',
+	'start',
+	'stop',
+	'url',
+	'email',
+	'username',
+	'name',
+	'imageUrl',
+	'cssClass'
+);
