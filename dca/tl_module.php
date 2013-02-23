@@ -17,7 +17,7 @@
  */
 //dump($GLOBALS['TL_DCA']['tl_module']['fields']['headline']);
 
-$GLOBALS['TL_DCA']['tl_module']['palettes']['navigation'] = str_replace(',headline', ',headline,TranslationTextArea1,TranslationTextArea2,TranslationTextArea3', $GLOBALS['TL_DCA']['tl_module']['palettes']['navigation']);
+$GLOBALS['TL_DCA']['tl_module']['palettes']['navigation'] = str_replace(',headline', ',headline,TranslationTextArea1,TranslationTextArea2,TranslationTextArea3,TranslationTextArea4,TranslationTextArea5,TranslationTextArea6', $GLOBALS['TL_DCA']['tl_module']['palettes']['navigation']);
 
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['name']['inputType'] = 'TranslationTextField';
@@ -35,14 +35,21 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea1']['eval']['rte']
 $GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea1']['eval']['tl_class'] = '';
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea2'] = $GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea1'];
-$GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea2']['eval']['rte'] = 'tinyFlash';
-$GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea2']['eval']['tl_class'] = '';
-//$GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea2']['inputType'] = 'textarea';
+$GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea2']['inputType'] = 'textarea';
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea3'] = $GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea1'];
-$GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea3']['eval']['rte'] = 'tinyMCE';
-$GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea3']['eval']['tl_class'] = '';
-//$GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea3']['inputType'] = 'textarea';
+$GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea3']['eval']['rte'] = 'tinyFlash';
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea4'] = $GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea1'];
+$GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea4']['eval']['rte'] = 'tinyFlash';
+$GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea4']['inputType'] = 'textarea';
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea5'] = $GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea1'];
+$GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea5']['eval']['rte'] = 'tinyMCE';
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea6'] = $GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea1'];
+$GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea6']['eval']['rte'] = 'tinyMCE';
+$GLOBALS['TL_DCA']['tl_module']['fields']['TranslationTextArea6']['inputType'] = 'textarea';
 
 
 

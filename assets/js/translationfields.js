@@ -20,7 +20,7 @@ window.addEvent('domready', function() {
 	$(document.body).addEvent('click', function(el) {
 		
 		var obj       = $(el.target);
-		var field     = obj.getParent('.tf_field_wrap');
+		var field     = obj.getParent('.tf_wrap');
 		
 		if (field != undefined)
 		{
@@ -34,8 +34,20 @@ window.addEvent('domready', function() {
 			// User clicked on the flag button
 			if (obj.hasClass('tf_button') || obj.getParent('.tf_button') != null)
 			{
-				// Open language list
-				field.getElement('.tf_lng_list').toggleClass('active');
+				if (field.getElement('.tf_lng_list').hasClass('active'))
+				{
+					// Close language list
+					field.getElement('.tf_lng_list').removeClass('active');
+				}
+				else
+				{
+					$$('.tf_wrap .tf_lng_list.active').each(function(el) {
+						el.removeClass('active');
+					});
+					
+					// Open language list
+					field.getElement('.tf_lng_list').addClass('active');
+				}
 			}
 			else
 			{
@@ -65,10 +77,10 @@ window.addEvent('domready', function() {
 					});
 					
 					// Show the requested language field and hide the others
-					field.getChildren('.tf_lng_field').each(function(el) {
+					field.getChildren('.tf_field_wrap').each(function(el) {
 						el.addClass('hide');
 						
-						if (el.get('id') == 'ctrl_' + fieldname + '_' + language)
+						if (el.hasClass('tf_field_wrap_' + language))
 						{
 							el.removeClass('hide');
 						}
@@ -76,25 +88,24 @@ window.addEvent('domready', function() {
 				}
 				// ELSE User clicked on the page
 				
-				$$('.tf_field_wrap').getElement('.tf_lng_list').removeClass('active');
+				$$('.tf_wrap').getElement('.tf_lng_list').removeClass('active');
 			}
 		}
 	});
 	
 	
 	// User translates fields
-	$$('.tf_field_wrap').getChildren('.tf_lng_field').each(function(el) {
-		var fieldname = el.getParent('.tf_field_wrap').get('id').toString().replace('ctrl_', '');
+	$$('.tf_wrap').getChildren('.tf_field_wrap').each(function(el) {
+		var fieldname = el.getParent('.tf_wrap').get('id').toString().replace('ctrl_', '');
 		
 		el.addEvent('keyup', function(el) {
-			
 			var obj = $(el.target);
 			
 			// Get active language from field
 			var language = obj.get('id').replace('ctrl_' + fieldname + '_', '');
 			
 			// Get list item from active language
-			var listItem = obj.getParent('.tf_field_wrap').getElement('.tf_lng_list').getElement('#lng_list_item_' + language);
+			var listItem = obj.getParent('.tf_wrap').getElement('.tf_lng_list').getElement('#lng_list_item_' + language);
 			
 			// Set or unset translated class on active list item
 			if (obj.get('value').length > 0)

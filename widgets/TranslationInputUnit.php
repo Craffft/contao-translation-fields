@@ -146,12 +146,12 @@ class TranslationInputUnit extends \InputUnit
 
 		foreach ($arrLngInputs as $value)
 		{
-			$arrFields[] = sprintf('<input type="text" name="%s[value][%s]" id="ctrl_%s" class="tf_lng_field tl_text_unit tl_text_unit%s%s" value="%s"%s onfocus="Backend.getScrollOffset()">',
+			$arrFields[] = sprintf('<div class="tf_field_wrap tf_field_wrap_%s%s"><input type="text" name="%s[value][%s]" id="ctrl_%s" class="tf_field tl_text_unit" value="%s"%s onfocus="Backend.getScrollOffset()"></div>',
+									$value,
+									($i > 0) ? ' hide' : '',
 									$this->strName,
 									$value,
 									$this->strId.'_'.$value,
-									$value,
-									($i > 0) ? ' hide' : '',
 									specialchars(@$this->varValue['value'][$value]),
 									$this->getAttributes());
 			$i++;
@@ -161,7 +161,7 @@ class TranslationInputUnit extends \InputUnit
 						$this->strName,
 						implode('', $arrUnits));
 						
-		return sprintf('<div id="ctrl_%s" class="tf_field_wrap tf_text_unit_wrap%s">%s %s%s%s</div>%s',
+		return sprintf('<div id="ctrl_%s" class="tf_wrap tf_text_unit_wrap%s">%s %s%s%s</div>%s',
 						$this->strId,
 						(($this->strClass != '') ? ' ' . $this->strClass : ''),
 						implode(' ', $arrFields),

@@ -125,6 +125,7 @@ class TranslationTextArea extends \TextArea
 
 		foreach ($arrLngInputs as $value)
 		{
+			$strScript = '';
 			$rte = false;
 
 			// Register the field name for rich text editor usage
@@ -140,23 +141,28 @@ class TranslationTextArea extends \TextArea
 					'type' => $type
 				);
 
+				$strScript = sprintf("\n<script>tinyMCE.execCommand('mceAddControl', false, '%s');$('%s').erase('required')</script>",
+										$key,
+										$key);
+
 				$rte = true;
 			}
 
-			$arrFields[] = sprintf('<textarea name="%s[%s]" id="ctrl_%s" class="tf_lng_field tl_textarea tl_textarea_%s%s" rows="%s" cols="%s"%s onfocus="Backend.getScrollOffset()">%s</textarea>',
+			$arrFields[] = sprintf('<div class="tf_field_wrap tf_field_wrap_%s%s"><textarea name="%s[%s]" id="ctrl_%s" class="tf_field tl_textarea" rows="%s" cols="%s"%s onfocus="Backend.getScrollOffset()">%s</textarea>%s</div>',
+									$value,
+									($i > 0) ? ' hide' : '',
 									$this->strName,
 									$value,
 									$this->strId.'_'.$value,
-									$value,
-									($i > 0) ? ' hide' : '',
 									$this->intRows,
 									$this->intCols,
 									$this->getAttributes(),
-									specialchars(@$this->varValue[$value]));
+									specialchars(@$this->varValue[$value]),
+									$strScript);
 			$i++;
 		}
 
-		return sprintf('<div id="ctrl_%s" class="tf_field_wrap tf_textarea_wrap%s%s">%s%s%s</div>%s',
+		return sprintf('<div id="ctrl_%s" class="tf_wrap tf_textarea_wrap%s%s">%s%s%s</div>%s',
 						$this->strId,
 						(($this->strClass != '') ? ' ' . $this->strClass : ''),
 						($rte ? ' rte' : ''),

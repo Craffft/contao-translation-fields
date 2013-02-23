@@ -134,20 +134,20 @@ class TranslationTextField extends \TextField
 
 		foreach ($arrLngInputs as $value)
 		{
-			$arrFields[] = sprintf('<input type="%s" name="%s[%s]" id="ctrl_%s" class="tf_lng_field tl_text tl_text_%s%s" value="%s"%s onfocus="Backend.getScrollOffset()">',
+			$arrFields[] = sprintf('<div class="tf_field_wrap tf_field_wrap_%s%s"><input type="%s" name="%s[%s]" id="ctrl_%s" class="tf_field tl_text" value="%s"%s onfocus="Backend.getScrollOffset()"></div>',
+									$value,
+									($i > 0) ? ' hide' : '',
 									$type,
 									$this->strName,
 									$value,
 									$this->strId.'_'.$value,
-									$value,
-									($i > 0) ? ' hide' : '',
 									specialchars(@$this->varValue[$value]), // see #4979
 									$this->getAttributes());
 			$i++;
 		}
 
 
-		return sprintf('<div id="ctrl_%s" class="tf_field_wrap tf_text_wrap%s">%s%s%s</div>%s',
+		return sprintf('<div id="ctrl_%s" class="tf_wrap tf_text_wrap%s">%s%s%s</div>%s',
 						$this->strId,
 						(($this->strClass != '') ? ' ' . $this->strClass : ''),
 						implode(' ', $arrFields),
