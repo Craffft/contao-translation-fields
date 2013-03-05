@@ -12,15 +12,27 @@
  */
 
 
+/**
+ * Add CSS and JavaScript files
+ */
 if (TL_MODE == 'BE')
 {
 	$GLOBALS['TL_CSS'][]        = 'system/modules/translation_fields/assets/css/translationfields.css';
 	$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/translation_fields/assets/js/translationfields.js';
 }
 
+/**
+ * Add new backend formfields
+ */
 $GLOBALS['BE_FFL']['TranslationInputUnit'] = 'TranslationInputUnit';
 $GLOBALS['BE_FFL']['TranslationTextArea']  = 'TranslationTextArea';
 $GLOBALS['BE_FFL']['TranslationTextField'] = 'TranslationTextField';
+
+
+/**
+ * Add hooks
+ */
+$GLOBALS['TL_HOOKS']['loadDataContainer'][] = array('TranslationFieldsHooks', 'TranslationFieldsLoadDataContainer');
 
 
 /**
@@ -33,7 +45,7 @@ $GLOBALS['TL_CONFIG']['ignoreFields'] = array(
 	'url',
 	'email',
 	'username',
-	'name',
 	'imageUrl',
-	'cssClass'
+	'cssClass',
+	'cssID'
 );

@@ -29,7 +29,8 @@ ClassLoader::addClasses(array
 	'TranslationFields\Frontend'                => 'system/modules/translation_fields/classes/Frontend.php',
 	'TranslationFields\Module'                  => 'system/modules/translation_fields/classes/Module.php',
 	'TranslationFields\TranslationFields'       => 'system/modules/translation_fields/classes/TranslationFields.php',
-	'TranslationFields\TranslationWidgetHelper' => 'system/modules/translation_fields/classes/TranslationWidgetHelper.php',
+	'TranslationFields\TranslationFieldsHooks'  => 'system/modules/translation_fields/classes/TranslationFieldsHooks.php',
+	'TranslationFields\TranslationFieldsWidgetHelper' => 'system/modules/translation_fields/classes/TranslationFieldsWidgetHelper.php',
 
 	// Models
 	'TranslationFields\PageModel'               => 'system/modules/translation_fields/models/PageModel.php',

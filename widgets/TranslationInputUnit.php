@@ -98,7 +98,7 @@ class TranslationInputUnit extends \InputUnit
 	{
 		if (is_array($varInput['value']))
 		{
-			$varInput['value'] = \TranslationWidgetHelper::addFallbackValueToEmptyField($varInput['value']);
+			$varInput['value'] = \TranslationFieldsWidgetHelper::addFallbackValueToEmptyField($varInput['value']);
 			
 			parent::validator($varInput['value']);
 		}
@@ -114,8 +114,8 @@ class TranslationInputUnit extends \InputUnit
 	public function generate()
 	{
 		// Get translation languages
-		$objTranslationWidgetHelper = new \TranslationWidgetHelper();
-		$arrLng = $objTranslationWidgetHelper->getTranslationLanguages();
+		$objTranslationFieldsWidgetHelper = new \TranslationFieldsWidgetHelper();
+		$arrLng = $objTranslationFieldsWidgetHelper->getTranslationLanguages();
 		
 		$arrUnits = array();
 
@@ -133,13 +133,13 @@ class TranslationInputUnit extends \InputUnit
 		}
 
 		// Get language button
-		$strLngButton = $objTranslationWidgetHelper->getCurrentTranslationLanguageButton();
+		$strLngButton = $objTranslationFieldsWidgetHelper->getCurrentTranslationLanguageButton();
 
 		// Get language list
-		$strLngList = $objTranslationWidgetHelper->getTranslationLanguagesList($this->varValue['value']);
+		$strLngList = $objTranslationFieldsWidgetHelper->getTranslationLanguagesList($this->varValue['value']);
 
 		// Generate langauge fields
-		$arrLngInputs = $objTranslationWidgetHelper->getInputTranslationLanguages($this->varValue['value']);
+		$arrLngInputs = $objTranslationFieldsWidgetHelper->getInputTranslationLanguages($this->varValue['value']);
 		
 		$arrFields = array();
 		$i = 0;

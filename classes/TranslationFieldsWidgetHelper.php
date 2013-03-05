@@ -18,13 +18,13 @@
 namespace TranslationFields;
 
 /**
- * Class TranslationWidgetHelper
+ * Class TranslationFieldsWidgetHelper
  *
  * @copyright  Daniel Kiesel 2013
  * @author     Daniel Kiesel
  * @package    translation_fields
  */
-class TranslationWidgetHelper extends \Backend
+class TranslationFieldsWidgetHelper extends \Backend
 {
 	/**
 	 * arrLng

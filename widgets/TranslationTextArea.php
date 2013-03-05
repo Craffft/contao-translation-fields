@@ -108,17 +108,17 @@ class TranslationTextArea extends \TextArea
 	public function generate()
 	{
 		// Get translation languages
-		$objTranslationWidgetHelper = new \TranslationWidgetHelper();
-		$arrLng = $objTranslationWidgetHelper->getTranslationLanguages();
+		$objTranslationFieldsWidgetHelper = new \TranslationFieldsWidgetHelper();
+		$arrLng = $objTranslationFieldsWidgetHelper->getTranslationLanguages();
 
 		// Get language button
-		$strLngButton = $objTranslationWidgetHelper->getCurrentTranslationLanguageButton();
+		$strLngButton = $objTranslationFieldsWidgetHelper->getCurrentTranslationLanguageButton();
 
 		// Get language list
-		$strLngList = $objTranslationWidgetHelper->getTranslationLanguagesList($this->varValue);
+		$strLngList = $objTranslationFieldsWidgetHelper->getTranslationLanguagesList($this->varValue);
 
 		// Generate langauge fields
-		$arrLngInputs = $objTranslationWidgetHelper->getInputTranslationLanguages($this->varValue);
+		$arrLngInputs = $objTranslationFieldsWidgetHelper->getInputTranslationLanguages($this->varValue);
 
 		$arrFields = array();
 		$i = 0;
