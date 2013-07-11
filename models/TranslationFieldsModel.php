@@ -32,5 +32,4 @@ class TranslationFieldsModel extends \Model
 	 * @var string
 	 */
 	protected static $strTable = 'tl_translation_fields';
-
 }

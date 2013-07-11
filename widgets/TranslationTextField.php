@@ -110,8 +110,7 @@ class TranslationTextField extends \TextField
 	public function generate()
 	{
 		// Get translation languages
-		$objTranslationFieldsWidgetHelper = new \TranslationFieldsWidgetHelper();
-		$arrLng = $objTranslationFieldsWidgetHelper->getTranslationLanguages();
+		$arrLng = \TranslationFieldsWidgetHelper::getTranslationLanguages();
 
 		$type = $this->hideInput ? 'password' : 'text';
 
@@ -121,13 +120,13 @@ class TranslationTextField extends \TextField
 		}
 
 		// Get language button
-		$strLngButton = $objTranslationFieldsWidgetHelper->getCurrentTranslationLanguageButton();
+		$strLngButton = \TranslationFieldsWidgetHelper::getCurrentTranslationLanguageButton();
 
 		// Get language list
-		$strLngList = $objTranslationFieldsWidgetHelper->getTranslationLanguagesList($this->varValue);
+		$strLngList = \TranslationFieldsWidgetHelper::getTranslationLanguagesList($this->varValue);
 
 		// Generate langauge fields
-		$arrLngInputs = $objTranslationFieldsWidgetHelper->getInputTranslationLanguages($this->varValue);
+		$arrLngInputs = \TranslationFieldsWidgetHelper::getInputTranslationLanguages($this->varValue);
 
 		$arrFields = array();
 		$i = 0;

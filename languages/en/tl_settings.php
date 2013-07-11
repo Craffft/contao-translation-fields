@@ -14,10 +14,11 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_settings']['translation_fields'] = array('Übersetzbare Felder definieren', 'Hier können Sie diverse Textfelder in übersetzbare Textfelder umwandeln. WICHTIG: Aktualisieren nach dem Speichern der Änderungen die Datenbank über das DB-Tool!');
+$GLOBALS['TL_LANG']['tl_settings']['chooseTranslationLanguages'] = array('Select available languages', 'Check this box to define the available languages ​​for the translation fields.');
+$GLOBALS['TL_LANG']['tl_settings']['translationLanguages'] = array('Available languages', 'Here you can select from the available languages ​​for the translation fields.');
 
 
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_settings']['translation_fields_legend'] = 'Übersetzbare Felder';
+$GLOBALS['TL_LANG']['tl_settings']['translation_fields_legend'] = 'Translateable fields';

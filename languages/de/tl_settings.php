@@ -14,7 +14,8 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_settings']['translation_fields'] = array('Übersetzbare Felder definieren', 'Hier können Sie diverse Textfelder in übersetzbare Textfelder umwandeln. WICHTIG: Aktualisieren nach dem Speichern der Änderungen die Datenbank über das DB-Tool!');
+$GLOBALS['TL_LANG']['tl_settings']['chooseTranslationLanguages'] = array('Verfügbare Sprachen auswählen', 'Aktivieren Sie dieses Feld, um die verfügbaren Sprachen für die Übersetzungsfelder zu definieren.');
+$GLOBALS['TL_LANG']['tl_settings']['translationLanguages'] = array('Verfügbare Sprachen', 'Wählen Sie hier die verfügbaren Sprachen für die Übersetzungsfelder aus.');
 
 
 /**

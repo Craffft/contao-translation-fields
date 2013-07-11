@@ -26,18 +26,15 @@ ClassLoader::addNamespaces(array
 ClassLoader::addClasses(array
 (
 	// Classes
-	'TranslationFields\Frontend'                => 'system/modules/translation_fields/classes/Frontend.php',
-	'TranslationFields\Module'                  => 'system/modules/translation_fields/classes/Module.php',
-	'TranslationFields\TranslationFields'       => 'system/modules/translation_fields/classes/TranslationFields.php',
-	'TranslationFields\TranslationFieldsHooks'  => 'system/modules/translation_fields/classes/TranslationFieldsHooks.php',
+	'TranslationFields\TranslationFields'             => 'system/modules/translation_fields/classes/TranslationFields.php',
 	'TranslationFields\TranslationFieldsWidgetHelper' => 'system/modules/translation_fields/classes/TranslationFieldsWidgetHelper.php',
 
 	// Models
-	'TranslationFields\PageModel'               => 'system/modules/translation_fields/models/PageModel.php',
-	'TranslationFields\TranslationFieldsModel'  => 'system/modules/translation_fields/models/TranslationFieldsModel.php',
+	'TranslationFields\PageModel'                     => 'system/modules/translation_fields/models/PageModel.php',
+	'TranslationFields\TranslationFieldsModel'        => 'system/modules/translation_fields/models/TranslationFieldsModel.php',
 
 	// Widgets
-	'TranslationFields\TranslationInputUnit'    => 'system/modules/translation_fields/widgets/TranslationInputUnit.php',
-	'TranslationFields\TranslationTextArea'     => 'system/modules/translation_fields/widgets/TranslationTextArea.php',
-	'TranslationFields\TranslationTextField'    => 'system/modules/translation_fields/widgets/TranslationTextField.php',
+	'TranslationFields\TranslationInputUnit'          => 'system/modules/translation_fields/widgets/TranslationInputUnit.php',
+	'TranslationFields\TranslationTextArea'           => 'system/modules/translation_fields/widgets/TranslationTextArea.php',
+	'TranslationFields\TranslationTextField'          => 'system/modules/translation_fields/widgets/TranslationTextField.php',
 ));

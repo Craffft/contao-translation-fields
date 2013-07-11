@@ -114,8 +114,7 @@ class TranslationInputUnit extends \InputUnit
 	public function generate()
 	{
 		// Get translation languages
-		$objTranslationFieldsWidgetHelper = new \TranslationFieldsWidgetHelper();
-		$arrLng = $objTranslationFieldsWidgetHelper->getTranslationLanguages();
+		$arrLng = \TranslationFieldsWidgetHelper::getTranslationLanguages();
 		
 		$arrUnits = array();
 
@@ -133,13 +132,13 @@ class TranslationInputUnit extends \InputUnit
 		}
 
 		// Get language button
-		$strLngButton = $objTranslationFieldsWidgetHelper->getCurrentTranslationLanguageButton();
+		$strLngButton = \TranslationFieldsWidgetHelper::getCurrentTranslationLanguageButton();
 
 		// Get language list
-		$strLngList = $objTranslationFieldsWidgetHelper->getTranslationLanguagesList($this->varValue['value']);
+		$strLngList = \TranslationFieldsWidgetHelper::getTranslationLanguagesList($this->varValue['value']);
 
 		// Generate langauge fields
-		$arrLngInputs = $objTranslationFieldsWidgetHelper->getInputTranslationLanguages($this->varValue['value']);
+		$arrLngInputs = \TranslationFieldsWidgetHelper::getInputTranslationLanguages($this->varValue['value']);
 		
 		$arrFields = array();
 		$i = 0;

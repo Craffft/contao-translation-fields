@@ -26,6 +26,7 @@ namespace TranslationFields;
  */
 class TranslationFieldsWidgetHelper extends \Backend
 {
+
 	/**
 	 * arrLng
 	 * 
@@ -33,23 +34,11 @@ class TranslationFieldsWidgetHelper extends \Backend
 	 * 
 	 * @var array
 	 * @access private
+	 * @static
 	 */
-	private $arrLng = array();
+	private static $arrLng = array();
 
 
-	/**
-	 * __construct function.
-	 *
-	 * @access public
-	 * @return void
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-		$this->setTranslationLanguages();
-	}
-	
-	
 	/**
 	 * addFallbackValueToEmptyField function.
 	 * 
@@ -66,7 +55,7 @@ class TranslationFieldsWidgetHelper extends \Backend
 			if (count($varInput) > 0)
 			{
 				$strFallbackValue = $varInput[key($varInput)];
-				
+
 				foreach($varInput as $key => $value)
 				{
 					if (strlen($value) < 1)
@@ -76,21 +65,41 @@ class TranslationFieldsWidgetHelper extends \Backend
 				}
 			}
 		}
-		
+
 		return $varInput;
 	}
-	
-	
+
+
+	/**
+	 * getTranslationLanguages function.
+	 * 
+	 * @access public
+	 * @static
+	 * @param bool $blnReload (default: false)
+	 * @return array
+	 */
+	public static function getTranslationLanguages($blnReload = false)
+	{
+		if ($blnReload || !is_array(self::$arrLng) || count(self::$arrLng) < 1)
+		{
+			self::setTranslationLanguages();
+		}
+
+		return self::$arrLng;
+	}
+
+
 	/**
 	 * setTranslationLanguages function.
 	 * 
 	 * @access private
+	 * @static
 	 * @return void
 	 */
-	private function setTranslationLanguages()
+	private static function setTranslationLanguages()
 	{
 		// Get all languages
-		$arrLanguages = $this->getLanguages();
+		$arrLanguages = \System::getLanguages();
 
 		// Get all used languages
 		$arrLng = array();
@@ -112,44 +121,26 @@ class TranslationFieldsWidgetHelper extends \Backend
 			$arrLng = \System::getLanguages(true);
 
 			// Set the language of the user to the top
-			if ($this->User->language != null)
+			if (\BackendUser::getInstance()->language != null)
 			{
 				// Get langauge value
-				$strLngValue = $arrLng[$this->User->language];
+				$strLngValue = $arrLng[\BackendUser::getInstance()->language];
 
 				// Remove the current language from the array
-				unset($arrLng[$this->User->language]);
+				unset($arrLng[\BackendUser::getInstance()->language]);
 
 				// Add old array to a temp array
 				$arrLngTemp = $arrLng;
 
 				// Generate a new array
-				$arrLng = array($this->User->language => $strLngValue);
+				$arrLng = array(\BackendUser::getInstance()->language => $strLngValue);
 
 				// Merge the old array into the new array
 				$arrLng = array_merge($arrLng, $arrLngTemp);
 			}
 		}
 
-		$this->arrLng = $arrLng;
-	}
-
-
-	/**
-	 * getTranslationLanguages function.
-	 * 
-	 * @access public
-	 * @param bool $blnReload (default: false)
-	 * @return array
-	 */
-	public function getTranslationLanguages($blnReload = false)
-	{
-		if ($blnReload || !is_array($this->arrLng) || count($this->arrLng) < 1)
-		{
-			$this->setTranslationLanguages();
-		}
-
-		return $this->arrLng;
+		self::$arrLng = $arrLng;
 	}
 
 
@@ -157,34 +148,35 @@ class TranslationFieldsWidgetHelper extends \Backend
 	 * getInputTranslationLanguages function.
 	 * 
 	 * @access public
+	 * @static
 	 * @param array $varValue
 	 * @param bool $blnReload (default: false)
 	 * @return array
 	 */
-	public function getInputTranslationLanguages($varValue, $blnReload = false)
+	public static function getInputTranslationLanguages($varValue, $blnReload = false)
 	{
-		if ($blnReload || !is_array($this->arrLng) || count($this->arrLng) < 1)
+		if ($blnReload || !is_array(self::$arrLng) || count(self::$arrLng) < 1)
 		{
-			$this->setTranslationLanguages();
+			self::setTranslationLanguages();
 		}
 
 		if (!is_array($varValue))
 		{
 			$varValue = array();
 		}
-		
+
 		// Set new inputs array
-		$arrLngInputs = $this->arrLng;
-		
+		$arrLngInputs = self::$arrLng;
+
 		// Merge value array languages into inputs array
 		/*if (count($varValue) > 0)
 		{
 			$arrLngInputs = array_merge($arrLngInputs, $varValue);
 		}*/
-		
+
 		// Get array keys
 		$arrLngInputs = array_keys($arrLngInputs);
-		
+
 		return $arrLngInputs;
 	}
 
@@ -193,17 +185,18 @@ class TranslationFieldsWidgetHelper extends \Backend
 	 * getCurrentTranslationLanguageButton function.
 	 *
 	 * @access public
+	 * @static
 	 * @return string
 	 */
-	public function getCurrentTranslationLanguageButton()
+	public static function getCurrentTranslationLanguageButton()
 	{
 		// Get current translation languages
-		$arrLngKeys = array_keys($this->arrLng);
-		
+		$arrLngKeys = array_keys(self::$arrLng);
+
 		// Generate current translation language button
 		$strButton = sprintf('<span class="tf_button"><img src="system/modules/translation_fields/assets/images/flag_icons/%s.png" width="16" height="11" alt="%s"></span>',
 						$arrLngKeys[0],
-						$this->arrLng[$arrLngKeys[0]]);
+						self::$arrLng[$arrLngKeys[0]]);
 
 		return $strButton;
 	}
@@ -213,11 +206,12 @@ class TranslationFieldsWidgetHelper extends \Backend
 	 * getTranslationLanguagesList function.
 	 *
 	 * @access public
+	 * @static
 	 * @param string $strId
 	 * @param array $varValue
 	 * @return string
 	 */
-	public function getTranslationLanguagesList($varValue)
+	public static function getTranslationLanguagesList($varValue)
 	{
 		if (!is_array($varValue))
 		{
@@ -228,7 +222,7 @@ class TranslationFieldsWidgetHelper extends \Backend
 		$arrLngList = array();
 		$i = 0;
 
-		foreach ($this->arrLng as $key => $value)
+		foreach (self::$arrLng as $key => $value)
 		{
 			$strLngIcon = sprintf('<img src="system/modules/translation_fields/assets/images/flag_icons/%s.png" width="16" height="11" alt="%s">',
 							$key,
