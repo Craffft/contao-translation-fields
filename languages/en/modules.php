@@ -15,7 +15,7 @@
 /**
  * Back end modules
  */
-//$GLOBALS['TL_LANG']['MOD'][''] = array('', '');
+$GLOBALS['TL_LANG']['MOD']['translations'] = array('Translations', 'Here are the translations of the "Translation Fields" extension are stored.');
 
 
 /**

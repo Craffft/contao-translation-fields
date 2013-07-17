@@ -86,20 +86,29 @@ class TranslationTextField extends \TextField
 
 
 	/**
-	 * Trim values
-	 * @param mixed
-	 * @return mixed
+	 * validator function.
+	 * 
+	 * @access protected
+	 * @param mixed $varInput
+	 * @return int
 	 */
 	protected function validator($varInput)
 	{
+		// Fill all empty fields with the content of the fallback field
+		$varInput = \TranslationFieldsWidgetHelper::addFallbackValueToEmptyField($varInput);
+
+		parent::validator($varInput);
+
 		if (is_array($varInput))
 		{
-			$varInput = \TranslationFieldsWidgetHelper::addFallbackValueToEmptyField($varInput);
-			
-			return parent::validator($varInput);
+			if (!parent::hasErrors())
+			{
+				// Save values and return fid
+				return \TranslationFieldsWidgetHelper::saveValuesAndReturnFid($varInput, $this->activeRecord->{$this->strName});
+			}
 		}
 
-		return parent::validator(trim($varInput));
+		return $this->activeRecord->{$this->strName};
 	}
 
 
@@ -109,21 +118,10 @@ class TranslationTextField extends \TextField
 	 */
 	public function generate()
 	{
-		// Get translation languages
-		$arrLng = \TranslationFieldsWidgetHelper::getTranslationLanguages();
-
 		$type = $this->hideInput ? 'password' : 'text';
 
-		if (!is_array($this->varValue))
-		{
-			$this->varValue = array($this->varValue);
-		}
-
-		// Get language button
-		$strLngButton = \TranslationFieldsWidgetHelper::getCurrentTranslationLanguageButton();
-
-		// Get language list
-		$strLngList = \TranslationFieldsWidgetHelper::getTranslationLanguagesList($this->varValue);
+		// Get languages array with values
+		$this->varValue = \TranslationFieldsWidgetHelper::getTranslationsByFid($this->varValue);
 
 		// Generate langauge fields
 		$arrLngInputs = \TranslationFieldsWidgetHelper::getInputTranslationLanguages($this->varValue);
@@ -140,11 +138,16 @@ class TranslationTextField extends \TextField
 									$this->strName,
 									$value,
 									$this->strId.'_'.$value,
-									specialchars(@$this->varValue[$value]), // see #4979
+									specialchars((\Input::post($this->strName)[$value] !== null) ? @\Input::post($this->strName)[$value] : @$this->varValue[$value]), // see #4979
 									$this->getAttributes());
 			$i++;
 		}
 
+		// Get language button
+		$strLngButton = \TranslationFieldsWidgetHelper::getCurrentTranslationLanguageButton();
+
+		// Get language list
+		$strLngList = \TranslationFieldsWidgetHelper::getTranslationLanguagesList($this->varValue);
 
 		return sprintf('<div id="ctrl_%s" class="tf_wrap tf_text_wrap%s">%s%s%s</div>%s',
 						$this->strId,

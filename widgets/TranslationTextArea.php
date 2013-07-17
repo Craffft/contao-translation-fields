@@ -102,19 +102,40 @@ class TranslationTextArea extends \TextArea
 
 
 	/**
+	 * validator function.
+	 * 
+	 * @access protected
+	 * @param mixed $varInput
+	 * @return int
+	 */
+	protected function validator($varInput)
+	{
+		// Fill all empty fields with the content of the fallback field
+		$varInput = \TranslationFieldsWidgetHelper::addFallbackValueToEmptyField($varInput);
+
+		parent::validator($varInput);
+
+		if (is_array($varInput))
+		{
+			if (!parent::hasErrors())
+			{
+				// Save values and return fid
+				return \TranslationFieldsWidgetHelper::saveValuesAndReturnFid($varInput, $this->activeRecord->{$this->strName});
+			}
+		}
+
+		return $this->activeRecord->{$this->strName};
+	}
+
+
+	/**
 	 * Generate the widget and return it as string
 	 * @return string
 	 */
 	public function generate()
 	{
-		// Get translation languages
-		$arrLng = \TranslationFieldsWidgetHelper::getTranslationLanguages();
-
-		// Get language button
-		$strLngButton = \TranslationFieldsWidgetHelper::getCurrentTranslationLanguageButton();
-
-		// Get language list
-		$strLngList = \TranslationFieldsWidgetHelper::getTranslationLanguagesList($this->varValue);
+		// Get languages array with values
+		$this->varValue = \TranslationFieldsWidgetHelper::getTranslationsByFid($this->varValue);
 
 		// Generate langauge fields
 		$arrLngInputs = \TranslationFieldsWidgetHelper::getInputTranslationLanguages($this->varValue);
@@ -156,10 +177,16 @@ class TranslationTextArea extends \TextArea
 									$this->intRows,
 									$this->intCols,
 									$this->getAttributes(),
-									specialchars(@$this->varValue[$value]),
+									specialchars((\Input::post($this->strName)[$value] !== null) ? @\Input::post($this->strName)[$value] : @$this->varValue[$value]), // see #4979
 									$strScript);
 			$i++;
 		}
+
+		// Get language button
+		$strLngButton = \TranslationFieldsWidgetHelper::getCurrentTranslationLanguageButton();
+
+		// Get language list
+		$strLngList = \TranslationFieldsWidgetHelper::getTranslationLanguagesList($this->varValue);
 
 		return sprintf('<div id="ctrl_%s" class="tf_wrap tf_textarea_wrap%s%s">%s%s%s</div>%s',
 						$this->strId,

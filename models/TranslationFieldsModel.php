@@ -32,4 +32,15 @@ class TranslationFieldsModel extends \Model
 	 * @var string
 	 */
 	protected static $strTable = 'tl_translation_fields';
+
+
+	public static function findOneByFidAndLanguage($intFid, $strLanguage, array $arrOptions=array())
+	{
+		$t = static::$strTable;
+
+		$arrColumns = array("$t.fid=? AND $t.language=?");
+		$arrValues = array($intFid, $strLanguage);
+
+		return static::findOneBy($arrColumns, $arrValues, $arrOptions);
+	}
 }

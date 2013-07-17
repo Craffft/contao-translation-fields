@@ -71,21 +71,97 @@ class TranslationFieldsWidgetHelper extends \Backend
 
 
 	/**
-	 * getTranslationLanguages function.
+	 * saveValuesAndReturnFid function.
 	 * 
 	 * @access public
 	 * @static
-	 * @param bool $blnReload (default: false)
-	 * @return array
+	 * @param array $arrValues
+	 * @param int $intFid (default: null)
+	 * @return int
 	 */
-	public static function getTranslationLanguages($blnReload = false)
+	public static function saveValuesAndReturnFid($arrValues, $intFid = null)
 	{
-		if ($blnReload || !is_array(self::$arrLng) || count(self::$arrLng) < 1)
+		$arrLanguages = self::getTranslationLanguageKeys();
+
+		// Add fallback text to empty values
+		$arrValues = self::addFallbackValueToEmptyField($arrValues);
+
+		if (is_array($arrLanguages) && count($arrLanguages))
 		{
-			self::setTranslationLanguages();
+			foreach ($arrLanguages as $strLanguage)
+			{
+				// If current fid is correct
+				if (is_numeric($intFid) && $intFid > 0)
+				{
+					// Get existing translation object by fid
+					$objTranslation = \TranslationFieldsModel::findOneByFidAndLanguage($intFid, $strLanguage);
+
+					// Get new translation object by fid
+					if ($objTranslation === null)
+					{
+						// Create translation object
+						$objTranslation = new \TranslationFieldsModel();
+						$objTranslation->language = $strLanguage;
+						$objTranslation->fid = $intFid;
+					}
+				}
+
+				// Get new translation object with new fid
+				if ($objTranslation === null)
+				{
+					// Get next fid
+					$intFid = \Database::getInstance()->prepare("SELECT (fid + 1) AS nextFid FROM tl_translation_fields ORDER BY fid DESC")->limit(1)->executeUncached()->nextFid;
+					$intFid = ($intFid === null) ? 1 : $intFid;
+
+					// Create translation object
+					$objTranslation = new \TranslationFieldsModel();
+					$objTranslation->language = $strLanguage;
+					$objTranslation->fid = $intFid;
+				}
+
+				// Set content value
+				$objTranslation->content = $arrValues[$strLanguage];
+
+				// Set current timestamp
+				$objTranslation->tstamp = time();
+
+				// Save
+				$objTranslation->save();
+			}
 		}
 
-		return self::$arrLng;
+		return $intFid;
+	}
+
+
+	/**
+	 * getTranslationsByFid function.
+	 * 
+	 * @access public
+	 * @static
+	 * @param int $intFid
+	 * @return array
+	 */
+	public static function getTranslationsByFid($intFid)
+	{
+		// Get empty tranlation languages
+		$arrData = self::getEmptyTranslationLanguages();
+
+		if (is_numeric($intFid) && $intFid > 0)
+		{
+			$objTranslation = \TranslationFieldsModel::findByFid($intFid);
+
+			if ($objTranslation !== null)
+			{
+				while ($objTranslation->next())
+				{
+					$arrData[$objTranslation->language] = $objTranslation->content;
+				}
+			}
+		}
+
+		// Return data array
+		return $arrData;
 	}
 
 
@@ -145,6 +221,62 @@ class TranslationFieldsWidgetHelper extends \Backend
 
 
 	/**
+	 * getTranslationLanguages function.
+	 * 
+	 * @access public
+	 * @static
+	 * @param bool $blnReload (default: false)
+	 * @return array
+	 */
+	public static function getTranslationLanguages($blnReload = false)
+	{
+		if ($blnReload || !is_array(self::$arrLng) || count(self::$arrLng) < 1)
+		{
+			self::setTranslationLanguages();
+		}
+
+		return self::$arrLng;
+	}
+
+
+	/**
+	 * getEmptyTranslationLanguages function.
+	 * 
+	 * @access public
+	 * @static
+	 * @param bool $blnReload (default: false)
+	 * @return array
+	 */
+	public static function getTranslationLanguageKeys($blnReload = false)
+	{
+		$arrLng = self::getTranslationLanguages($blnReload);
+
+		return array_keys($arrLng);
+	}
+
+
+	/**
+	 * getEmptyTranslationLanguages function.
+	 * 
+	 * @access public
+	 * @static
+	 * @param bool $blnReload (default: false)
+	 * @return array
+	 */
+	public static function getEmptyTranslationLanguages($blnReload = false)
+	{
+		$arrLng = self::getTranslationLanguages($blnReload);
+
+		foreach ($arrLng as $k => $v)
+		{
+			$arrLng[$k] = '';
+		}
+
+		return $arrLng;
+	}
+
+
+	/**
 	 * getInputTranslationLanguages function.
 	 * 
 	 * @access public
@@ -155,15 +287,13 @@ class TranslationFieldsWidgetHelper extends \Backend
 	 */
 	public static function getInputTranslationLanguages($varValue, $blnReload = false)
 	{
-		if ($blnReload || !is_array(self::$arrLng) || count(self::$arrLng) < 1)
-		{
-			self::setTranslationLanguages();
-		}
-
 		if (!is_array($varValue))
 		{
 			$varValue = array();
 		}
+
+		// Be sure that translation languages are loaded
+		self::getTranslationLanguages($blnReload);
 
 		// Set new inputs array
 		$arrLngInputs = self::$arrLng;
