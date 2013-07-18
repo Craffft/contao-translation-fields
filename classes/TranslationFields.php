@@ -25,7 +25,8 @@ namespace TranslationFields;
  * @package    translation_fields
  */
 class TranslationFields extends \Controller
-{	
+{
+
 	/**
 	 * __construct function.
 	 * 
@@ -36,8 +37,8 @@ class TranslationFields extends \Controller
 	{
 		parent::__construct();
 	}
-	
-	
+
+
 	/**
 	 * translateValue function.
 	 * 
@@ -48,39 +49,29 @@ class TranslationFields extends \Controller
 	 */
 	public static function translateValue($varValue)
 	{
-		$varValue = deserialize($varValue);
-		
-		if (is_array($varValue))
+		// Get translation by current language and if it doesn't exist use the english translation
+		foreach (array($GLOBALS['TL_LANGUAGE'], 'en') as $strLanguage)
 		{
-			if (strlen($varValue[$GLOBALS['TL_LANGUAGE']]) > 0)
+			$objTranslation = \TranslationFieldsModel::findOneByFidAndLanguage($varValue, $strLanguage);
+
+			if ($objTranslation !== null)
 			{
-				return $varValue[$GLOBALS['TL_LANGUAGE']];
-			}
-			else if (strlen($varValue['en']) > 0)
-			{
-				return $varValue['en'];
-			}
-			else
-			{
-				if (count($varValue) > 0)
-				{
-					foreach ($varValue as $key => $value)
-					{
-						if (strlen($value) > 0)
-						{
-							return $varValue[$key];
-						}
-					}
-				}
-				
-				return '__NO_TRANSLATION_FOUND__';
+				return $objTranslation->content;
 			}
 		}
-		
-		return $varValue;
+
+		// Get any translation
+		$objTranslation = \TranslationFieldsModel::findOneByFid($varValue);
+
+		if ($objTranslation !== null)
+		{
+			return $objTranslation->content;
+		}
+
+		return '__NO_TRANSLATION_FOUND__';
 	}
-	
-	
+
+
 	/**
 	 * translateField function.
 	 * 
@@ -96,7 +87,7 @@ class TranslationFields extends \Controller
 		{
 			case 'TranslationInputUnit':
 				$varValue = deserialize($varValue);
-				
+
 				if (is_array($varValue))
 				{
 					if (is_array($varValue['value']) && count($varValue['value']) > 0)
@@ -105,6 +96,7 @@ class TranslationFields extends \Controller
 					}
 				}
 			break;
+
 			case 'TranslationTextArea':
 			case 'TranslationTextField':
 				$varValue = self::translateValue($varValue);
@@ -113,8 +105,8 @@ class TranslationFields extends \Controller
 		
 		return $varValue;
 	}
-	
-	
+
+
 	/**
 	 * translateDCObject function.
 	 * 
@@ -133,11 +125,11 @@ class TranslationFields extends \Controller
 				$objDC->$field = self::translateField($arrValues['inputType'], $objDC->$field);
 			}
 		}
-		
+
 		return $objDC;
 	}
-	
-	
+
+
 	/**
 	 * translateDCArray function.
 	 * 
@@ -156,7 +148,7 @@ class TranslationFields extends \Controller
 				$arrDC[$field] = self::translateField($arrValues['inputType'], $arrDC[$field]);
 			}
 		}
-		
+
 		return $arrDC;
 	}
 }
