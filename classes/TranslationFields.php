@@ -68,7 +68,7 @@ class TranslationFields extends \Controller
 			return $objTranslation->content;
 		}
 
-		return '__NO_TRANSLATION_FOUND__';
+		return '';
 	}
 
 
