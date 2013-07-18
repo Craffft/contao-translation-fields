@@ -1,5 +1,5 @@
 # Contao extension Translation Fields #
-## What is Photoalbums2? ##
+## What is Translation Fields? ##
 Translation Fields is a library for Contao developers to get nice translation fields in the Contao Open Source CMS.
 
 ## Dependencies ##
