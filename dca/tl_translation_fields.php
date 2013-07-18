@@ -28,7 +28,8 @@ $GLOBALS['TL_DCA']['tl_translation_fields'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'fid,language' => 'unique'
+				'fid,language' => 'unique',
+				'fid' => 'index'
 			)
 		)
 	),
@@ -84,14 +85,7 @@ $GLOBALS['TL_DCA']['tl_translation_fields'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array(),
 		'default'                     => '{translation_legend},fid,language,content'
-	),
-
-	// Subpalettes
-	'subpalettes' => array
-	(
-		
 	),
 
 	// Fields

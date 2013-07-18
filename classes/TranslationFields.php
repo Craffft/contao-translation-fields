@@ -113,11 +113,13 @@ class TranslationFields extends \Controller
 	 * @access public
 	 * @static
 	 * @param object $objDC
-	 * @param string $strTable
 	 * @return object
 	 */
-	public static function translateDCObject($objDC, $strTable)
+	public static function translateDCObject($objDC)
 	{
+		// Get table
+		$strTable = $objDC->current()->getTable();
+
 		if (count($GLOBALS['TL_DCA'][$strTable]['fields']) > 0)
 		{
 			foreach ($GLOBALS['TL_DCA'][$strTable]['fields'] as $field => $arrValues)
