@@ -71,6 +71,30 @@ class TranslationFieldsWidgetHelper extends \Backend
 
 
 	/**
+	 * addValueToAllLanguages function.
+	 * 
+	 * @access public
+	 * @static
+	 * @param string $strValue
+	 * @return array
+	 */
+	public static function addValueToAllLanguages($strValue)
+	{
+		$arrData = self::getEmptyTranslationLanguages();
+
+		if (is_array($arrData) && count($arrData) > 0)
+		{
+			foreach ($arrData as $k => $v)
+			{
+				$arrData[$k] = $strValue;
+			}
+		}
+
+		return $arrData;
+	}
+
+
+	/**
 	 * saveValuesAndReturnFid function.
 	 * 
 	 * @access public
