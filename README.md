@@ -177,3 +177,6 @@ You can do this like in the following code:
 		
 		// Code ...
 	}
+
+E.g. you can have a look at the runconce.php from my extension Photoalbums2:
+https://github.com/iCodr8/contao-photoalbums2/blob/master/config/runonce.php
