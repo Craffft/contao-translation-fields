@@ -22,7 +22,7 @@ There are three input types that you can use in the back end.
 - __TranslationInputType__ (the same as input type __inputType__)
 
 
-## Howto define a field in the DCA ##
+## How to define a field in the DCA ##
 To use the translation fields, you have to do the following changes in your DCA code.
 - Add an index to your field
 - Change the input type
@@ -95,7 +95,7 @@ The original field:
 		'inputType'               => 'inputUnit',
 		'options'                 => array('h1', 'h2', 'h3', 'h4', 'h5', 'h6'),
 		'eval'                    => array('maxlength'=>200, 'tl_class'=>'w50'),
-		'sql'                     => "varchar(255) NOT NULL default ''"
+		'sql'                     => "blob NULL"
 	);
 
 The field after the changes:
@@ -108,12 +108,12 @@ The field after the changes:
 		'inputType'               => 'TranslationInputUnit',
 		'options'                 => array('h1', 'h2', 'h3', 'h4', 'h5', 'h6'),
 		'eval'                    => array('maxlength'=>200, 'tl_class'=>'w50'),
-		'sql'                     => "int(10) unsigned NOT NULL default '0'",
+		'sql'                     => "blob NULL",
 		'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
 	);
 
 
-## Howto translate the field values ##
+## How to translate the field values ##
 To translate the key from your current field, you can use the following methods
 
 ### Translate value ###
