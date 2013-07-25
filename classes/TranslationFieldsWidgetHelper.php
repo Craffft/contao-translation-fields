@@ -365,7 +365,7 @@ class TranslationFieldsWidgetHelper extends \Backend
 
 		// Generate current translation language button
 		$strButton = sprintf('<span class="tf_button"><img src="system/modules/translation_fields/assets/images/flag_icons/%s.png" width="16" height="11" alt="%s"></span>',
-						$arrLngKeys[0],
+						(strtolower(strlen($arrLngKeys[0]) > 2 ? substr($arrLngKeys[0], -2) : $arrLngKeys[0])),
 						self::$arrLng[$arrLngKeys[0]]);
 
 		return $strButton;
@@ -395,7 +395,7 @@ class TranslationFieldsWidgetHelper extends \Backend
 		foreach (self::$arrLng as $key => $value)
 		{
 			$strLngIcon = sprintf('<img src="system/modules/translation_fields/assets/images/flag_icons/%s.png" width="16" height="11" alt="%s">',
-							$key,
+							(strtolower(strlen($key) > 2 ? substr($key, -2) : $key)),
 							$value);
 
 			$arrLngList[] = sprintf('<li id="lng_list_item_%s" class="tf_lng_item%s">%s%s</li>',

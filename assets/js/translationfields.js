@@ -67,13 +67,10 @@ window.addEvent('domready', function() {
 					// Change the langauge button
 					field.getChildren('.tf_button').each(function(el) {
 						var img = el.getElement('img');
-						var src = img.get('src');
 						
-						// Generate new path
-						src = (src.substr(0, src.length - 6) + language + src.substr(src.length - 4, src.length));
-						
-						// Set new path
-						img.set('src', src);
+						// Set new path and new alt tag
+						img.set('src', listItem.getElement('img').get('src'));
+						img.set('alt', listItem.getElement('img').get('alt'));
 					});
 					
 					// Show the requested language field and hide the others
