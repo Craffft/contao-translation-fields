@@ -204,39 +204,55 @@ class TranslationFieldsWidgetHelper extends \Backend
 		// Get all used languages
 		$arrLng = array();
 
-		$objRootPages = \PageModel::findRootPages();
-
-		if ($objRootPages !== null)
+		// If languages are specified
+		if ($GLOBALS['TL_CONFIG']['chooseTranslationLanguages'] == '1')
 		{
-			while ($objRootPages->next())
+			$arrTranslationLanguages = deserialize($GLOBALS['TL_CONFIG']['translationLanguages']);
+
+			if (is_array($arrTranslationLanguages) && $arrTranslationLanguages > 0)
 			{
-				$arrLng[$objRootPages->language] = $arrLanguages[$objRootPages->language];
+				foreach ($arrTranslationLanguages as $strLng)
+				{
+					$arrLng[$strLng] = $arrLanguages[$strLng];
+				}
 			}
 		}
-
-		// If langauge array is empty
-		if (count($arrLng) < 1)
+		else
 		{
-			// Set all available languages
-			$arrLng = \System::getLanguages(true);
+			$objRootPages = \PageModel::findRootPages();
 
-			// Set the language of the user to the top
-			if (\BackendUser::getInstance()->language != null)
+			if ($objRootPages !== null)
 			{
-				// Get langauge value
-				$strLngValue = $arrLng[\BackendUser::getInstance()->language];
+				while ($objRootPages->next())
+				{
+					$arrLng[$objRootPages->language] = $arrLanguages[$objRootPages->language];
+				}
+			}
 
-				// Remove the current language from the array
-				unset($arrLng[\BackendUser::getInstance()->language]);
+			// If langauge array is empty
+			if (count($arrLng) < 1)
+			{
+				// Set all available languages
+				$arrLng = \System::getLanguages(true);
 
-				// Add old array to a temp array
-				$arrLngTemp = $arrLng;
+				// Set the language of the user to the top
+				if (\BackendUser::getInstance()->language != null)
+				{
+					// Get langauge value
+					$strLngValue = $arrLng[\BackendUser::getInstance()->language];
 
-				// Generate a new array
-				$arrLng = array(\BackendUser::getInstance()->language => $strLngValue);
+					// Remove the current language from the array
+					unset($arrLng[\BackendUser::getInstance()->language]);
 
-				// Merge the old array into the new array
-				$arrLng = array_merge($arrLng, $arrLngTemp);
+					// Add old array to a temp array
+					$arrLngTemp = $arrLng;
+
+					// Generate a new array
+					$arrLng = array(\BackendUser::getInstance()->language => $strLngValue);
+
+					// Merge the old array into the new array
+					$arrLng = array_merge($arrLng, $arrLngTemp);
+				}
 			}
 		}
 
