@@ -16,6 +16,40 @@
  */
 window.addEvent('domready', function() {
 	
+	/**
+	 * changeFieldContent function.
+	 * 
+	 * @access public
+	 * @param object listItem
+	 * @param object field
+	 * @return void
+	 */
+	function changeFieldContent(listItem, field)
+	{
+		// Get language from chosen item
+		var language = listItem.get('id').replace('lng_list_item_', '');
+		
+		// Change the langauge button
+		field.getChildren('.tf_button').each(function(el) {
+			var img = el.getElement('img');
+			
+			// Set new path and new alt tag
+			img.set('src', listItem.getElement('img').get('src'));
+			img.set('alt', listItem.getElement('img').get('alt'));
+		});
+		
+		// Show the requested language field and hide the others
+		field.getChildren('.tf_field_wrap').each(function(el) {
+			el.addClass('hide');
+			
+			if (el.hasClass('tf_field_wrap_' + language))
+			{
+				el.removeClass('hide');
+			}
+		});
+	}
+	
+	
 	// User clicks on page
 	$(document.body).addEvent('click', function(el) {
 		
@@ -61,33 +95,24 @@ window.addEvent('domready', function() {
 						listItem = obj;
 					}
 					
-					// Get language from chosen item
-					var language = listItem.get('id').replace('lng_list_item_', '');
-					
-					// Change the langauge button
-					field.getChildren('.tf_button').each(function(el) {
-						var img = el.getElement('img');
-						
-						// Set new path and new alt tag
-						img.set('src', listItem.getElement('img').get('src'));
-						img.set('alt', listItem.getElement('img').get('alt'));
-					});
-					
-					// Show the requested language field and hide the others
-					field.getChildren('.tf_field_wrap').each(function(el) {
-						el.addClass('hide');
-						
-						if (el.hasClass('tf_field_wrap_' + language))
-						{
-							el.removeClass('hide');
-						}
-					});
+					// Call function
+					changeFieldContent(listItem, field)
 				}
 				// ELSE User clicked on the page
 				
 				$$('.tf_wrap').getElement('.tf_lng_list').removeClass('active');
 			}
 		}
+	});
+	
+	
+	// User enters mouse into language list item
+	$$('.tf_lng_item').addEvent('mouseenter', function(el) {
+		var listItem = $(el.target);
+		var field     = listItem.getParent('.tf_wrap');
+		
+		// Call function
+		changeFieldContent(listItem, field);
 	});
 	
 	
