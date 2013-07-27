@@ -138,7 +138,8 @@ class TranslationTextField extends \TextField
 									$this->strName,
 									$value,
 									$this->strId.'_'.$value,
-									specialchars((\Input::post($this->strName)[$value] !== null) ? @\Input::post($this->strName)[$value] : @$this->varValue[$value]), // see #4979
+// Klammer bei [$value] ??
+specialchars((\Input::post($this->strName)[$value] !== null) ? @\Input::post($this->strName)[$value] : @$this->varValue[$value]), // see #4979
 									$this->getAttributes());
 			$i++;
 		}
