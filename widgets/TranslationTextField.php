@@ -120,6 +120,9 @@ class TranslationTextField extends \TextField
 	{
 		$type = $this->hideInput ? 'password' : 'text';
 
+		// Get post array
+		$arrPost = \Input::post($this->strName);
+
 		// Get languages array with values
 		$this->varValue = \TranslationFieldsWidgetHelper::getTranslationsByFid($this->varValue);
 
@@ -138,7 +141,7 @@ class TranslationTextField extends \TextField
 									$this->strName,
 									$value,
 									$this->strId.'_'.$value,
-									specialchars((\Input::post($this->strName)[$value] !== null) ? @\Input::post($this->strName)[$value] : @$this->varValue[$value]), // see #4979
+									specialchars(($arrPost[$value] !== null) ? $arrPost[$value] : @$this->varValue[$value]), // see #4979
 									$this->getAttributes());
 			$i++;
 		}

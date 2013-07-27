@@ -134,6 +134,9 @@ class TranslationTextArea extends \TextArea
 	 */
 	public function generate()
 	{
+		// Get post array
+		$arrPost = \Input::post($this->strName);
+
 		// Get languages array with values
 		$this->varValue = \TranslationFieldsWidgetHelper::getTranslationsByFid($this->varValue);
 
@@ -177,7 +180,7 @@ class TranslationTextArea extends \TextArea
 									$this->intRows,
 									$this->intCols,
 									$this->getAttributes(),
-									specialchars((\Input::post($this->strName)[$value] !== null) ? @\Input::post($this->strName)[$value] : @$this->varValue[$value]), // see #4979
+									specialchars(($arrPost[$value] !== null) ? $arrPost[$value] : @$this->varValue[$value]), // see #4979
 									$strScript);
 			$i++;
 		}
