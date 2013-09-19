@@ -1,14 +1,14 @@
-<?php 
+<?php
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (C) 2005-2013 Leo Feyer
- * 
- * @package   TranslationFields 
- * @author    Daniel Kiesel 
- * @license   LGPL 
- * @copyright Daniel Kiesel 2013 
+ *
+ * @package   TranslationFields
+ * @author    Daniel Kiesel
+ * @license   LGPL
+ * @copyright Daniel Kiesel 2013
  */
 
 
@@ -18,10 +18,10 @@
 namespace TranslationFields;
 
 /**
- * Class TranslationFields 
+ * Class TranslationFields
  *
- * @copyright  Daniel Kiesel 2013 
- * @author     Daniel Kiesel 
+ * @copyright  Daniel Kiesel 2013
+ * @author     Daniel Kiesel
  * @package    translation_fields
  */
 class TranslationFields extends \Controller
@@ -29,7 +29,7 @@ class TranslationFields extends \Controller
 
 	/**
 	 * __construct function.
-	 * 
+	 *
 	 * @access public
 	 * @return void
 	 */
@@ -41,16 +41,28 @@ class TranslationFields extends \Controller
 
 	/**
 	 * translateValue function.
-	 * 
+	 *
 	 * @access public
 	 * @static
 	 * @param mixed $varValue
 	 * @return string
 	 */
-	public static function translateValue($varValue)
+	public static function translateValue($varValue, $strForceLanguage = '')
 	{
+		$arrLanguages = array();
+
+		// If force language is set than add it as first language param
+		if (strlen($strForceLanguage))
+		{
+			$arrLanguages[] = $strForceLanguage;
+		}
+
+		// Add current langauge and default language to languages array
+		$arrLanguages[] = $GLOBALS['TL_LANGUAGE'];
+		$arrLanguages[] = 'en';
+
 		// Get translation by current language and if it doesn't exist use the english translation
-		foreach (array($GLOBALS['TL_LANGUAGE'], 'en') as $strLanguage)
+		foreach ($arrLanguages as $strLanguage)
 		{
 			$objTranslation = \TranslationFieldsModel::findOneByFidAndLanguage($varValue, $strLanguage);
 
@@ -74,7 +86,7 @@ class TranslationFields extends \Controller
 
 	/**
 	 * translateField function.
-	 * 
+	 *
 	 * @access protected
 	 * @static
 	 * @param string $strInputType
@@ -102,14 +114,14 @@ class TranslationFields extends \Controller
 				$varValue = self::translateValue($varValue);
 			break;
 		}
-		
+
 		return $varValue;
 	}
 
 
 	/**
 	 * translateDCObject function.
-	 * 
+	 *
 	 * @access public
 	 * @static
 	 * @param object $objDC
@@ -134,7 +146,7 @@ class TranslationFields extends \Controller
 
 	/**
 	 * translateDCArray function.
-	 * 
+	 *
 	 * @access public
 	 * @static
 	 * @param array $arrDC
