@@ -1,14 +1,14 @@
-<?php
+<?php 
 
 /**
  * Contao Open Source CMS
- *
+ * 
  * Copyright (C) 2005-2013 Leo Feyer
- *
- * @package   translation_fields
- * @author    Daniel Kiesel
- * @license   LGPL
- * @copyright Daniel Kiesel 2013
+ * 
+ * @package   translation_fields 
+ * @author    Daniel Kiesel 
+ * @license   LGPL 
+ * @copyright Daniel Kiesel 2013 
  */
 
 
@@ -16,7 +16,7 @@
  * Palettes
  */
 $GLOBALS['TL_DCA']['tl_settings']['palettes']['__selector__'][] = 'chooseTranslationLanguages';
-$GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] = str_replace('inactiveModules;', 'inactiveModules;{translation_fields_legend},translationField,chooseTranslationLanguages;', $GLOBALS['TL_DCA']['tl_settings']['palettes']['default']);
+$GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] = str_replace('inactiveModules;', 'inactiveModules;{translation_fields_legend},chooseTranslationLanguages;', $GLOBALS['TL_DCA']['tl_settings']['palettes']['default']);
 $GLOBALS['TL_DCA']['tl_settings']['subpalettes']['chooseTranslationLanguages'] = 'translationLanguages';
 
 
@@ -36,11 +36,4 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['translationLanguages'] = array
 	'inputType'               => 'checkbox',
 	'options'                 => \System::getLanguages(),
 	'eval'                    => array('multiple'=>true)
-);
-
-$GLOBALS['TL_DCA']['tl_settings']['fields']['translationField'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['translationField'],
-	'inputType'               => 'TranslationTextField',
-	'eval'                    => array()
 );
