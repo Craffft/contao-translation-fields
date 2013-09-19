@@ -1,14 +1,14 @@
-<?php 
+<?php
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (C) 2005-2013 Leo Feyer
- * 
- * @package   translation_fields 
- * @author    Daniel Kiesel 
- * @license   LGPL 
- * @copyright Daniel Kiesel 2013 
+ *
+ * @package   translation_fields
+ * @author    Daniel Kiesel
+ * @license   LGPL
+ * @copyright Daniel Kiesel 2013
  */
 
 
@@ -18,10 +18,10 @@
 namespace TranslationFields;
 
 /**
- * Class TranslationInputUnit 
+ * Class TranslationInputUnit
  *
- * @copyright  Daniel Kiesel 2013 
- * @author     Daniel Kiesel 
+ * @copyright  Daniel Kiesel 2013
+ * @author     Daniel Kiesel
  * @package    translation_fields
  */
 class TranslationInputUnit extends \InputUnit
@@ -91,25 +91,28 @@ class TranslationInputUnit extends \InputUnit
 
 	/**
 	 * validator function.
-	 * 
+	 *
 	 * @access protected
 	 * @param mixed $varInput
 	 * @return mixed
 	 */
 	protected function validator($varInput)
 	{
+		// Get array with language id
+		$arrData = ($this->activeRecord) ? $this->activeRecord->{$this->strName} : $GLOBALS['TL_CONFIG'][$this->strName];
+
 		if (is_array($varInput['value']))
 		{
 			// Fill all empty fields with the content of the fallback field
 			$varInput['value'] = \TranslationFieldsWidgetHelper::addFallbackValueToEmptyField($varInput['value']);
-			
+
 			parent::validator($varInput['value']);
 		}
 
-		$this->activeRecord->{$this->strName} = deserialize($this->activeRecord->{$this->strName});
+		$arrData = deserialize($arrData);
 
 		// Save values and return fid
-		$varInput['value'] = \TranslationFieldsWidgetHelper::saveValuesAndReturnFid($varInput['value'], $this->activeRecord->{$this->strName}['value']);
+		$varInput['value'] = \TranslationFieldsWidgetHelper::saveValuesAndReturnFid($varInput['value'], $arrData['value']);
 
 		return $varInput;
 	}
@@ -141,7 +144,7 @@ class TranslationInputUnit extends \InputUnit
 
 		// Generate langauge fields
 		$arrLngInputs = \TranslationFieldsWidgetHelper::getInputTranslationLanguages($this->varValue['value']);
-		
+
 		$arrFields = array();
 		$i = 0;
 

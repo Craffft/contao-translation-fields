@@ -1,14 +1,14 @@
-<?php 
+<?php
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (C) 2005-2013 Leo Feyer
- * 
- * @package   translation_fields 
- * @author    Daniel Kiesel 
- * @license   LGPL 
- * @copyright Daniel Kiesel 2013 
+ *
+ * @package   translation_fields
+ * @author    Daniel Kiesel
+ * @license   LGPL
+ * @copyright Daniel Kiesel 2013
  */
 
 
@@ -18,10 +18,10 @@
 namespace TranslationFields;
 
 /**
- * Class TranslationTextArea 
+ * Class TranslationTextArea
  *
- * @copyright  Daniel Kiesel 2013 
- * @author     Daniel Kiesel 
+ * @copyright  Daniel Kiesel 2013
+ * @author     Daniel Kiesel
  * @package    translation_fields
  */
 class TranslationTextArea extends \TextArea
@@ -103,13 +103,16 @@ class TranslationTextArea extends \TextArea
 
 	/**
 	 * validator function.
-	 * 
+	 *
 	 * @access protected
 	 * @param mixed $varInput
 	 * @return int
 	 */
 	protected function validator($varInput)
 	{
+		// Get language id
+		$intId = ($this->activeRecord) ? $this->activeRecord->{$this->strName} : $GLOBALS['TL_CONFIG'][$this->strName];
+
 		// Fill all empty fields with the content of the fallback field
 		$varInput = \TranslationFieldsWidgetHelper::addFallbackValueToEmptyField($varInput);
 
@@ -120,11 +123,11 @@ class TranslationTextArea extends \TextArea
 			if (!parent::hasErrors())
 			{
 				// Save values and return fid
-				return \TranslationFieldsWidgetHelper::saveValuesAndReturnFid($varInput, $this->activeRecord->{$this->strName});
+				return \TranslationFieldsWidgetHelper::saveValuesAndReturnFid($varInput, $intId);
 			}
 		}
 
-		return $this->activeRecord->{$this->strName};
+		return $intId;
 	}
 
 
