@@ -120,19 +120,28 @@ To translate the key from your current field, you can use the following methods
 Translates the field key to the translation value in the current language.
 
 	$intId = '1485'; // Example value
-	
+
 	$strTranslated = \TranslationFields::translateValue($intId);
-	
+
 	echo $strTranslated; // Returns e.g. "Hi there!"
+
+Optional you can add a force language to the translateValue method.
+
+	$intId = '1485'; // Example value
+	$strForceLanguage = 'de';
+
+	$strTranslated = \TranslationFields::translateValue($intId, $strForceLanguage);
+
+	echo $strTranslated; // Returns e.g. "Hallo zusammen!"
 
 
 ### Translate DataContainer object ###
 Translates all translation field values in the data container object to a translated value.
 
 	$objDC->exampleValue = '1485'; // Example value
-	
+
 	$objDC = \TranslationFields::translateDCObject($objDC);
-	
+
 	echo $objDC->exampleValue; // Returns e.g. "Hi there!"
 
 
@@ -140,9 +149,9 @@ Translates all translation field values in the data container object to a transl
 Translates all translation field values in the data container array to a translated value.
 
 	$arrDC['exampleValue'] = '1485'; // Example value
-	
+
 	$arrDC = \TranslationFields::translateDCArray($arrDC, $strTable);
-	
+
 	echo $arrDC['exampleValue']; // Returns e.g. "Hi there!"
 
 
@@ -154,11 +163,11 @@ You can do this like in the following code:
 	class MyApplicationRunconce extends \Controller
 	{
 		// Code ...
-		
+
 		function handleTranslationFields()
 		{
 			$objMyTable = \MyTableModel::findAll();
-			
+
 			if ($objMyTable !== null)
 			{
 				while ($objMyTable->next())
@@ -168,13 +177,13 @@ You can do this like in the following code:
 					{
 						$objMyTable->myfield = \TranslationFieldsWidgetHelper::saveValuesAndReturnFid(\TranslationFieldsWidgetHelper::addValueToAllLanguages($objMyTable->myfield));
 					}
-					
+
 					// Save model
 					$objMyTable->save();
 				}
 			}
 		}
-		
+
 		// Code ...
 	}
 
