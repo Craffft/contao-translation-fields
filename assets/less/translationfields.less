@@ -4,45 +4,45 @@
 	display: inline-block;
 	position: relative;
 	width: 320px;
-	
+
 	.tf_field_wrap
 	{
 		display: inline-block;
-		
+
 		&.hide
 		{
 			display:none;
 		}
-		
+
 		.tl_text
 		{
 			width: 290px;
 			padding-right: 26px;
 		}
-		
-		
+
+
 		.wizard &
 		{
 			width: 296px;
-			
+
 			.tl_text
 			{
 				width: 266px;
 				padding-right: 26px;
 			}
 		}
-		
+
 		.long &
 		{
 			width: 670px;
-			
+
 			.tl_text
 			{
 				width: 640px;
 			}
 		}
 	}
-	
+
 	.tf_button
 	{
 		position: absolute;
@@ -51,7 +51,7 @@
 		right: 6px;
 		cursor: pointer;
 	}
-	
+
 	.tf_lng_list
 	{
 		position: absolute;
@@ -66,12 +66,12 @@
 		-webkit-border-radius:0 0 3px 3px;
 		-moz-border-radius:0 0 3px 3px;
 		border-radius:0 0 3px 3px;
-		
+
 		&.active
 		{
 			left: 0px;
 		}
-		
+
 		.tf_lng_item
 		{
 			padding:1px 7px 3px;
@@ -81,18 +81,18 @@
 			margin-top: 1px;
 			cursor: pointer;
 			background: #fee;
-			
+
 			&.translated
 			{
 				background: #fff;
 			}
-			
+
 			&:hover
 			{
 				background: #4064f7;
 				color: #fff;
 			}
-			
+
 			img
 			{
 				margin: -2px 7px 0px 0px;
@@ -100,24 +100,24 @@
 			}
 		}
 	}
-	
+
 	&.tf_text_unit_wrap
 	{
 		.tf_button
 		{
 			right: 70px;
 		}
-		
+
 		.tf_lng_list
 		{
 			width: 250px;
 		}
 	}
-	
+
 	&.tf_textarea_wrap
 	{
 		width: 686px;
-		
+
 		&.rte
 		{
 			.tf_lng_list
@@ -130,17 +130,17 @@
 				border-radius:0 0px 0px 3px;
 			}
 		}
-		
+
 		.tl_textarea
 		{
 			width: 678px !important;
 		}
-		
+
 		.mceToolbar > div
 		{
 			width: 682px;
 		}
-		
+
 		.tf_lng_list
 		{
 			z-index: 997;
@@ -149,12 +149,21 @@
 			-webkit-border-radius:0 3px 0px 3px;
 			-moz-border-radius:0 3px 0px 3px;
 			border-radius:0 3px 0px 3px;
-			
+
 			&.active
 			{
 				left: auto;
 				right: 0px;
 			}
 		}
+	}
+}
+
+/* Contao debug bar z-index fix */
+#debug
+{
+	> *
+	{
+		z-index: 1000;
 	}
 }
