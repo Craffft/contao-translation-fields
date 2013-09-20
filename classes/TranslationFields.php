@@ -165,4 +165,31 @@ class TranslationFields extends \Controller
 
 		return $arrDC;
 	}
+
+
+	/**
+	 * getTranslationsByFid function.
+	 *
+	 * @access public
+	 * @static
+	 * @param int $intFid
+	 * @return array
+	 */
+	public static function getTranslationsByFid($intFid)
+	{
+		$arrData = array();
+
+		// Get translation object
+		$objTranslation = \TranslationFieldsModel::findByFid($intFid);
+
+		if ($objTranslation !== null)
+		{
+			while ($objTranslation->next())
+			{
+				$arrData[$objTranslation->language] = $objTranslation->content;
+			}
+		}
+
+		return $arrData;
+	}
 }
