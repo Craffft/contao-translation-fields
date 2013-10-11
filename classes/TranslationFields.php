@@ -135,7 +135,7 @@ class TranslationFields extends \Controller
 		// load DCA file explicitly when internal cache is enabled
 		$strFile = 'system/cache/dca/' . $strTable . '.php';	
 		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strFile)) {			
-			include TL_ROOT . '/' . $strFile;
+			require_once TL_ROOT . '/' . $strFile;
 		}	
 		
 		if (count($GLOBALS['TL_DCA'][$strTable]['fields']) > 0)
