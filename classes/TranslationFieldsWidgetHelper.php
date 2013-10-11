@@ -17,6 +17,7 @@
  */
 namespace TranslationFields;
 
+
 /**
  * Class TranslationFieldsWidgetHelper
  *
@@ -29,9 +30,9 @@ class TranslationFieldsWidgetHelper extends \Backend
 
 	/**
 	 * arrLng
-	 * 
+	 *
 	 * (default value: array())
-	 * 
+	 *
 	 * @var array
 	 * @access private
 	 * @static
@@ -41,7 +42,7 @@ class TranslationFieldsWidgetHelper extends \Backend
 
 	/**
 	 * addFallbackValueToEmptyField function.
-	 * 
+	 *
 	 * @access public
 	 * @static
 	 * @param mixed $varInput
@@ -72,7 +73,7 @@ class TranslationFieldsWidgetHelper extends \Backend
 
 	/**
 	 * addValueToAllLanguages function.
-	 * 
+	 *
 	 * @access public
 	 * @static
 	 * @param string $strValue
@@ -96,7 +97,7 @@ class TranslationFieldsWidgetHelper extends \Backend
 
 	/**
 	 * saveValuesAndReturnFid function.
-	 * 
+	 *
 	 * @access public
 	 * @static
 	 * @param array $arrValues
@@ -159,7 +160,7 @@ class TranslationFieldsWidgetHelper extends \Backend
 
 	/**
 	 * getTranslationsByFid function.
-	 * 
+	 *
 	 * @access public
 	 * @static
 	 * @param int $intFid
@@ -190,7 +191,7 @@ class TranslationFieldsWidgetHelper extends \Backend
 
 	/**
 	 * setTranslationLanguages function.
-	 * 
+	 *
 	 * @access private
 	 * @static
 	 * @return void
@@ -261,7 +262,7 @@ class TranslationFieldsWidgetHelper extends \Backend
 
 	/**
 	 * getTranslationLanguages function.
-	 * 
+	 *
 	 * @access public
 	 * @static
 	 * @param bool $blnReload (default: false)
@@ -280,7 +281,7 @@ class TranslationFieldsWidgetHelper extends \Backend
 
 	/**
 	 * getEmptyTranslationLanguages function.
-	 * 
+	 *
 	 * @access public
 	 * @static
 	 * @param bool $blnReload (default: false)
@@ -296,7 +297,7 @@ class TranslationFieldsWidgetHelper extends \Backend
 
 	/**
 	 * getEmptyTranslationLanguages function.
-	 * 
+	 *
 	 * @access public
 	 * @static
 	 * @param bool $blnReload (default: false)
@@ -317,7 +318,7 @@ class TranslationFieldsWidgetHelper extends \Backend
 
 	/**
 	 * getInputTranslationLanguages function.
-	 * 
+	 *
 	 * @access public
 	 * @static
 	 * @param array $varValue

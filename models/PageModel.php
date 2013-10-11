@@ -1,14 +1,14 @@
-<?php 
+<?php
 
 /**
  * Contao Open Source CMS
- * 
+ *
  * Copyright (C) 2005-2013 Leo Feyer
- * 
- * @package   translation_fields 
- * @author    Daniel Kiesel 
- * @license   LGPL 
- * @copyright Daniel Kiesel 2013 
+ *
+ * @package   translation_fields
+ * @author    Daniel Kiesel
+ * @license   LGPL
+ * @copyright Daniel Kiesel 2013
  */
 
 
@@ -17,11 +17,12 @@
  */
 namespace TranslationFields;
 
+
 /**
- * Class PageModel 
+ * Class PageModel
  *
- * @copyright  Daniel Kiesel 2013 
- * @author     Daniel Kiesel 
+ * @copyright  Daniel Kiesel 2013
+ * @author     Daniel Kiesel
  * @package    translation_fields
  */
 class PageModel extends \Contao\PageModel

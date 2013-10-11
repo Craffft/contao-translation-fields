@@ -17,6 +17,7 @@
  */
 namespace TranslationFields;
 
+
 /**
  * Class TranslationFields
  *
