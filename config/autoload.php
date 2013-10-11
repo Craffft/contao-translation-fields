@@ -27,7 +27,11 @@ ClassLoader::addClasses(array
 (
 	// Classes
 	'TranslationFields\TranslationFields'             => 'system/modules/translation_fields/classes/TranslationFields.php',
+	'TranslationFields\TranslationFieldsCopyHelper'   => 'system/modules/translation_fields/classes/TranslationFieldsCopyHelper.php',
 	'TranslationFields\TranslationFieldsWidgetHelper' => 'system/modules/translation_fields/classes/TranslationFieldsWidgetHelper.php',
+
+	// Driver
+	'TranslationFields\DC_Table'                      => 'system/modules/translation_fields/driver/DC_Table.php',
 
 	// Models
 	'TranslationFields\PageModel'                     => 'system/modules/translation_fields/models/PageModel.php',

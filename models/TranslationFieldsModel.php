@@ -34,6 +34,16 @@ class TranslationFieldsModel extends \Model
 	protected static $strTable = 'tl_translation_fields';
 
 
+	/**
+	 * findOneByFidAndLanguage function.
+	 *
+	 * @access public
+	 * @static
+	 * @param int $intFid
+	 * @param string $strLanguage
+	 * @param array $arrOptions (default: array())
+	 * @return object
+	 */
 	public static function findOneByFidAndLanguage($intFid, $strLanguage, array $arrOptions=array())
 	{
 		$t = static::$strTable;
@@ -42,5 +52,23 @@ class TranslationFieldsModel extends \Model
 		$arrValues = array($intFid, $strLanguage);
 
 		return static::findOneBy($arrColumns, $arrValues, $arrOptions);
+	}
+
+
+	/**
+	 * getNextFid function.
+	 *
+	 * @access public
+	 * @static
+	 * @return int
+	 */
+	public static function getNextFid()
+	{
+		$t = static::$strTable;
+
+		$intFid = \Database::getInstance()->prepare("SELECT (fid + 1) AS nextFid FROM $t ORDER BY fid DESC")->limit(1)->executeUncached()->nextFid;
+		$intFid = ($intFid === null) ? 1 : $intFid;
+
+		return $intFid;
 	}
 }

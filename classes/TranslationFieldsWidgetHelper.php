@@ -134,8 +134,7 @@ class TranslationFieldsWidgetHelper extends \Backend
 				if ($objTranslation === null)
 				{
 					// Get next fid
-					$intFid = \Database::getInstance()->prepare("SELECT (fid + 1) AS nextFid FROM tl_translation_fields ORDER BY fid DESC")->limit(1)->executeUncached()->nextFid;
-					$intFid = ($intFid === null) ? 1 : $intFid;
+					$intFid = \TranslationFieldsModel::getNextFid();
 
 					// Create translation object
 					$objTranslation = new \TranslationFieldsModel();
