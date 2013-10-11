@@ -38,7 +38,7 @@ class DC_Table extends \Contao\DC_Table
 	public function copy($blnDoNotRedirect=false)
 	{
 		// Define oncopy callback for every copy
-		$GLOBALS['TL_DCA'][$this->strTable]['config']['oncopy_callback'][] = array('\TranslationFields\TranslationFieldsCopyHelper', 'copyDataRecord');
+		$GLOBALS['TL_DCA'][$this->strTable]['config']['oncopy_callback'][] = array('\TranslationFields\TranslationFieldsBackendHelper', 'copyDataRecord');
 
 		// Return parent copy
 		return parent::copy($blnDoNotRedirect);

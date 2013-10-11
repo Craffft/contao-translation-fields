@@ -19,13 +19,13 @@ namespace TranslationFields;
 
 
 /**
- * Class TranslationFieldsCopyHelper
+ * Class TranslationFieldsBackendHelper
  *
  * @copyright  Daniel Kiesel 2013
  * @author     Daniel Kiesel
  * @package    translation_fields
  */
-class TranslationFieldsCopyHelper extends \Backend
+class TranslationFieldsBackendHelper extends \Backend
 {
 
 	/**
@@ -39,8 +39,15 @@ class TranslationFieldsCopyHelper extends \Backend
 	 */
 	public static function copyDataRecord($intCopyId, \DataContainer $dc)
 	{
+		// If this is not the backend than return
+		if (TL_MODE != 'BE')
+		{
+			return;
+		}
+
 		$strTable = $dc->table;
 		$strModel = '\\' . \System::getModelClassFromTable($strTable);
+		$objTranslationController = new \TranslationController();
 
 		// Get object from model
 		$objModel = $strModel::findByPk($intCopyId);
@@ -51,8 +58,8 @@ class TranslationFieldsCopyHelper extends \Backend
 
 			if (is_array($arrData) && count($arrData) > 0)
 			{
-				// Load current DCA
-				// DOTO
+				// Load current data container
+				$objTranslationController->loadDataContainer($strTable);
 
 				foreach ($arrData as $strField => $varValue)
 				{
