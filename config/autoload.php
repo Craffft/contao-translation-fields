@@ -35,8 +35,8 @@ ClassLoader::addClasses(array
 	'TranslationFields\DC_Table'                       => 'system/modules/translation_fields/driver/DC_Table.php',
 
 	// Models
-	'TranslationFields\PageModel'                      => 'system/modules/translation_fields/models/PageModel.php',
 	'TranslationFields\TranslationFieldsModel'         => 'system/modules/translation_fields/models/TranslationFieldsModel.php',
+	'TranslationFields\TranslationFieldsPageModel'     => 'system/modules/translation_fields/models/TranslationFieldsPageModel.php',
 
 	// Widgets
 	'TranslationFields\TranslationInputUnit'           => 'system/modules/translation_fields/widgets/TranslationInputUnit.php',
