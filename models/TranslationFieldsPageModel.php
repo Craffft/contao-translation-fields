@@ -29,6 +29,16 @@ class TranslationFieldsPageModel extends \Model
 {
 
 	/**
+	 * strTable
+	 * 
+	 * @var string
+	 * @access protected
+	 * @static
+	 */
+	protected static $strTable = 'tl_page';
+
+
+	/**
 	 * findRootPages function.
 	 * 
 	 * @access public
