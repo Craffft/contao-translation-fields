@@ -219,7 +219,7 @@ class TranslationFieldsWidgetHelper extends \Backend
 		}
 		else
 		{
-			$objRootPages = \PageModel::findRootPages();
+			$objRootPages = \TranslationFieldsPageModel::findRootPages();
 
 			if ($objRootPages !== null)
 			{

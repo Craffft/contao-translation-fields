@@ -19,14 +19,23 @@ namespace TranslationFields;
 
 
 /**
- * Class PageModel
+ * Class TranslationFieldsPageModel
  *
  * @copyright  Daniel Kiesel 2013
  * @author     Daniel Kiesel
  * @package    translation_fields
  */
-class PageModel extends \Contao\PageModel
+class TranslationFieldsPageModel extends \Model
 {
+
+	/**
+	 * findRootPages function.
+	 * 
+	 * @access public
+	 * @static
+	 * @param array
+	 * @return object
+	 */
 	public static function findRootPages(array $arrOptions=array())
 	{
 		$t = static::$strTable;
