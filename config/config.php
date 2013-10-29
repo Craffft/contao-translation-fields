@@ -52,11 +52,14 @@ if (TL_MODE == 'BE')
  * have to be set. Take a look at the system/modules/core/config/config.php
  * file to see how back end modules are configured.
  */
-$GLOBALS['BE_MOD']['system']['translations'] = array
+array_insert($GLOBALS['BE_MOD']['system'], 7, array
 (
-	'tables' => array('tl_translation_fields'),
-	'icon'   => $GLOBALS['TRANSLATION_FIELDS']['PATH'] . '/assets/images/translation-icon.png'
-);
+	'translations' => array
+	(
+		'tables'	=> array('tl_translation_fields'),
+		'icon'		=> $GLOBALS['TRANSLATION_FIELDS']['PATH'] . '/assets/images/translation-icon.png',
+	)
+));
 
 
 /**
