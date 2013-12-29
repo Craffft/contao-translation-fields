@@ -49,6 +49,12 @@ class TranslationFieldsBackendHelper extends \Backend
 		$strModel = '\\' . \System::getModelClassFromTable($strTable);
 		$objTranslationController = new \TranslationController();
 
+		// Return if the class does not exist (#9 thanks to tsarma)
+		if (!class_exists($strModel))
+		{
+			return;
+		}
+
 		// Get object from model
 		$objModel = $strModel::findByPk($intCopyId);
 
