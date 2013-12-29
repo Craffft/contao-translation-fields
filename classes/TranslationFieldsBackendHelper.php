@@ -33,11 +33,11 @@ class TranslationFieldsBackendHelper extends \Backend
 	 *
 	 * @access public
 	 * @static
-	 * @param int $intCopyId
+	 * @param int $intId
 	 * @param \DataContainer $dc
 	 * @return void
 	 */
-	public static function copyDataRecord($intCopyId, \DataContainer $dc)
+	public static function copyDataRecord($intId, \DataContainer $dc)
 	{
 		// If this is not the backend than return
 		if (TL_MODE != 'BE')
@@ -56,7 +56,7 @@ class TranslationFieldsBackendHelper extends \Backend
 		}
 
 		// Get object from model
-		$objModel = $strModel::findByPk($intCopyId);
+		$objModel = $strModel::findByPk($intId);
 
 		if ($objModel !== null)
 		{
@@ -102,6 +102,77 @@ class TranslationFieldsBackendHelper extends \Backend
 
 			// Save model object
 			$objModel->save();
+		}
+	}
+
+
+	/**
+	 * deleteDataRecord function.
+	 *
+	 * @access public
+	 * @static
+	 * @param int $intId
+	 * @param \DataContainer $dc
+	 * @return void
+	 */
+	public static function deleteDataRecord($dc)
+	{
+		// If this is not the backend than return
+		if (TL_MODE != 'BE')
+		{
+			return;
+		}
+
+		// Check if there is an active record
+		if ($dc instanceof \DataContainer && $dc->activeRecord)
+		{
+			$intId = $dc->activeRecord->id;
+
+			$strTable = $dc->table;
+			$strModel = '\\' . \System::getModelClassFromTable($strTable);
+			$objTranslationController = new \TranslationController();
+
+			// Return if the class does not exist (#9 thanks to tsarma)
+			if (!class_exists($strModel))
+			{
+				return;
+			}
+
+			// Get object from model
+			$objModel = $strModel::findByPk($intId);
+
+			if ($objModel !== null)
+			{
+				$arrData = $objModel->row();
+
+				if (is_array($arrData) && count($arrData) > 0)
+				{
+					// Load current data container
+					$objTranslationController->loadDataContainer($strTable);
+
+					foreach ($arrData as $strField => $varValue)
+					{
+						switch ($GLOBALS['TL_DCA'][$strTable]['fields'][$strField]['inputType'])
+						{
+							case 'TranslationInputUnit':
+							case 'TranslationTextArea':
+							case 'TranslationTextField':
+								// Get translation values
+								$objTranslation = \TranslationFieldsModel::findByFid($varValue);
+
+								if ($objTranslation !== null)
+								{
+									while ($objTranslation->next())
+									{
+										// Delete translation
+										$objTranslation->delete();
+									}
+								}
+								break;
+						}
+					}
+				}
+			}
 		}
 	}
 }

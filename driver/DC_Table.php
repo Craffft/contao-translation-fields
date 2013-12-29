@@ -43,4 +43,21 @@ class DC_Table extends \Contao\DC_Table
 		// Return parent copy
 		return parent::copy($blnDoNotRedirect);
 	}
+
+
+	/**
+	 * delete function.
+	 *
+	 * @access public
+	 * @param bool $blnDoNotRedirect (default: false)
+	 * @return void
+	 */
+	public function delete($blnDoNotRedirect=false)
+	{
+		// Define ondelete callback for every deltion
+		$GLOBALS['TL_DCA'][$this->strTable]['config']['ondelete_callback'][] = array('\TranslationFields\TranslationFieldsBackendHelper', 'deleteDataRecord');
+
+		// Call parent
+		parent::delete($blnDoNotRedirect);
+	}
 }
