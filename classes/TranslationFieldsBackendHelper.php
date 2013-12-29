@@ -3,12 +3,12 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (C) 2005-2013 Leo Feyer
+ * Copyright (C) 2005-2014 Leo Feyer
  *
- * @package   TranslationFields
- * @author    Daniel Kiesel
- * @license   LGPL
- * @copyright Daniel Kiesel 2013
+ * @package    TranslationFields
+ * @author     Daniel Kiesel <https://github.com/icodr8>
+ * @license    LGPL
+ * @copyright  Daniel Kiesel 2013
  */
 
 
@@ -21,8 +21,8 @@ namespace TranslationFields;
 /**
  * Class TranslationFieldsBackendHelper
  *
- * @copyright  Daniel Kiesel 2013
- * @author     Daniel Kiesel
+ * @copyright  Daniel Kiesel 2013-2014
+ * @author     Daniel Kiesel <https://github.com/icodr8>
  * @package    translation_fields
  */
 class TranslationFieldsBackendHelper extends \Backend
