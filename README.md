@@ -164,24 +164,28 @@ You can do this like in the following code:
 	{
 		// Code ...
 
-		function handleTranslationFields()
+		public function __construct()
 		{
-			$objMyTable = \MyTableModel::findAll();
+			parent::__construct();
 
-			if ($objMyTable !== null)
-			{
-				while ($objMyTable->next())
-				{
-					// Check if already translated
-					if (strlen($objMyTable->myfield) > 0 && !is_numeric($objMyTable->myfield))
-					{
-						$objMyTable->myfield = \TranslationFieldsWidgetHelper::saveValuesAndReturnFid(\TranslationFieldsWidgetHelper::addValueToAllLanguages($objMyTable->myfield));
-					}
+			// Code ...
 
-					// Save model
-					$objMyTable->save();
-				}
-			}
+			// Load required translation_fields classes
+			\ClassLoader::addNamespace('TranslationFields');
+			\ClassLoader::addClass('TranslationFields\Updater', 'system/modules/translation_fields/classes/Updater.php');
+			\ClassLoader::addClass('TranslationFields\TranslationFieldsWidgetHelper', 'system/modules/translation_fields/classes/TranslationFieldsWidgetHelper.php');
+			\ClassLoader::addClass('TranslationFields\TranslationFieldsModel', 'system/modules/translation_fields/models/TranslationFieldsModel.php');
+			\ClassLoader::register();
+		}
+
+
+		public function run()
+		{
+			// Code ...
+
+			\TranslationFields\Updater::convertTranslationField('tl_my_table_name', 'my_field_name');
+
+			// Code ...
 		}
 
 		// Code ...
