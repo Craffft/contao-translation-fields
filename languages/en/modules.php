@@ -8,7 +8,7 @@
  * @package    translation_fields 
  * @author     Daniel Kiesel <https://github.com/icodr8> 
  * @license    LGPL 
- * @copyright  Daniel Kiesel 2013 
+ * @copyright  Daniel Kiesel 2013-2014 
  */
 
 
