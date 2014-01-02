@@ -30,6 +30,7 @@ ClassLoader::addClasses(array
 	'TranslationFields\TranslationFields'              => 'system/modules/translation_fields/classes/TranslationFields.php',
 	'TranslationFields\TranslationFieldsBackendHelper' => 'system/modules/translation_fields/classes/TranslationFieldsBackendHelper.php',
 	'TranslationFields\TranslationFieldsWidgetHelper'  => 'system/modules/translation_fields/classes/TranslationFieldsWidgetHelper.php',
+	'TranslationFields\Updater'                        => 'system/modules/translation_fields/classes/Updater.php',
 
 	// Driver
 	'TranslationFields\DC_Table'                       => 'system/modules/translation_fields/driver/DC_Table.php',
