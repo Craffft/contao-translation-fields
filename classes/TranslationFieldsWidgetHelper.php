@@ -362,10 +362,17 @@ class TranslationFieldsWidgetHelper extends \Backend
 	{
 		// Get current translation languages
 		$arrLngKeys = array_keys(self::$arrLng);
+		$strFlagname = (strtolower(strlen($arrLngKeys[0]) > 2 ? substr($arrLngKeys[0], -2) : $arrLngKeys[0]));
+
+		// Set empty flagname, if flag doesn't exist
+		if (!file_exists(TL_ROOT . '/' . sprintf('system/modules/translation_fields/assets/images/flag_icons/%s.png', $strFlagname)))
+		{
+			$strFlagname = 'xx';
+		}
 
 		// Generate current translation language button
 		$strButton = sprintf('<span class="tf_button"><img src="system/modules/translation_fields/assets/images/flag_icons/%s.png" width="16" height="11" alt="%s"></span>',
-						(strtolower(strlen($arrLngKeys[0]) > 2 ? substr($arrLngKeys[0], -2) : $arrLngKeys[0])),
+						$strFlagname,
 						self::$arrLng[$arrLngKeys[0]]);
 
 		return $strButton;
@@ -394,8 +401,16 @@ class TranslationFieldsWidgetHelper extends \Backend
 
 		foreach (self::$arrLng as $key => $value)
 		{
+			$strFlagname = (strtolower(strlen($key) > 2 ? substr($key, -2) : $key));
+
+			// Set empty flagname, if flag doesn't exist
+			if (!file_exists(TL_ROOT . '/' . sprintf('system/modules/translation_fields/assets/images/flag_icons/%s.png', $strFlagname)))
+			{
+				$strFlagname = 'xx';
+			}
+
 			$strLngIcon = sprintf('<img src="system/modules/translation_fields/assets/images/flag_icons/%s.png" width="16" height="11" alt="%s">',
-							(strtolower(strlen($key) > 2 ? substr($key, -2) : $key)),
+							$strFlagname,
 							$value);
 
 			$arrLngList[] = sprintf('<li id="lng_list_item_%s" class="tf_lng_item%s">%s%s</li>',
