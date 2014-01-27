@@ -50,6 +50,12 @@ class TranslationFields extends \Controller
 	 */
 	public static function translateValue($varValue, $strForceLanguage = '')
 	{
+		// Return value if it is already translated
+		if (!is_numeric($varValue))
+		{
+			return $varValue;
+		}
+
 		$arrLanguages = array();
 
 		// If force language is set than add it as first language param
