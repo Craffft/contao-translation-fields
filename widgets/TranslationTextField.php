@@ -98,11 +98,20 @@ class TranslationTextField extends \TextField
 		// Get language id
 		$intId = ($this->activeRecord) ? $this->activeRecord->{$this->strName} : $GLOBALS['TL_CONFIG'][$this->strName];
 
-		// Fill all empty fields with the content of the fallback field
-		$varInput = \TranslationFieldsWidgetHelper::addFallbackValueToEmptyField($varInput);
+		// Check if translation fields should not be empty saved
+		if (!$GLOBALS['TL_CONFIG']['dontfillEmptyTranslationFields'])
+		{
+			// Fill all empty fields with the content of the fallback field
+			$varInput = \TranslationFieldsWidgetHelper::addFallbackValueToEmptyField($varInput);
+			parent::validator($varInput);
+		}
+		else
+		{
+			// Check only the first field
+			parent::validator($varInput[key($varInput)]);
+		}
 
-		parent::validator($varInput);
-
+		// Check if array
 		if (is_array($varInput))
 		{
 			if (!parent::hasErrors())

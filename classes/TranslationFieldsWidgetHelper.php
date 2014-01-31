@@ -108,8 +108,12 @@ class TranslationFieldsWidgetHelper extends \Backend
 	{
 		$arrLanguages = self::getTranslationLanguageKeys();
 
-		// Add fallback text to empty values
-		$arrValues = self::addFallbackValueToEmptyField($arrValues);
+		// Check if translation fields should not be empty saved
+		if (!$GLOBALS['TL_CONFIG']['dontfillEmptyTranslationFields'])
+		{
+			// Add fallback text to empty values
+			$arrValues = self::addFallbackValueToEmptyField($arrValues);
+		}
 
 		if (is_array($arrLanguages) && count($arrLanguages))
 		{
@@ -166,7 +170,7 @@ class TranslationFieldsWidgetHelper extends \Backend
 	 * @param int $intFid
 	 * @return array
 	 */
-	public static function getTranslationsByFid($intFid)
+	public static function getTranslationsByFid($intFid, $onlyActiveLanguages = false)
 	{
 		// Get empty tranlation languages
 		$arrData = self::getEmptyTranslationLanguages();
@@ -182,6 +186,24 @@ class TranslationFieldsWidgetHelper extends \Backend
 					$arrData[$objTranslation->language] = $objTranslation->content;
 				}
 			}
+		}
+
+		// If only active languages should be returned
+		if ($onlyActiveLanguages)
+		{
+			$arrActiveData = array();
+			$arrKeys = self::getTranslationLanguageKeys();
+
+			if (is_array($arrKeys) && count($arrKeys) > 0)
+			{
+				foreach ($arrKeys as $key)
+				{
+					$arrActiveData[$key] = (!isset($arrData[$key]) ? '' : $arrData[$key]);
+				}
+			}
+
+			// Replace data with active data
+			$arrData = $arrActiveData;
 		}
 
 		// Return data array
