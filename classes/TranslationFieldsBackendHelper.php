@@ -46,7 +46,7 @@ class TranslationFieldsBackendHelper extends \Backend
 		}
 
 		$strTable = $dc->table;
-		$strModel = '\\' . \System::getModelClassFromTable($strTable);
+		$strModel = '\\' . \Model::getClassFromTable($strTable);
 		$objTranslationController = new \TranslationController();
 
 		// Return if the class does not exist (#9 thanks to tsarma)
@@ -129,7 +129,7 @@ class TranslationFieldsBackendHelper extends \Backend
 			$intId = $dc->activeRecord->id;
 
 			$strTable = $dc->table;
-			$strModel = '\\' . \System::getModelClassFromTable($strTable);
+			$strModel = '\\' . \Model::getClassFromTable($strTable);
 			$objTranslationController = new \TranslationController();
 
 			// Return if the class does not exist (#9 thanks to tsarma)
