@@ -1,8 +1,8 @@
 <?php
 /**
- * TL_ROOT/system/modules/translation_fields/languages/fa/tl_settings.php 
+ * TL_ROOT/system/modules/translation-fields/languages/fa/tl_settings.php
  * 
- * Contao extension: translation_fields 1.2.0 stable 
+ * Contao extension: translation-fields 1.2.0 stable
  * Persian translation file 
  * 
  * Copyright : Daniel Kiesel 2013 
@@ -19,6 +19,6 @@ $GLOBALS['TL_LANG']['tl_settings']['chooseTranslationLanguages']['0'] = "انت�
 $GLOBALS['TL_LANG']['tl_settings']['chooseTranslationLanguages']['1'] = "این جعبه را برا تعریف زبان‌های موجود برای فیلدهای ترجمه انتخاب کنید.";
 $GLOBALS['TL_LANG']['tl_settings']['translationLanguages']['0'] = "زبان‌های موجود";
 $GLOBALS['TL_LANG']['tl_settings']['translationLanguages']['1'] = "اینجا می‌توانید از زبان‌های موجود برای فیلدهای ترجمعه انتخاب نمایید.";
-$GLOBALS['TL_LANG']['tl_settings']['translation_fields_legend'] = "فیلدهای قابل ترجمه";
+$GLOBALS['TL_LANG']['tl_settings']['translation-fields_legend'] = "فیلدهای قابل ترجمه";
  
 ?>

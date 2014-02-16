@@ -4,7 +4,7 @@
  * 
  * Copyright (C) 2005-2014 Leo Feyer
  * 
- * @package    translation_fields 
+ * @package    translation-fields
  * @author     Daniel Kiesel <https://github.com/icodr8> 
  * @license    LGPL 
  * @copyright  Daniel Kiesel 2013-2014 
@@ -22,4 +22,4 @@ $GLOBALS['TL_LANG']['tl_settings']['translationLanguages'] = array('Verfügbare 
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_settings']['translation_fields_legend'] = 'Übersetzbare Felder';
+$GLOBALS['TL_LANG']['tl_settings']['translation-fields_legend'] = 'Übersetzbare Felder';

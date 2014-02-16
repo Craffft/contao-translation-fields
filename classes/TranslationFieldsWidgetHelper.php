@@ -23,7 +23,7 @@ namespace TranslationFields;
  *
  * @copyright  Daniel Kiesel 2013-2014
  * @author     Daniel Kiesel <https://github.com/icodr8>
- * @package    translation_fields
+ * @package    translation-fields
  */
 class TranslationFieldsWidgetHelper extends \Backend
 {
@@ -387,13 +387,13 @@ class TranslationFieldsWidgetHelper extends \Backend
 		$strFlagname = (strtolower(strlen($arrLngKeys[0]) > 2 ? substr($arrLngKeys[0], -2) : $arrLngKeys[0]));
 
 		// Set empty flagname, if flag doesn't exist
-		if (!file_exists(TL_ROOT . '/' . sprintf('system/modules/translation_fields/assets/images/flag_icons/%s.png', $strFlagname)))
+		if (!file_exists(TL_ROOT . '/' . sprintf('system/modules/translation-fields/assets/images/flag_icons/%s.png', $strFlagname)))
 		{
 			$strFlagname = 'xx';
 		}
 
 		// Generate current translation language button
-		$strButton = sprintf('<span class="tf_button"><img src="system/modules/translation_fields/assets/images/flag_icons/%s.png" width="16" height="11" alt="%s"></span>',
+		$strButton = sprintf('<span class="tf_button"><img src="system/modules/translation-fields/assets/images/flag_icons/%s.png" width="16" height="11" alt="%s"></span>',
 						$strFlagname,
 						self::$arrLng[$arrLngKeys[0]]);
 
@@ -426,12 +426,12 @@ class TranslationFieldsWidgetHelper extends \Backend
 			$strFlagname = (strtolower(strlen($key) > 2 ? substr($key, -2) : $key));
 
 			// Set empty flagname, if flag doesn't exist
-			if (!file_exists(TL_ROOT . '/' . sprintf('system/modules/translation_fields/assets/images/flag_icons/%s.png', $strFlagname)))
+			if (!file_exists(TL_ROOT . '/' . sprintf('system/modules/translation-fields/assets/images/flag_icons/%s.png', $strFlagname)))
 			{
 				$strFlagname = 'xx';
 			}
 
-			$strLngIcon = sprintf('<img src="system/modules/translation_fields/assets/images/flag_icons/%s.png" width="16" height="11" alt="%s">',
+			$strLngIcon = sprintf('<img src="system/modules/translation-fields/assets/images/flag_icons/%s.png" width="16" height="11" alt="%s">',
 							$strFlagname,
 							$value);
 

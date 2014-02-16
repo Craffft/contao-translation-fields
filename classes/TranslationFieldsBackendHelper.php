@@ -23,7 +23,7 @@ namespace TranslationFields;
  *
  * @copyright  Daniel Kiesel 2013-2014
  * @author     Daniel Kiesel <https://github.com/icodr8>
- * @package    translation_fields
+ * @package    translation-fields
  */
 class TranslationFieldsBackendHelper extends \Backend
 {

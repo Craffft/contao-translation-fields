@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2005-2014 Leo Feyer
  *
- * @package Translation_fields
+ * @package translation-fields
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
@@ -26,21 +26,21 @@ ClassLoader::addNamespaces(array
 ClassLoader::addClasses(array
 (
 	// Classes
-	'TranslationFields\TranslationController'          => 'system/modules/translation_fields/classes/TranslationController.php',
-	'TranslationFields\TranslationFields'              => 'system/modules/translation_fields/classes/TranslationFields.php',
-	'TranslationFields\TranslationFieldsBackendHelper' => 'system/modules/translation_fields/classes/TranslationFieldsBackendHelper.php',
-	'TranslationFields\TranslationFieldsWidgetHelper'  => 'system/modules/translation_fields/classes/TranslationFieldsWidgetHelper.php',
-	'TranslationFields\Updater'                        => 'system/modules/translation_fields/classes/Updater.php',
+	'TranslationFields\TranslationController'          => 'system/modules/translation-fields/classes/TranslationController.php',
+	'TranslationFields\TranslationFields'              => 'system/modules/translation-fields/classes/TranslationFields.php',
+	'TranslationFields\TranslationFieldsBackendHelper' => 'system/modules/translation-fields/classes/TranslationFieldsBackendHelper.php',
+	'TranslationFields\TranslationFieldsWidgetHelper'  => 'system/modules/translation-fields/classes/TranslationFieldsWidgetHelper.php',
+	'TranslationFields\Updater'                        => 'system/modules/translation-fields/classes/Updater.php',
 
 	// Driver
-	'TranslationFields\DC_Table'                       => 'system/modules/translation_fields/driver/DC_Table.php',
+	'TranslationFields\DC_Table'                       => 'system/modules/translation-fields/driver/DC_Table.php',
 
 	// Models
-	'TranslationFields\TranslationFieldsModel'         => 'system/modules/translation_fields/models/TranslationFieldsModel.php',
-	'TranslationFields\TranslationFieldsPageModel'     => 'system/modules/translation_fields/models/TranslationFieldsPageModel.php',
+	'TranslationFields\TranslationFieldsModel'         => 'system/modules/translation-fields/models/TranslationFieldsModel.php',
+	'TranslationFields\TranslationFieldsPageModel'     => 'system/modules/translation-fields/models/TranslationFieldsPageModel.php',
 
 	// Widgets
-	'TranslationFields\TranslationInputUnit'           => 'system/modules/translation_fields/widgets/TranslationInputUnit.php',
-	'TranslationFields\TranslationTextArea'            => 'system/modules/translation_fields/widgets/TranslationTextArea.php',
-	'TranslationFields\TranslationTextField'           => 'system/modules/translation_fields/widgets/TranslationTextField.php',
+	'TranslationFields\TranslationInputUnit'           => 'system/modules/translation-fields/widgets/TranslationInputUnit.php',
+	'TranslationFields\TranslationTextArea'            => 'system/modules/translation-fields/widgets/TranslationTextArea.php',
+	'TranslationFields\TranslationTextField'           => 'system/modules/translation-fields/widgets/TranslationTextField.php',
 ));

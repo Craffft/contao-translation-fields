@@ -5,7 +5,7 @@
  * 
  * Copyright (C) 2005-2014 Leo Feyer
  * 
- * @package    translation_fields 
+ * @package    translation-fields
  * @author     Daniel Kiesel <https://github.com/icodr8> 
  * @license    LGPL 
  * @copyright  Daniel Kiesel 2013-2014 
@@ -15,14 +15,14 @@
 /**
  * Set global path to this module
  */
-$GLOBALS['TRANSLATION_FIELDS']['PATH'] = 'system/modules/translation_fields';
+$GLOBALS['translation-fields']['PATH'] = 'system/modules/translation-fields';
 /**
  * Add CSS and JavaScript files
  */
 if (TL_MODE == 'BE')
 {
-	$GLOBALS['TL_CSS'][]        = $GLOBALS['TRANSLATION_FIELDS']['PATH'] . '/assets/css/translationfields.css';
-	$GLOBALS['TL_JAVASCRIPT'][] = $GLOBALS['TRANSLATION_FIELDS']['PATH'] . '/assets/js/translationfields.js';
+	$GLOBALS['TL_CSS'][]        = $GLOBALS['translation-fields']['PATH'] . '/assets/css/translationfields.css';
+	$GLOBALS['TL_JAVASCRIPT'][] = $GLOBALS['translation-fields']['PATH'] . '/assets/js/translationfields.js';
 }
 
 
@@ -57,7 +57,7 @@ array_insert($GLOBALS['BE_MOD']['system'], 7, array
 	'translations' => array
 	(
 		'tables'	=> array('tl_translation_fields'),
-		'icon'		=> $GLOBALS['TRANSLATION_FIELDS']['PATH'] . '/assets/images/translation-icon.png',
+		'icon'		=> $GLOBALS['translation-fields']['PATH'] . '/assets/images/translation-icon.png',
 	)
 ));
 

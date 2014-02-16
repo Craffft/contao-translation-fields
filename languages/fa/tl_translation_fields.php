@@ -1,8 +1,8 @@
 <?php
 /**
- * TL_ROOT/system/modules/translation_fields/languages/fa/tl_translation_fields.php 
+ * TL_ROOT/system/modules/translation-fields/languages/fa/tl_translation_fields.php
  * 
- * Contao extension: translation_fields 1.2.0 stable 
+ * Contao extension: translation-fields 1.2.0 stable
  * Persian translation file 
  * 
  * Copyright : Daniel Kiesel 2013 

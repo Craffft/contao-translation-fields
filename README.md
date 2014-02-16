@@ -15,7 +15,7 @@ Dependencies
 Troubleshooting
 ---------------
 
-Directly on github! See https://github.com/iCodr8/contao-translation_fields/issues
+Directly on github! See https://github.com/iCodr8/contao-translation-fields/issues
 
 Documentation
 =============
@@ -181,11 +181,11 @@ You can do this like in the following code:
 
             // Code ...
 
-            // Load required translation_fields classes
+            // Load required translation-fields classes
             \ClassLoader::addNamespace('TranslationFields');
-            \ClassLoader::addClass('TranslationFields\Updater', 'system/modules/translation_fields/classes/Updater.php');
-            \ClassLoader::addClass('TranslationFields\TranslationFieldsWidgetHelper', 'system/modules/translation_fields/classes/TranslationFieldsWidgetHelper.php');
-            \ClassLoader::addClass('TranslationFields\TranslationFieldsModel', 'system/modules/translation_fields/models/TranslationFieldsModel.php');
+            \ClassLoader::addClass('TranslationFields\Updater', 'system/modules/translation-fields/classes/Updater.php');
+            \ClassLoader::addClass('TranslationFields\TranslationFieldsWidgetHelper', 'system/modules/translation-fields/classes/TranslationFieldsWidgetHelper.php');
+            \ClassLoader::addClass('TranslationFields\TranslationFieldsModel', 'system/modules/translation-fields/models/TranslationFieldsModel.php');
             \ClassLoader::register();
         }
 
