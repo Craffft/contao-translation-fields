@@ -148,6 +148,13 @@ class TranslationFieldsBackendHelper extends \Backend
 					// Load current data container
 					$objTranslationController->loadDataContainer($strTable);
 
+                    // Get tl_undo data
+                    $objUndo = \Database::getInstance()->prepare("SELECT * FROM tl_undo WHERE fromTable=? ORDER BY id DESC")->limit(1)->execute($dc->table);
+                    $arrSet = $objUndo->row();
+
+                    // Deserialize tl_undo data
+                    $arrSet['data'] = deserialize($arrSet['data']);
+
 					foreach ($arrData as $strField => $varValue)
 					{
 						switch ($GLOBALS['TL_DCA'][$strTable]['fields'][$strField]['inputType'])
@@ -162,6 +169,11 @@ class TranslationFieldsBackendHelper extends \Backend
 								{
 									while ($objTranslation->next())
 									{
+                                        $t = \TranslationFieldsModel::getTable();
+
+                                        // Add cross table record to undo data
+                                        $arrSet['data'][$t][] = $objTranslation->row();
+
 										// Delete translation
 										$objTranslation->delete();
 									}
@@ -169,6 +181,12 @@ class TranslationFieldsBackendHelper extends \Backend
 								break;
 						}
 					}
+
+                    // Serialize tl_undo data
+                    $arrSet['data'] = serialize($arrSet['data']);
+
+                    // Update tl_undo
+                    \Database::getInstance()->prepare("UPDATE tl_undo %s WHERE id=?")->set($arrSet)->execute($objUndo->id);
 				}
 			}
 		}
