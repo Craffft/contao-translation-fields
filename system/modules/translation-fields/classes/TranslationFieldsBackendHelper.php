@@ -88,11 +88,9 @@ class TranslationFieldsBackendHelper extends \Backend
 								while ($objTranslation->next())
 								{
 									// Generate new translation fields object to copy the current
-									$objCopyTranslation = new \TranslationFieldsModel();
-									$objCopyTranslation->setRow($objTranslation->row());
-									$objCopyTranslation->id = null;
-									$objCopyTranslation->fid = $intFid;
-									$objCopyTranslation->save();
+                                    $objCopy = clone $objTranslation->current();
+                                    $objCopy->fid = $intFid;
+                                    $objCopy->save();
 								}
 							}
 							break;
