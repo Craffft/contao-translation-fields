@@ -104,7 +104,6 @@ $GLOBALS['TL_DCA']['tl_translation_fields'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_translation_fields']['fid'],
 			'exclude'                 => true,
-			'filter'                  => true,
 			'search'                  => true,
 			'sorting'                 => true,
 			'inputType'               => 'text',
