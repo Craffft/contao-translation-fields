@@ -40,7 +40,7 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['chooseTranslationLanguages'] = arra
 $GLOBALS['TL_DCA']['tl_settings']['fields']['translationLanguages'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['translationLanguages'],
-	'inputType'               => 'checkbox',
+	'inputType'               => 'checkboxWizard',
 	'options'                 => \System::getLanguages(),
 	'eval'                    => array('mandatory'=>true, 'multiple'=>true)
 );
