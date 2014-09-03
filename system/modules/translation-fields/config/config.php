@@ -230,6 +230,11 @@ $GLOBALS['BE_FFL']['TranslationTextField'] = 'TranslationTextField';
  * tables, "folders" stores jobs which purge folders and "custom" stores jobs
  * which only trigger a callback function.
  */
+$GLOBALS['TL_PURGE']['tables']['translation_fields'] = array
+(
+    'callback' => array('\\TranslationFields\\Purge', 'purgeTranslationFields'),
+    'affected' => array('tl_translation_fields')
+);
 
 
 /**
