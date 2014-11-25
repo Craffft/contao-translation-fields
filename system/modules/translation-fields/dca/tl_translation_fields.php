@@ -41,11 +41,11 @@ $GLOBALS['TL_DCA']['tl_translation_fields'] = array
 		(
 			'mode'                    => 2,
 			'fields'                  => array('language'),
-			'panelLayout'             => 'filter;sort,search,limit'
+			'panelLayout'             => 'filter;sort,search'
 		),
 		'label' => array
 		(
-			'fields'                  => array('language', 'fid'),
+			'fields'                  => array('language', 'fid', 'content'),
 			'showColumns'             => true
 		),
 		'global_operations' => array
@@ -115,7 +115,6 @@ $GLOBALS['TL_DCA']['tl_translation_fields'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_translation_fields']['language'],
 			'exclude'                 => true,
 			'filter'                  => true,
-			'search'                  => true,
 			'sorting'                 => true,
 			'inputType'               => 'select',
 			'options'                 => \System::getLanguages(),
