@@ -1,21 +1,21 @@
 {
-    "name": "icodr8/contao-translation-fields",
+    "name": "craffft/contao-translation-fields",
     "description": "Translation fields for Contao OpenSource CMS",
     "keywords": ["translate", "translation", "fields"],
     "type": "contao-module",
-    "homepage": "http://daniel-kiesel.de",
+    "homepage": "http://craffft.de",
     "license": "LGPL-3.0+",
     "authors": [
         {
             "name": "Daniel Kiesel",
-            "email": "icodr8@gmail.com",
+            "email": "daniel@craffft.de",
             "homepage": "http://daniel-kiesel.de",
             "role": "Developer"
         }
     ],
     "support": {
-        "issues": "https://github.com/iCodr8/contao-translation-fields/issues",
-        "source": "https://github.com/iCodr8/contao-translation-fields"
+        "issues": "https://github.com/Craffft/contao-translation-fields/issues",
+        "source": "https://github.com/Craffft/contao-translation-fields"
     },
     "require": {
         "php": ">=5.3.2",
