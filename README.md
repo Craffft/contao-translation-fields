@@ -21,7 +21,7 @@ http://www.gnu.org/licenses/lgpl-3.0.html
 Troubleshooting
 ---------------
 
-Directly on github! See https://github.com/iCodr8/contao-translation-fields/issues
+Directly on github! See https://github.com/Craffft/contao-translation-fields/issues
 
 Documentation
 =============
@@ -225,4 +225,4 @@ class MyApplicationRunconce extends \Controller
 ```
 
 E.g. you can have a look at the runconce.php from my extension Photoalbums2:
-https://github.com/iCodr8/contao-photoalbums2/blob/master/config/runonce.php
+https://github.com/Craffft/contao-photoalbums2/blob/master/config/runonce.php
