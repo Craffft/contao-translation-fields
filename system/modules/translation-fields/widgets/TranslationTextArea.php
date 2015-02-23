@@ -58,7 +58,6 @@ class TranslationTextArea extends \TextArea
 	 */
 	protected $strTemplate = 'be_widget';
 
-
 	/**
 	 * Add specific attributes
 	 * @param string
@@ -157,45 +156,26 @@ class TranslationTextArea extends \TextArea
 		$arrLngInputs = \TranslationFieldsWidgetHelper::getInputTranslationLanguages($this->varValue);
 
 		$arrFields = array();
-		$i = 0;
 
-		foreach ($arrLngInputs as $value)
-		{
-			$strScript = '';
-			$rte = false;
+        for ($i=0; $i < count($arrLngInputs); $i++) {
+            $value = $arrLngInputs[$i];
 
-			// Register the field name for rich text editor usage
-			if (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['rte']))
-			{
-				list ($file, $type) = explode('|', $this->rte);
-				$key = 'ctrl_' . $this->strId.'_'.$value;
+            $strRte = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['rte'];
+            $key = 'ctrl_' . $this->strId.'_'.$value;
 
-				$GLOBALS['TL_RTE'][$file][$key] = array
-				(
-					'id'   => $key,
-					'file' => $file,
-					'type' => $type
-				);
+            $strScript = $this->getRteScriptByTranslatedField($strRte, $key);
 
-				$strScript = sprintf("\n<script>tinyMCE.execCommand('mceAddControl', false, '%s');$('%s').erase('required')</script>",
-										$key,
-										$key);
-
-				$rte = true;
-			}
-
-			$arrFields[] = sprintf('<div class="tf_field_wrap tf_field_wrap_%s%s"><textarea name="%s[%s]" id="ctrl_%s" class="tf_field tl_textarea" rows="%s" cols="%s"%s onfocus="Backend.getScrollOffset()">%s</textarea>%s</div>',
-									$value,
-									($i > 0) ? ' hide' : '',
-									$this->strName,
-									$value,
-									$this->strId.'_'.$value,
-									$this->intRows,
-									$this->intCols,
-									$this->getAttributes(),
-									specialchars(($arrPost[$value] !== null) ? $arrPost[$value] : @$this->varValue[$value]), // see #4979
-									$strScript);
-			$i++;
+            $arrFields[] = sprintf('<div class="tf_field_wrap tf_field_wrap_%s%s"><textarea name="%s[%s]" id="%s" class="tf_field tl_textarea" rows="%s" cols="%s"%s onfocus="Backend.getScrollOffset()">%s</textarea>%s</div>',
+                                    $value,
+                                    ($i > 0) ? ' hide' : '',
+                                    $this->strName,
+                                    $value,
+                                    $key,
+                                    $this->intRows,
+                                    $this->intCols,
+                                    $this->getAttributes(),
+                                    specialchars(($arrPost[$value] !== null) ? $arrPost[$value] : @$this->varValue[$value]), // see #4979
+                                    $strScript);
 		}
 
 		// Get language button
@@ -204,13 +184,45 @@ class TranslationTextArea extends \TextArea
 		// Get language list
 		$strLngList = \TranslationFieldsWidgetHelper::getTranslationLanguagesList($this->varValue);
 
-		return sprintf('<div id="ctrl_%s" class="tf_wrap tf_textarea_wrap%s%s">%s%s%s</div>%s',
+		return sprintf('<div id="ctrl_%s_tf" class="tf_wrap tf_textarea_wrap%s%s">%s%s%s</div>%s',
 						$this->strId,
 						(($this->strClass != '') ? ' ' . $this->strClass : ''),
-						($rte ? ' rte' : ''),
+						(!empty($this->rte) ? ' rte' : ''),
 						implode(' ', $arrFields),
 						$strLngButton,
 						$strLngList,
 						$this->wizard);
 	}
+
+    protected function getRteScriptByTranslatedField($rte, $selector)
+    {
+        $updateMode = '';
+
+        // Replace the textarea with an RTE instance
+        if (!empty($rte))
+        {
+            list ($file, $type) = explode('|', $rte, 2);
+
+            if (!file_exists(TL_ROOT . '/system/config/' . $file . '.php'))
+            {
+                throw new \Exception(sprintf('Cannot find editor configuration file "%s.php"', $file));
+            }
+
+            // Backwards compatibility
+            $language = substr($GLOBALS['TL_LANGUAGE'], 0, 2);
+
+            if (!file_exists(TL_ROOT . '/assets/tinymce/langs/' . $language . '.js'))
+            {
+                $language = 'en';
+            }
+
+            ob_start();
+            // $selector and $language variables are used in the included file
+            include TL_ROOT . '/system/config/' . $file . '.php';
+            $updateMode = ob_get_contents();
+            ob_end_clean();
+        }
+
+        return $updateMode;
+    }
 }
