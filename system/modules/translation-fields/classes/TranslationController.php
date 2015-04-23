@@ -11,12 +11,10 @@
  * @copyright  Daniel Kiesel 2013-2014
  */
 
-
 /**
  * Namespace
  */
 namespace TranslationFields;
-
 
 /**
  * Class TranslationController
@@ -27,5 +25,5 @@ namespace TranslationFields;
  */
 class TranslationController extends \Controller
 {
-	// Helper to load the data container in static methods
+    // Helper to load the data container in static methods
 }

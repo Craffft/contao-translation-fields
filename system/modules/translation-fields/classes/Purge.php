@@ -32,7 +32,9 @@ class Purge extends \Controller
         $arrFids = $this->getUsedTranslationFieldIds($arrStructure);
 
         if (is_array($arrFids) && !empty($arrFids)) {
-            $database->prepare(sprintf("DELETE FROM tl_translation_fields WHERE fid NOT IN(%s)", implode(',', array_map('intval', $arrFids))))->execute();
+            $database->prepare(sprintf("DELETE FROM tl_translation_fields WHERE fid NOT IN(%s)",
+                implode(',', array_map('intval', $arrFids))
+            ))->execute();
         }
     }
 
@@ -47,7 +49,10 @@ class Purge extends \Controller
                 if (is_array($arrFields) && !empty($arrFields)) {
                     switch ($GLOBALS['TL_DCA'][$strTable]['config']['dataContainer']) {
                         case 'Table':
-                            $objData = $database->prepare(sprintf("SELECT %s FROM %s", implode(', ', $arrFields), $strTable))->execute();
+                            $objData = $database->prepare(sprintf("SELECT %s FROM %s",
+                                implode(', ', $arrFields),
+                                $strTable
+                            ))->execute();
 
                             if ($objData !== null) {
                                 foreach ($arrFields as $strField) {
@@ -104,20 +109,21 @@ class Purge extends \Controller
         $arrFiles = array();
 
         // Parse all active modules
-        foreach (\ModuleLoader::getActive() as $strModule)
-        {
+        foreach (\ModuleLoader::getActive() as $strModule) {
             $strDir = 'system/modules/' . $strModule . '/dca';
 
-            if (!is_dir(TL_ROOT . '/' . $strDir))
-            {
+            if (!is_dir(TL_ROOT . '/' . $strDir)) {
                 continue;
             }
 
-            foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
-            {
+            foreach (scan(TL_ROOT . '/' . $strDir) as $strFile) {
                 // Ignore non PHP files and files which have been included before
-                if (strncmp($strFile, '.', 1) === 0 || substr($strFile, -4) != '.php' || in_array($strFile, $arrFiles))
-                {
+                if (strncmp($strFile, '.', 1) === 0
+                    ||
+                    substr($strFile, -4) != '.php'
+                    ||
+                    in_array($strFile, $arrFiles)
+                ) {
                     continue;
                 }
 

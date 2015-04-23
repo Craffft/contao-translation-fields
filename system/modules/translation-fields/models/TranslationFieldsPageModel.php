@@ -11,12 +11,10 @@
  * @copyright  Daniel Kiesel 2013-2014
  */
 
-
 /**
  * Namespace
  */
 namespace TranslationFields;
-
 
 /**
  * Class TranslationFieldsPageModel
@@ -27,35 +25,32 @@ namespace TranslationFields;
  */
 class TranslationFieldsPageModel extends \Model
 {
+    /**
+     * strTable
+     *
+     * @var string
+     * @access protected
+     * @static
+     */
+    protected static $strTable = 'tl_page';
 
-	/**
-	 * strTable
-	 * 
-	 * @var string
-	 * @access protected
-	 * @static
-	 */
-	protected static $strTable = 'tl_page';
+    /**
+     * findRootPages function.
+     *
+     * @access public
+     * @static
+     * @param array
+     * @return object
+     */
+    public static function findRootPages(array $arrOptions = array())
+    {
+        $t = static::$strTable;
+        $arrColumns = array("$t.type='root'");
 
+        if (!isset($arrOptions['order'])) {
+            $arrOptions['order'] = "$t.fallback DESC, $t.sorting ASC";
+        }
 
-	/**
-	 * findRootPages function.
-	 * 
-	 * @access public
-	 * @static
-	 * @param array
-	 * @return object
-	 */
-	public static function findRootPages(array $arrOptions=array())
-	{
-		$t = static::$strTable;
-		$arrColumns = array("$t.type='root'");
-
-		if (!isset($arrOptions['order']))
-		{
-			$arrOptions['order'] = "$t.fallback DESC, $t.sorting ASC";
-		}
-
-		return static::findBy($arrColumns, $intPid, $arrOptions);
-	}
+        return static::findBy($arrColumns, $intPid, $arrOptions);
+    }
 }
