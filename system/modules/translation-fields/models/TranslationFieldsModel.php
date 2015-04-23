@@ -11,12 +11,10 @@
  * @copyright  Daniel Kiesel 2013-2014
  */
 
-
 /**
  * Namespace
  */
 namespace TranslationFields;
-
 
 /**
  * Class TranslationFieldsModel
@@ -27,49 +25,46 @@ namespace TranslationFields;
  */
 class TranslationFieldsModel extends \Model
 {
+    /**
+     * Name of the table
+     * @var string
+     */
+    protected static $strTable = 'tl_translation_fields';
 
-	/**
-	 * Name of the table
-	 * @var string
-	 */
-	protected static $strTable = 'tl_translation_fields';
+    /**
+     * findOneByFidAndLanguage function.
+     *
+     * @access public
+     * @static
+     * @param int $intFid
+     * @param string $strLanguage
+     * @param array $arrOptions (default: array())
+     * @return object
+     */
+    public static function findOneByFidAndLanguage($intFid, $strLanguage, array $arrOptions = array())
+    {
+        $t = static::$strTable;
 
+        $arrColumns = array("$t.fid=? AND $t.language=?");
+        $arrValues = array($intFid, $strLanguage);
 
-	/**
-	 * findOneByFidAndLanguage function.
-	 *
-	 * @access public
-	 * @static
-	 * @param int $intFid
-	 * @param string $strLanguage
-	 * @param array $arrOptions (default: array())
-	 * @return object
-	 */
-	public static function findOneByFidAndLanguage($intFid, $strLanguage, array $arrOptions=array())
-	{
-		$t = static::$strTable;
+        return static::findOneBy($arrColumns, $arrValues, $arrOptions);
+    }
 
-		$arrColumns = array("$t.fid=? AND $t.language=?");
-		$arrValues = array($intFid, $strLanguage);
+    /**
+     * getNextFid function.
+     *
+     * @access public
+     * @static
+     * @return int
+     */
+    public static function getNextFid()
+    {
+        $t = static::$strTable;
 
-		return static::findOneBy($arrColumns, $arrValues, $arrOptions);
-	}
+        $intFid = \Database::getInstance()->prepare("SELECT (fid + 1) AS nextFid FROM $t ORDER BY fid DESC")->limit(1)->executeUncached()->nextFid;
+        $intFid = ($intFid === null) ? 1 : $intFid;
 
-
-	/**
-	 * getNextFid function.
-	 *
-	 * @access public
-	 * @static
-	 * @return int
-	 */
-	public static function getNextFid()
-	{
-		$t = static::$strTable;
-
-		$intFid = \Database::getInstance()->prepare("SELECT (fid + 1) AS nextFid FROM $t ORDER BY fid DESC")->limit(1)->executeUncached()->nextFid;
-		$intFid = ($intFid === null) ? 1 : $intFid;
-
-		return $intFid;
-	}
+        return $intFid;
+    }
 }
