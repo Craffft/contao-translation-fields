@@ -11,12 +11,10 @@
  * @copyright  Daniel Kiesel 2013-2014
  */
 
-
 /**
  * Namespace
  */
 namespace TranslationFields;
-
 
 /**
  * Class TranslationTextArea
@@ -27,190 +25,192 @@ namespace TranslationFields;
  */
 class TranslationTextArea extends \TextArea
 {
+    /**
+     * Submit user input
+     * @var boolean
+     */
+    protected $blnSubmitInput = true;
 
-	/**
-	 * Submit user input
-	 * @var boolean
-	 */
-	protected $blnSubmitInput = true;
+    /**
+     * Add a for attribute
+     * @var boolean
+     */
+    protected $blnForAttribute = true;
 
-	/**
-	 * Add a for attribute
-	 * @var boolean
-	 */
-	protected $blnForAttribute = true;
+    /**
+     * Rows
+     * @var integer
+     */
+    protected $intRows = 12;
 
-	/**
-	 * Rows
-	 * @var integer
-	 */
-	protected $intRows = 12;
+    /**
+     * Columns
+     * @var integer
+     */
+    protected $intCols = 80;
 
-	/**
-	 * Columns
-	 * @var integer
-	 */
-	protected $intCols = 80;
+    /**
+     * Template
+     * @var string
+     */
+    protected $strTemplate = 'be_widget';
 
-	/**
-	 * Template
-	 * @var string
-	 */
-	protected $strTemplate = 'be_widget';
+    /**
+     * Add specific attributes
+     * @param string
+     * @param mixed
+     */
+    public function __set($strKey, $varValue)
+    {
+        switch ($strKey) {
+            case 'maxlength':
+                if ($varValue > 0) {
+                    $this->arrAttributes['maxlength'] = $varValue;
+                }
+                break;
 
+            case 'mandatory':
+                if ($varValue) {
+                    $this->arrAttributes['required'] = 'required';
+                } else {
+                    unset($this->arrAttributes['required']);
+                }
+                parent::__set($strKey, $varValue);
+                break;
 
-	/**
-	 * Add specific attributes
-	 * @param string
-	 * @param mixed
-	 */
-	public function __set($strKey, $varValue)
-	{
-		switch ($strKey)
-		{
-			case 'maxlength':
-				if ($varValue > 0)
-				{
-					$this->arrAttributes['maxlength'] = $varValue;
-				}
-				break;
+            case 'rows':
+                $this->intRows = $varValue;
+                break;
 
-			case 'mandatory':
-				if ($varValue)
-				{
-					$this->arrAttributes['required'] = 'required';
-				}
-				else
-				{
-					unset($this->arrAttributes['required']);
-				}
-				parent::__set($strKey, $varValue);
-				break;
+            case 'cols':
+                $this->intCols = $varValue;
+                break;
 
-			case 'rows':
-				$this->intRows = $varValue;
-				break;
+            default:
+                parent::__set($strKey, $varValue);
+                break;
+        }
+    }
 
-			case 'cols':
-				$this->intCols = $varValue;
-				break;
+    /**
+     * validator function.
+     *
+     * @access protected
+     * @param mixed $varInput
+     * @return int
+     */
+    protected function validator($varInput)
+    {
+        // Get language id
+        $intId = ($this->activeRecord) ? $this->activeRecord->{$this->strName} : $GLOBALS['TL_CONFIG'][$this->strName];
 
-			default:
-				parent::__set($strKey, $varValue);
-				break;
-		}
-	}
+        // Check if translation fields should not be empty saved
+        if (!$GLOBALS['TL_CONFIG']['dontfillEmptyTranslationFields']) {
+            // Fill all empty fields with the content of the fallback field
+            $varInput = \TranslationFieldsWidgetHelper::addFallbackValueToEmptyField($varInput);
+            parent::validator($varInput);
+        } else {
+            // Check only the first field
+            parent::validator($varInput[key($varInput)]);
+        }
 
+        // Check if array
+        if (is_array($varInput)) {
+            if (!parent::hasErrors()) {
+                // Save values and return fid
+                return \TranslationFieldsWidgetHelper::saveValuesAndReturnFid($varInput, $intId);
+            }
+        }
 
-	/**
-	 * validator function.
-	 *
-	 * @access protected
-	 * @param mixed $varInput
-	 * @return int
-	 */
-	protected function validator($varInput)
-	{
-		// Get language id
-		$intId = ($this->activeRecord) ? $this->activeRecord->{$this->strName} : $GLOBALS['TL_CONFIG'][$this->strName];
+        return $intId;
+    }
 
-		// Check if translation fields should not be empty saved
-		if (!$GLOBALS['TL_CONFIG']['dontfillEmptyTranslationFields'])
-		{
-			// Fill all empty fields with the content of the fallback field
-			$varInput = \TranslationFieldsWidgetHelper::addFallbackValueToEmptyField($varInput);
-			parent::validator($varInput);
-		}
-		else
-		{
-			// Check only the first field
-			parent::validator($varInput[key($varInput)]);
-		}
+    /**
+     * Generate the widget and return it as string
+     * @return string
+     */
+    public function generate()
+    {
+        // Get post array
+        $arrPost = \Input::post($this->strName);
 
-		// Check if array
-		if (is_array($varInput))
-		{
-			if (!parent::hasErrors())
-			{
-				// Save values and return fid
-				return \TranslationFieldsWidgetHelper::saveValuesAndReturnFid($varInput, $intId);
-			}
-		}
+        // Get languages array with values
+        $this->varValue = \TranslationFieldsWidgetHelper::getTranslationsByFid($this->varValue);
 
-		return $intId;
-	}
+        // Generate langauge fields
+        $arrLngInputs = \TranslationFieldsWidgetHelper::getInputTranslationLanguages($this->varValue);
 
+        $arrFields = array();
 
-	/**
-	 * Generate the widget and return it as string
-	 * @return string
-	 */
-	public function generate()
-	{
-		// Get post array
-		$arrPost = \Input::post($this->strName);
+        for ($i = 0; $i < count($arrLngInputs); $i++) {
+            $value = $arrLngInputs[$i];
 
-		// Get languages array with values
-		$this->varValue = \TranslationFieldsWidgetHelper::getTranslationsByFid($this->varValue);
+            $strRte = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['rte'];
+            $key = 'ctrl_' . $this->strId . '_' . $value;
 
-		// Generate langauge fields
-		$arrLngInputs = \TranslationFieldsWidgetHelper::getInputTranslationLanguages($this->varValue);
+            $strScript = $this->getRteScriptByTranslatedField($strRte, $key);
 
-		$arrFields = array();
-		$i = 0;
+            $arrFields[] = sprintf('<div class="tf_field_wrap tf_field_wrap_%s%s"><textarea name="%s[%s]" id="%s" class="tf_field tl_textarea" rows="%s" cols="%s"%s onfocus="Backend.getScrollOffset()">%s</textarea>%s</div>',
+                $value,
+                ($i > 0) ? ' hide' : '',
+                $this->strName,
+                $value,
+                $key,
+                $this->intRows,
+                $this->intCols,
+                $this->getAttributes(),
+                specialchars(($arrPost[$value] !== null) ? $arrPost[$value] : @$this->varValue[$value]), // see #4979
+                $strScript);
+        }
 
-		foreach ($arrLngInputs as $value)
-		{
-			$strScript = '';
-			$rte = false;
+        // Get language button
+        $strLngButton = \TranslationFieldsWidgetHelper::getCurrentTranslationLanguageButton();
 
-			// Register the field name for rich text editor usage
-			if (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['rte']))
-			{
-				list ($file, $type) = explode('|', $this->rte);
-				$key = 'ctrl_' . $this->strId.'_'.$value;
+        // Get language list
+        $strLngList = \TranslationFieldsWidgetHelper::getTranslationLanguagesList($this->varValue);
 
-				$GLOBALS['TL_RTE'][$file][$key] = array
-				(
-					'id'   => $key,
-					'file' => $file,
-					'type' => $type
-				);
+        return sprintf('<div id="ctrl_%s_tf" class="tf_wrap tf_textarea_wrap%s%s">%s%s%s</div>%s',
+            $this->strId,
+            (($this->strClass != '') ? ' ' . $this->strClass : ''),
+            (!empty($this->rte) ? ' rte' : ''),
+            implode(' ', $arrFields),
+            $strLngButton,
+            $strLngList,
+            $this->wizard);
+    }
 
-				$strScript = sprintf("\n<script>tinyMCE.execCommand('mceAddControl', false, '%s');$('%s').erase('required')</script>",
-										$key,
-										$key);
+    /**
+     * @param string $rte
+     * @param string $selector
+     * @return string
+     * @throws \Exception
+     */
+    protected function getRteScriptByTranslatedField($rte, $selector)
+    {
+        $updateMode = '';
 
-				$rte = true;
-			}
+        // Replace the textarea with an RTE instance
+        if (!empty($rte)) {
+            list ($file, $type) = explode('|', $rte, 2);
 
-			$arrFields[] = sprintf('<div class="tf_field_wrap tf_field_wrap_%s%s"><textarea name="%s[%s]" id="ctrl_%s" class="tf_field tl_textarea" rows="%s" cols="%s"%s onfocus="Backend.getScrollOffset()">%s</textarea>%s</div>',
-									$value,
-									($i > 0) ? ' hide' : '',
-									$this->strName,
-									$value,
-									$this->strId.'_'.$value,
-									$this->intRows,
-									$this->intCols,
-									$this->getAttributes(),
-									specialchars(($arrPost[$value] !== null) ? $arrPost[$value] : @$this->varValue[$value]), // see #4979
-									$strScript);
-			$i++;
-		}
+            if (!file_exists(TL_ROOT . '/system/config/' . $file . '.php')) {
+                throw new \Exception(sprintf('Cannot find editor configuration file "%s.php"', $file));
+            }
 
-		// Get language button
-		$strLngButton = \TranslationFieldsWidgetHelper::getCurrentTranslationLanguageButton();
+            // Backwards compatibility
+            $language = substr($GLOBALS['TL_LANGUAGE'], 0, 2);
 
-		// Get language list
-		$strLngList = \TranslationFieldsWidgetHelper::getTranslationLanguagesList($this->varValue);
+            if (!file_exists(TL_ROOT . '/assets/tinymce/langs/' . $language . '.js')) {
+                $language = 'en';
+            }
 
-		return sprintf('<div id="ctrl_%s" class="tf_wrap tf_textarea_wrap%s%s">%s%s%s</div>%s',
-						$this->strId,
-						(($this->strClass != '') ? ' ' . $this->strClass : ''),
-						($rte ? ' rte' : ''),
-						implode(' ', $arrFields),
-						$strLngButton,
-						$strLngList,
-						$this->wizard);
-	}
+            ob_start();
+            // $selector and $language variables are used in the included file
+            include TL_ROOT . '/system/config/' . $file . '.php';
+            $updateMode = ob_get_contents();
+            ob_end_clean();
+        }
+
+        return $updateMode;
+    }
 }
