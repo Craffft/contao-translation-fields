@@ -45,12 +45,13 @@ class TranslationFieldsPageModel extends \Model
     public static function findRootPages(array $arrOptions = array())
     {
         $t = static::$strTable;
-        $arrColumns = array("$t.type='root'");
+        $arrColumns = array("$t.type=?");
+        $arrValues = array('root');
 
         if (!isset($arrOptions['order'])) {
             $arrOptions['order'] = "$t.fallback DESC, $t.sorting ASC";
         }
 
-        return static::findBy($arrColumns, $intPid, $arrOptions);
+        return static::findBy($arrColumns, $arrValues, $arrOptions);
     }
 }
