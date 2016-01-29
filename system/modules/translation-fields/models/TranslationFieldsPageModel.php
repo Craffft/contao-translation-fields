@@ -1,46 +1,26 @@
 <?php
 
-/**
- * Contao Open Source CMS
+/*
+ * This file is part of the TranslationFields Bundle.
  *
- * Copyright (C) 2005-2014 Leo Feyer
+ * (c) Daniel Kiesel <https://github.com/iCodr8>
  *
- * @package    translation-fields
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @license    LGPL
- * @copyright  Daniel Kiesel 2013-2016
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
-/**
- * Namespace
- */
 namespace TranslationFields;
 
-/**
- * Class TranslationFieldsPageModel
- *
- * @copyright  Daniel Kiesel 2013-2016
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @package    translation-fields
- */
 class TranslationFieldsPageModel extends \Model
 {
     /**
-     * strTable
-     *
      * @var string
-     * @access protected
-     * @static
      */
     protected static $strTable = 'tl_page';
 
     /**
-     * findRootPages function.
-     *
-     * @access public
-     * @static
-     * @param array
-     * @return object
+     * @param array $arrOptions
+     * @return mixed
      */
     public static function findRootPages(array $arrOptions = array())
     {

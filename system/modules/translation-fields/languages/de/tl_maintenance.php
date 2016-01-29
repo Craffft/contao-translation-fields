@@ -1,15 +1,13 @@
 <?php
-/**
- * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2014 Leo Feyer
- * 
- * @package    translation-fields
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @license    LGPL 
- * @copyright  Daniel Kiesel 2013-2016
- */
 
+/*
+ * This file is part of the TranslationFields Bundle.
+ *
+ * (c) Daniel Kiesel <https://github.com/iCodr8>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 /**
  * Purge Jobs

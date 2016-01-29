@@ -1,28 +1,16 @@
 <?php
 
-/**
- * Contao Open Source CMS
+/*
+ * This file is part of the TranslationFields Bundle.
  *
- * Copyright (C) 2005-2014 Leo Feyer
+ * (c) Daniel Kiesel <https://github.com/iCodr8>
  *
- * @package    TranslationFields
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @license    LGPL
- * @copyright  Daniel Kiesel 2013-2016
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
-/**
- * Namespace
- */
 namespace TranslationFields;
 
-/**
- * Class Purge
- *
- * @copyright  Daniel Kiesel 2013-2016
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @package    translation-fields
- */
 class Purge extends \Controller
 {
     public function purgeTranslationFields()
@@ -38,6 +26,10 @@ class Purge extends \Controller
         }
     }
 
+    /**
+     * @param $arrStructure
+     * @return array
+     */
     protected function getUsedTranslationFieldIds($arrStructure)
     {
         $database = \Database::getInstance();
@@ -77,6 +69,9 @@ class Purge extends \Controller
         return $arrFids;
     }
 
+    /**
+     * @return array
+     */
     protected function listAllTranslationFields()
     {
         $arrStructure = array();
@@ -104,6 +99,9 @@ class Purge extends \Controller
         return $arrStructure;
     }
 
+    /**
+     * @return array
+     */
     protected function listDataContainerArrayFiles()
     {
         $arrFiles = array();

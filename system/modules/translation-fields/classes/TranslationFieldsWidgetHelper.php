@@ -1,48 +1,26 @@
 <?php
 
-/**
- * Contao Open Source CMS
+/*
+ * This file is part of the TranslationFields Bundle.
  *
- * Copyright (C) 2005-2014 Leo Feyer
+ * (c) Daniel Kiesel <https://github.com/iCodr8>
  *
- * @package    TranslationFields
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @license    LGPL
- * @copyright  Daniel Kiesel 2013-2016
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
-/**
- * Namespace
- */
 namespace TranslationFields;
 
-/**
- * Class TranslationFieldsWidgetHelper
- *
- * @copyright  Daniel Kiesel 2013-2016
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @package    translation-fields
- */
 class TranslationFieldsWidgetHelper extends \Backend
 {
     /**
-     * arrLng
-     *
-     * (default value: array())
-     *
      * @var array
-     * @access private
-     * @static
      */
     private static $arrLng = array();
 
     /**
-     * addFallbackValueToEmptyField function.
-     *
-     * @access public
-     * @static
-     * @param mixed $varInput
-     * @return mixed
+     * @param $varInput
+     * @return array
      */
     public static function addFallbackValueToEmptyField($varInput)
     {
@@ -63,11 +41,7 @@ class TranslationFieldsWidgetHelper extends \Backend
     }
 
     /**
-     * addValueToAllLanguages function.
-     *
-     * @access public
-     * @static
-     * @param string $strValue
+     * @param $strValue
      * @return array
      */
     public static function addValueToAllLanguages($strValue)
@@ -84,13 +58,9 @@ class TranslationFieldsWidgetHelper extends \Backend
     }
 
     /**
-     * saveValuesAndReturnFid function.
-     *
-     * @access public
-     * @static
-     * @param array $arrValues
-     * @param int $intFid (default: null)
-     * @return int
+     * @param $arrValues
+     * @param null $intFid
+     * @return null
      */
     public static function saveValuesAndReturnFid($arrValues, $intFid = null)
     {
@@ -144,11 +114,8 @@ class TranslationFieldsWidgetHelper extends \Backend
     }
 
     /**
-     * getTranslationsByFid function.
-     *
-     * @access public
-     * @static
-     * @param int $intFid
+     * @param $intFid
+     * @param bool $onlyActiveLanguages
      * @return array
      */
     public static function getTranslationsByFid($intFid, $onlyActiveLanguages = false)
@@ -185,13 +152,6 @@ class TranslationFieldsWidgetHelper extends \Backend
         return $arrData;
     }
 
-    /**
-     * setTranslationLanguages function.
-     *
-     * @access private
-     * @static
-     * @return void
-     */
     private static function setTranslationLanguages()
     {
         // Get all languages
@@ -247,11 +207,7 @@ class TranslationFieldsWidgetHelper extends \Backend
     }
 
     /**
-     * getTranslationLanguages function.
-     *
-     * @access public
-     * @static
-     * @param bool $blnReload (default: false)
+     * @param bool $blnReload
      * @return array
      */
     public static function getTranslationLanguages($blnReload = false)
@@ -264,11 +220,7 @@ class TranslationFieldsWidgetHelper extends \Backend
     }
 
     /**
-     * getEmptyTranslationLanguages function.
-     *
-     * @access public
-     * @static
-     * @param bool $blnReload (default: false)
+     * @param bool $blnReload
      * @return array
      */
     public static function getTranslationLanguageKeys($blnReload = false)
@@ -279,11 +231,7 @@ class TranslationFieldsWidgetHelper extends \Backend
     }
 
     /**
-     * getEmptyTranslationLanguages function.
-     *
-     * @access public
-     * @static
-     * @param bool $blnReload (default: false)
+     * @param bool $blnReload
      * @return array
      */
     public static function getEmptyTranslationLanguages($blnReload = false)
@@ -298,12 +246,8 @@ class TranslationFieldsWidgetHelper extends \Backend
     }
 
     /**
-     * getInputTranslationLanguages function.
-     *
-     * @access public
-     * @static
-     * @param array $varValue
-     * @param bool $blnReload (default: false)
+     * @param $varValue
+     * @param bool $blnReload
      * @return array
      */
     public static function getInputTranslationLanguages($varValue, $blnReload = false)
@@ -331,10 +275,6 @@ class TranslationFieldsWidgetHelper extends \Backend
     }
 
     /**
-     * getCurrentTranslationLanguageButton function.
-     *
-     * @access public
-     * @static
      * @return string
      */
     public static function getCurrentTranslationLanguageButton()
@@ -359,12 +299,7 @@ class TranslationFieldsWidgetHelper extends \Backend
     }
 
     /**
-     * getTranslationLanguagesList function.
-     *
-     * @access public
-     * @static
-     * @param string $strId
-     * @param array $varValue
+     * @param $varValue
      * @return string
      */
     public static function getTranslationLanguagesList($varValue)

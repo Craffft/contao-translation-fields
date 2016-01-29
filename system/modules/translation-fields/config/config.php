@@ -1,30 +1,26 @@
-<?php 
+<?php
 
-/**
- * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2014 Leo Feyer
- * 
- * @package    translation-fields
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @license    LGPL 
- * @copyright  Daniel Kiesel 2013-2016
+/*
+ * This file is part of the TranslationFields Bundle.
+ *
+ * (c) Daniel Kiesel <https://github.com/iCodr8>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
-
 
 /**
  * Set global path to this module
  */
 $GLOBALS['translation-fields']['PATH'] = 'system/modules/translation-fields';
+
 /**
  * Add CSS and JavaScript files
  */
-if (TL_MODE == 'BE')
-{
-	$GLOBALS['TL_CSS'][]        = $GLOBALS['translation-fields']['PATH'] . '/assets/css/translationfields.css';
-	$GLOBALS['TL_JAVASCRIPT'][] = $GLOBALS['translation-fields']['PATH'] . '/assets/js/translationfields.js';
+if (TL_MODE == 'BE') {
+    $GLOBALS['TL_CSS'][] = $GLOBALS['translation-fields']['PATH'] . '/assets/css/translationfields.css';
+    $GLOBALS['TL_JAVASCRIPT'][] = $GLOBALS['translation-fields']['PATH'] . '/assets/js/translationfields.js';
 }
-
 
 /**
  * BACK END MODULES
@@ -54,59 +50,12 @@ if (TL_MODE == 'BE')
  */
 array_insert($GLOBALS['BE_MOD']['system'], 7, array
 (
-	'translations' => array
-	(
-		'tables'	=> array('tl_translation_fields'),
-		'icon'		=> $GLOBALS['translation-fields']['PATH'] . '/assets/images/translation-icon.png',
-	)
+    'translations' => array
+    (
+        'tables' => array('tl_translation_fields'),
+        'icon'   => $GLOBALS['translation-fields']['PATH'] . '/assets/images/translation-icon.png',
+    )
 ));
-
-
-/**
- * FRONT END MODULES
- *
- * Front end modules are stored in a global array called "FE_MOD". You can add
- * your own modules by adding them to the array.
- *
- * $GLOBALS['FE_MOD'] = array
- * (
- *    'group_1' => array
- *    (
- *       'module_1' => 'ModuleClass1',
- *       'module_2' => 'ModuleClass2'
- *    )
- * );
- *
- * The keys (like "module_1") are the module names, which are e.g. stored in the
- * database and used to find the corresponding translations. The values (like
- * "ModuleClass1") are the names of the classes, which will be loaded when the
- * module is rendered. The class "ModuleClass1" has to be stored in a file
- * named "ModuleClass1.php" in your module folder.
- */
-
-
-/**
- * CONTENT ELEMENTS
- *
- * Content elements are stored in a global array called "TL_CTE". You can add
- * your own content elements by adding them to the array.
- *
- * $GLOBALS['TL_CTE'] = array
- * (
- *    'group_1' => array
- *    (
- *       'cte_1' => 'ContentClass1',
- *       'cte_2' => 'ContentClass2'
- *    )
- * );
- *
- * The keys (like "cte_1") are the element names, which are e.g. stored in the
- * database and used to find the corresponding translations. The values (like
- * "ContentClass1") are the names of the classes, which will be loaded when the
- * element is rendered. The class "ContentClass1" has to be stored in a file
- * named "ContentClass1.php" in your module folder.
- */
-
 
 /**
  * BACK END FORM FIELDS
@@ -127,84 +76,8 @@ array_insert($GLOBALS['BE_MOD']['system'], 7, array
  * "FieldClass1.php" in your module folder.
  */
 $GLOBALS['BE_FFL']['TranslationInputUnit'] = 'TranslationInputUnit';
-$GLOBALS['BE_FFL']['TranslationTextArea']  = 'TranslationTextArea';
+$GLOBALS['BE_FFL']['TranslationTextArea'] = 'TranslationTextArea';
 $GLOBALS['BE_FFL']['TranslationTextField'] = 'TranslationTextField';
-
-
-/**
- * FRONT END FORM FIELDS
- *
- * Front end form fields are stored in a global array called "TL_FFL". You can
- * add your own form fields by adding them to the array.
- *
- * $GLOBALS['TL_FFL'] = array
- * (
- *    'input'  => 'FieldClass1',
- *    'select' => 'FieldClass2'
- * );
- *
- * The keys (like "input") are the field names, which are e.g. stored in the
- * database and used to find the corresponding translations. The values (like
- * "FieldClass1") are the names of the classes, which will be loaded when the
- * field is rendered. The class "FieldClass1" has to be stored in a file named
- * "FieldClass1.php" in your module folder.
- */
-
-
-/**
- * PAGE TYPES
- *
- * Page types are stored in a global array called "TL_PTY". You can add your own
- * page types by adding them to the array.
- *
- * $GLOBALS['TL_PTY'] = array
- * (
- *    'type_1' => 'PageType1',
- *    'type_2' => 'PageType2'
- * );
- *
- * The keys (like "type_1") are the field names, which are e.g. stored in the
- * database and used to find the corresponding translations. The values (like
- * "PageType1") are the names of the classes, which will be loaded when the
- * page is rendered. The class "PageType1" has to be stored in a file named
- * "PageType1.php" in your module folder.
- */
-
-
-/**
- * MODEL MAPPINGS
- *
- * Model names are usually built from the table names, e.g. "tl_user_group"
- * becomes "UserGroupModel". There might be situations, however, where you need
- * to specify a custom mapping, e.g. when you are using nested namespaces.
- *
- * $GLOBALS['TL_MODELS'] = array
- * (
- *    'tl_user'       => 'Vendor\Application\UserModel',
- *    'tl_user_group' => 'Vendor\Application\UserGroupModel'
- * );
- *
- * You can register your mappings in the config.php file of your extension.
- */
-
-
-/**
- * MAINTENANCE MODULES
- *
- * Maintenance modules are stored in a global array called "TL_MAINTENANCE". You
- * can add your own maintenance modules by adding them to the array.
- *
- * $GLOBALS['TL_MAINTENANCE'] = array
- * (
- *    'ClearCache',
- *    'RebuildSearchIndex'
- * );
- *
- * Take a look at the system/modules/core/classes/PurgeData.php file to see how
- * maintenance modules are set up. The class "ClearCache" has to be stored in a
- * file named "ClearCache.php" in your module folder.
- */
-
 
 /**
  * PURGE JOBS
@@ -235,62 +108,3 @@ $GLOBALS['TL_PURGE']['tables']['translation_fields'] = array
     'callback' => array('\\TranslationFields\\Purge', 'purgeTranslationFields'),
     'affected' => array('tl_translation_fields')
 );
-
-
-/**
- * CRON JOBS
- *
- * Cron jobs are stored in a global array called "TL_CRON". You can add your own
- * cron jobs by adding them to the array.
- *
- * $GLOBALS['TL_CRON'] = array
- * (
- *    'monthly' => array
- *    (
- *       array('Automator', 'purgeImageCache')
- *    ),
- *    'weekly'   => array(),
- *    'daily'    => array(),
- *    'hourly'   => array(),
- *    'minutely' => array()
- * );
- *
- * Note that this is rather a command scheduler than a cron job, which does not
- * guarantee an exact execution time. You can replace the command scheduler with
- * a real cron job though.
- */
-
-
-/**
- * HOOKS
- *
- * Hooks are stored in a global array called "TL_HOOKS". You can register your
- * own functions by adding them to the array.
- *
- * $GLOBALS['TL_HOOKS'] = array
- * (
- *    'hook_1' => array
- *    (
- *       array('MyClass', 'myPostLogin'),
- *       array('MyClass', 'myPostLogout')
- *    )
- * );
- *
- * Hooks allow you to add functionality to the core without having to modify the
- * source code by registering callback functions to be executed on a particular
- * event. For more information see https://contao.org/manual.html.
- */
-
-
-/**
- * AUTO ITEMS
- *
- * Auto items are stored in a global array called "TL_AUTO_ITEM". You can
- * register your own auto items by adding them to the array.
- *
- * $GLOBALS['TL_AUTO_ITEM'] = array('items', 'events');
- *
- * Auto items are keywords, which are used as parameters by certain modules.
- * When rebuilding the search index URLs, Contao needs to know about these
- * keywords so it can handle them properly.
- */

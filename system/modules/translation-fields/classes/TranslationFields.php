@@ -1,35 +1,20 @@
 <?php
 
-/**
- * Contao Open Source CMS
+/*
+ * This file is part of the TranslationFields Bundle.
  *
- * Copyright (C) 2005-2014 Leo Feyer
+ * (c) Daniel Kiesel <https://github.com/iCodr8>
  *
- * @package    TranslationFields
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @license    LGPL
- * @copyright  Daniel Kiesel 2013-2016
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
-/**
- * Namespace
- */
 namespace TranslationFields;
 
-/**
- * Class TranslationFields
- *
- * @copyright  Daniel Kiesel 2013-2016
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @package    translation-fields
- */
 class TranslationFields extends \Controller
 {
     /**
-     * __construct function.
-     *
-     * @access public
-     * @return void
+     * TranslationFields constructor.
      */
     public function __construct()
     {
@@ -37,11 +22,8 @@ class TranslationFields extends \Controller
     }
 
     /**
-     * translateValue function.
-     *
-     * @access public
-     * @static
-     * @param mixed $varValue
+     * @param $varValue
+     * @param string $strForceLanguage
      * @return string
      */
     public static function translateValue($varValue, $strForceLanguage = '')
@@ -82,13 +64,9 @@ class TranslationFields extends \Controller
     }
 
     /**
-     * translateField function.
-     *
-     * @access protected
-     * @static
-     * @param string $strInputType
-     * @param array $varValue
-     * @return string
+     * @param $strInputType
+     * @param $varValue
+     * @return array|mixed|string
      */
     protected static function translateField($strInputType, $varValue)
     {
@@ -113,19 +91,16 @@ class TranslationFields extends \Controller
     }
 
     /**
-     * translateDCObject function.
-     *
-     * @access public
-     * @static
-     * @param object $objDC
-     * @return object
+     * @param \DataContainer $objDC
+     * @return \DataContainer
      */
-    public static function translateDCObject($objDC)
+    public static function translateDCObject(\DataContainer $objDC)
     {
         // Get table
         $strTable = $objDC->current()->getTable();
 
         // Load current data container
+
         $objTranslationController = new \TranslationController();
         $objTranslationController->loadDataContainer($strTable);
 
@@ -139,15 +114,11 @@ class TranslationFields extends \Controller
     }
 
     /**
-     * translateDCArray function.
-     *
-     * @access public
-     * @static
      * @param array $arrDC
-     * @param string $strTable
+     * @param $strTable
      * @return array
      */
-    public static function translateDCArray($arrDC, $strTable)
+    public static function translateDCArray(array $arrDC, $strTable)
     {
         if (count($GLOBALS['TL_DCA'][$strTable]['fields']) > 0) {
             foreach ($GLOBALS['TL_DCA'][$strTable]['fields'] as $field => $arrValues) {
@@ -159,11 +130,7 @@ class TranslationFields extends \Controller
     }
 
     /**
-     * getTranslationsByFid function.
-     *
-     * @access public
-     * @static
-     * @param int $intFid
+     * @param $intFid
      * @return array
      */
     public static function getTranslationsByFid($intFid)

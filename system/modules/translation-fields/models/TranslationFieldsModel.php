@@ -1,45 +1,25 @@
 <?php
 
-/**
- * Contao Open Source CMS
+/*
+ * This file is part of the TranslationFields Bundle.
  *
- * Copyright (C) 2005-2014 Leo Feyer
+ * (c) Daniel Kiesel <https://github.com/iCodr8>
  *
- * @package    translation-fields
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @license    LGPL
- * @copyright  Daniel Kiesel 2013-2016
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
-/**
- * Namespace
- */
 namespace TranslationFields;
 
-/**
- * Class TranslationFieldsModel
- *
- * @copyright  Daniel Kiesel 2013-2016
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @package    translation-fields
- */
 class TranslationFieldsModel extends \Model
 {
-    /**
-     * Name of the table
-     * @var string
-     */
     protected static $strTable = 'tl_translation_fields';
 
     /**
-     * findOneByFidAndLanguage function.
-     *
-     * @access public
-     * @static
-     * @param int $intFid
-     * @param string $strLanguage
-     * @param array $arrOptions (default: array())
-     * @return object
+     * @param $intFid
+     * @param $strLanguage
+     * @param array $arrOptions
+     * @return mixed
      */
     public static function findOneByFidAndLanguage($intFid, $strLanguage, array $arrOptions = array())
     {
@@ -52,17 +32,13 @@ class TranslationFieldsModel extends \Model
     }
 
     /**
-     * getNextFid function.
-     *
-     * @access public
-     * @static
-     * @return int
+     * @return int|mixed|null
      */
     public static function getNextFid()
     {
         $t = static::$strTable;
 
-        $intFid = \Database::getInstance()->prepare("SELECT (fid + 1) AS nextFid FROM $t ORDER BY fid DESC")->limit(1)->executeUncached()->nextFid;
+        $intFid = \Database::getInstance()->prepare("SELECT (fid + 1) AS nextFid FROM $t ORDER BY fid DESC")->limit(1)->execute()->nextFid;
         $intFid = ($intFid === null) ? 1 : $intFid;
 
         return $intFid;

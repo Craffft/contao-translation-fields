@@ -1,52 +1,25 @@
 <?php
 
-/**
- * Contao Open Source CMS
+/*
+ * This file is part of the TranslationFields Bundle.
  *
- * Copyright (C) 2005-2014 Leo Feyer
+ * (c) Daniel Kiesel <https://github.com/iCodr8>
  *
- * @package    translation-fields
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @license    LGPL
- * @copyright  Daniel Kiesel 2013-2016
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
-/**
- * Namespace
- */
 namespace TranslationFields;
 
-/**
- * Class TranslationTextField
- *
- * @copyright  Daniel Kiesel 2013-2016
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @package    translation-fields
- */
 class TranslationTextField extends \TextField
 {
-    /**
-     * Submit user input
-     * @var boolean
-     */
     protected $blnSubmitInput = true;
-
-    /**
-     * Add a for attribute
-     * @var boolean
-     */
     protected $blnForAttribute = false;
-
-    /**
-     * Template
-     * @var string
-     */
     protected $strTemplate = 'be_widget';
 
     /**
-     * Add specific attributes
-     * @param string
-     * @param mixed
+     * @param string $strKey
+     * @param mixed $varValue
      */
     public function __set($strKey, $varValue)
     {
@@ -77,11 +50,8 @@ class TranslationTextField extends \TextField
     }
 
     /**
-     * validator function.
-     *
-     * @access protected
      * @param mixed $varInput
-     * @return int
+     * @return mixed
      */
     protected function validator($varInput)
     {
@@ -110,7 +80,6 @@ class TranslationTextField extends \TextField
     }
 
     /**
-     * Generate the widget and return it as string
      * @return string
      */
     public function generate()
