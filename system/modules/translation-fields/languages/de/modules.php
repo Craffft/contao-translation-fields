@@ -8,7 +8,7 @@
  * @package    translation-fields
  * @author     Daniel Kiesel <daniel@craffft.de>
  * @license    LGPL 
- * @copyright  Daniel Kiesel 2013-2014 
+ * @copyright  Daniel Kiesel 2013-2016
  */
 
 
