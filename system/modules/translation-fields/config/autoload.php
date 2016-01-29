@@ -1,24 +1,21 @@
 <?php
 
-/**
- * Contao Open Source CMS
+/*
+ * This file is part of the TranslationFields Bundle.
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * (c) Daniel Kiesel <https://github.com/iCodr8>
  *
- * @package translation-fields
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
-
 
 /**
  * Register the namespaces
  */
 ClassLoader::addNamespaces(array
 (
-	'TranslationFields',
+    'TranslationFields',
 ));
-
 
 /**
  * Register the classes

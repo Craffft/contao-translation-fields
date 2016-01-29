@@ -1,15 +1,13 @@
 <?php
-/**
- * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2014 Leo Feyer
- * 
- * @package    translation-fields
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @license    LGPL 
- * @copyright  Daniel Kiesel 2013-2014 
- */
 
+/*
+ * This file is part of the TranslationFields Bundle.
+ *
+ * (c) Daniel Kiesel <https://github.com/iCodr8>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 /**
  * Fields
@@ -18,12 +16,10 @@ $GLOBALS['TL_LANG']['tl_translation_fields']['fid'] = array('Feld ID', 'Diese Fe
 $GLOBALS['TL_LANG']['tl_translation_fields']['language'] = array('Sprache', 'Dieses Feld stellt die Verknüpfung zu einer Sprache her.');
 $GLOBALS['TL_LANG']['tl_translation_fields']['content'] = array('Inhalt', 'Dieses Feld zeigt den Inhalt der Übersetzung.');
 
-
 /**
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_translation_fields']['translation_legend'] = 'Übersetzung';
-
 
 /**
  * Buttons

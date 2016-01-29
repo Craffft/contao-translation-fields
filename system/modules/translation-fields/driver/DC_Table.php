@@ -1,36 +1,21 @@
 <?php
 
-/**
- * Contao Open Source CMS
+/*
+ * This file is part of the TranslationFields Bundle.
  *
- * Copyright (C) 2005-2014 Leo Feyer
+ * (c) Daniel Kiesel <https://github.com/iCodr8>
  *
- * @package    TranslationFields
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @license    LGPL
- * @copyright  Daniel Kiesel 2013-2014
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
-/**
- * Namespace
- */
 namespace TranslationFields;
 
-/**
- * Class TranslationFields
- *
- * @copyright  Daniel Kiesel 2013-2014
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @package    translation-fields
- */
 class DC_Table extends \Contao\DC_Table
 {
     /**
-     * copy function.
-     *
-     * @access public
-     * @param bool $blnDoNotRedirect (default: false)
-     * @return bool
+     * @param bool $blnDoNotRedirect
+     * @return bool|int
      */
     public function copy($blnDoNotRedirect = false)
     {
@@ -40,16 +25,11 @@ class DC_Table extends \Contao\DC_Table
             'copyDataRecord'
         );
 
-        // Return parent copy
         return parent::copy($blnDoNotRedirect);
     }
 
     /**
-     * delete function.
-     *
-     * @access public
-     * @param bool $blnDoNotRedirect (default: false)
-     * @return void
+     * @param bool $blnDoNotRedirect
      */
     public function delete($blnDoNotRedirect = false)
     {

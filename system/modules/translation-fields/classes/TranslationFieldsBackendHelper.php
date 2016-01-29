@@ -1,38 +1,21 @@
 <?php
 
-/**
- * Contao Open Source CMS
+/*
+ * This file is part of the TranslationFields Bundle.
  *
- * Copyright (C) 2005-2014 Leo Feyer
+ * (c) Daniel Kiesel <https://github.com/iCodr8>
  *
- * @package    TranslationFields
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @license    LGPL
- * @copyright  Daniel Kiesel 2013-2014
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
-/**
- * Namespace
- */
 namespace TranslationFields;
 
-/**
- * Class TranslationFieldsBackendHelper
- *
- * @copyright  Daniel Kiesel 2013-2014
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @package    translation-fields
- */
 class TranslationFieldsBackendHelper extends \Backend
 {
     /**
-     * copyDataRecord function.
-     *
-     * @access public
-     * @static
-     * @param int $intId
+     * @param $intId
      * @param \DataContainer $dc
-     * @return void
      */
     public static function copyDataRecord($intId, \DataContainer $dc)
     {
@@ -93,13 +76,7 @@ class TranslationFieldsBackendHelper extends \Backend
     }
 
     /**
-     * deleteDataRecord function.
-     *
-     * @access public
-     * @static
-     * @param int $intId
-     * @param \DataContainer $dc
-     * @return void
+     * @param $dc
      */
     public static function deleteDataRecord($dc)
     {

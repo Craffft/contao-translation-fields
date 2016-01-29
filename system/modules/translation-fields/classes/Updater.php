@@ -1,38 +1,21 @@
 <?php
 
-/**
- * Contao Open Source CMS
+/*
+ * This file is part of the TranslationFields Bundle.
  *
- * Copyright (C) 2005-2014 Leo Feyer
+ * (c) Daniel Kiesel <https://github.com/iCodr8>
  *
- * @package    TranslationFields
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @license    LGPL
- * @copyright  Daniel Kiesel 2013-2014
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
-/**
- * Namespace
- */
 namespace TranslationFields;
 
-/**
- * Class Updater
- *
- * @copyright  Daniel Kiesel 2013-2014
- * @author     Daniel Kiesel <daniel@craffft.de>
- * @package    translation-fields
- */
 class Updater extends \Controller
 {
     /**
-     * convertTranslationField function.
-     *
-     * @access public
-     * @static
-     * @param string $table
-     * @param string $field
-     * @return void
+     * @param $table
+     * @param $field
      */
     public static function convertTranslationField($table, $field)
     {
