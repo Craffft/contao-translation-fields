@@ -84,13 +84,15 @@ class Purge extends \Controller
 
                 $arrFields = &$GLOBALS['TL_DCA'][$strFile]['fields'];
 
-                foreach ($arrFields as $strField => $varValue) {
-                    switch ($varValue['inputType']) {
-                        case 'TranslationInputUnit':
-                        case 'TranslationTextArea':
-                        case 'TranslationTextField':
-                            $arrStructure[$strFile][] = $strField;
-                            break;
+                if (is_array($arrFields)) {
+                    foreach ($arrFields as $strField => $varValue) {
+                        switch ($varValue['inputType']) {
+                            case 'TranslationInputUnit':
+                            case 'TranslationTextArea':
+                            case 'TranslationTextField':
+                                $arrStructure[$strFile][] = $strField;
+                                break;
+                        }
                     }
                 }
             }
