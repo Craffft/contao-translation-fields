@@ -78,7 +78,7 @@ $GLOBALS['TL_DCA']['tl_mytable']['fields']['myfield'] = array
     'label'                   => &$GLOBALS['TL_LANG']['tl_mytable']['myfield'],
     'exclude'                 => true,
     'inputType'               => 'textarea',
-    'eval'                    => array('rte'=>'tinyFlash', 'tl_class'=>'long'),
+    'eval'                    => array('rte'=>'tinyMCE', 'tl_class'=>'long'),
     'sql'                     => "text NULL"
 );
 ```
@@ -92,7 +92,7 @@ $GLOBALS['TL_DCA']['tl_mytable']['fields']['myfield'] = array
     'label'                   => &$GLOBALS['TL_LANG']['tl_mytable']['myfield'],
     'exclude'                 => true,
     'inputType'               => 'TranslationTextArea',
-    'eval'                    => array('rte'=>'tinyFlash', 'tl_class'=>'long'),
+    'eval'                    => array('rte'=>'tinyMCE', 'tl_class'=>'long'),
     'sql'                     => "int(10) unsigned NOT NULL default '0'",
     'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
 );
