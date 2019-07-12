@@ -119,7 +119,7 @@ class TranslationTextArea extends \TextArea
                 $this->intRows,
                 $this->intCols,
                 $this->getAttributes(),
-                specialchars(($arrPost[$value] !== null) ? $arrPost[$value] : @$this->varValue[$value]), // see #4979
+                \StringUtil::specialchars(($arrPost[$value] !== null) ? $arrPost[$value] : @$this->varValue[$value]), // see #4979
                 $strScript);
         }
 

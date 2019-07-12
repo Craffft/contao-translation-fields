@@ -92,7 +92,7 @@ class TranslationInputUnit extends \InputUnit
 
         foreach ($this->arrUnits as $arrUnit) {
             $arrUnits[] = sprintf('<option value="%s"%s>%s</option>',
-                specialchars($arrUnit['value']),
+                \StringUtil::specialchars($arrUnit['value']),
                 $this->isSelected($arrUnit),
                 $arrUnit['label']);
         }
@@ -117,7 +117,7 @@ class TranslationInputUnit extends \InputUnit
                 $this->strName,
                 $value,
                 $this->strId . '_' . $value,
-                specialchars(@$this->varValue['value'][$value]),
+                \StringUtil::specialchars(@$this->varValue['value'][$value]),
                 $this->getAttributes());
             $i++;
         }

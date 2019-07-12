@@ -328,7 +328,7 @@ class TranslationFieldsWidgetHelper extends \Backend
 
             $arrLngList[] = sprintf('<li id="lng_list_item_%s" class="tf_lng_item%s">%s%s</li>',
                 $key,
-                (strlen(specialchars(@$varValue[$key])) > 0) ? ' translated' : '',
+                (strlen(\StringUtil::specialchars(@$varValue[$key])) > 0) ? ' translated' : '',
                 $strLngIcon,
                 $value);
             $i++;

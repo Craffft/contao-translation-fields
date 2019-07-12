@@ -106,7 +106,7 @@ class TranslationTextField extends \TextField
                 $this->strName,
                 $value,
                 $this->strId . '_' . $value,
-                specialchars(($arrPost[$value] !== null) ? $arrPost[$value] : @$this->varValue[$value]), // see #4979
+                \StringUtil::specialchars(($arrPost[$value] !== null) ? $arrPost[$value] : @$this->varValue[$value]), // see #4979
                 $this->getAttributes());
             $i++;
         }
