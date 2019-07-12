@@ -1,1 +1,82 @@
-.tf_wrap{display:inline-block;position:relative;width:320px}.tf_wrap .tf_field_wrap{display:block}.tf_wrap .tf_field_wrap.hide{display:none}.tf_wrap .tf_field_wrap .tl_text{width:290px;padding-right:26px}.wizard .tf_wrap .tf_field_wrap{width:296px}.wizard .tf_wrap .tf_field_wrap .tl_text{width:266px;padding-right:26px}.long .tf_wrap .tf_field_wrap{width:670px}.long .tf_wrap .tf_field_wrap .tl_text{width:640px}.tf_wrap .tf_button{position:absolute;z-index:998;top:6px;right:6px;cursor:pointer}.tf_wrap .tf_lng_list{position:absolute;z-index:999;top:20px;left:-9000px;width:315px;padding:5px 2px 3px;border:1px solid #b8b8b8;border-top:none;background:#fff;-webkit-border-radius:0 0 3px 3px;-moz-border-radius:0 0 3px 3px;border-radius:0 0 3px 3px}.tf_wrap .tf_lng_list.active{left:0px}.tf_wrap .tf_lng_list .tf_lng_item{padding:1px 7px 3px;line-height:1.2;vertical-align:middle;list-style:none;margin-top:1px;cursor:pointer;background:#fee}.tf_wrap .tf_lng_list .tf_lng_item.translated{background:#fff}.tf_wrap .tf_lng_list .tf_lng_item:hover{background:#4064f7;color:#fff}.tf_wrap .tf_lng_list .tf_lng_item img{margin:-2px 7px 0px 0px;vertical-align:middle}.long .tf_wrap.tf_text_wrap{width:671px}.long .tf_wrap.tf_text_wrap .tf_lng_list{width:665px}.tf_wrap.tf_text_unit_wrap .tf_button{right:70px}.tf_wrap.tf_text_unit_wrap .tf_lng_list{width:250px}.tf_wrap.tf_textarea_wrap{width:686px}.tf_wrap.tf_textarea_wrap.rte .tf_lng_list{top:1px;border:1px solid #ccc;border-top:none;-webkit-border-radius:0 0px 0px 3px;-moz-border-radius:0 0px 0px 3px;border-radius:0 0px 0px 3px}.tf_wrap.tf_textarea_wrap .tl_textarea{width:678px !important}.tf_wrap.tf_textarea_wrap .mceToolbar>div{width:682px}.tf_wrap.tf_textarea_wrap .tf_lng_list{z-index:997;top:2px;padding-top:20px;-webkit-border-radius:0 3px 0px 3px;-moz-border-radius:0 3px 0px 3px;border-radius:0 3px 0px 3px}.tf_wrap.tf_textarea_wrap .tf_lng_list.active{left:auto;right:0px}#debug>*{z-index:1000}
+.tf_wrap {
+  display: inline-block;
+  position: relative;
+  width: 100%; }
+  .wizard .tf_wrap {
+    width: calc(100% - 26px); }
+  .tf_wrap .tf_field_wrap {
+    display: block; }
+    .tf_wrap .tf_field_wrap.hide {
+      display: none; }
+    .tf_wrap .tf_field_wrap .tl_text {
+      width: 100%;
+      padding-right: 26px; }
+  .tf_wrap .tf_button {
+    position: absolute;
+    z-index: 998;
+    top: 8px;
+    right: 8px;
+    cursor: pointer; }
+  .tf_wrap .tf_lng_list {
+    position: absolute;
+    z-index: 999;
+    top: 20px;
+    left: -9000px;
+    width: calc(100% - 6px);
+    padding: 5px 2px 3px;
+    border: 1px solid #b8b8b8;
+    border-top: none;
+    background: #fff;
+    -webkit-border-radius: 0 0 3px 3px;
+    -moz-border-radius: 0 0 3px 3px;
+    border-radius: 0 0 3px 3px; }
+    .tf_wrap .tf_lng_list.active {
+      left: 0; }
+    .tf_wrap .tf_lng_list .tf_lng_item {
+      padding: 1px 7px 3px;
+      line-height: 1.2;
+      vertical-align: middle;
+      list-style: none;
+      margin-top: 1px;
+      cursor: pointer;
+      background: #fee; }
+      .tf_wrap .tf_lng_list .tf_lng_item.translated {
+        background: #fff; }
+      .tf_wrap .tf_lng_list .tf_lng_item:hover {
+        background: #4064f7;
+        color: #fff; }
+      .tf_wrap .tf_lng_list .tf_lng_item img {
+        margin: -2px 7px 0 0;
+        vertical-align: middle; }
+  .tf_wrap.tf_text_unit_wrap .tf_button {
+    right: 70px; }
+  .tf_wrap.tf_textarea_wrap {
+    width: 100%; }
+    .tf_wrap.tf_textarea_wrap.rte .tf_lng_list {
+      top: 3px;
+      border: 1px solid #ccc;
+      border-top: none;
+      -webkit-border-radius: 0 0 0 3px;
+      -moz-border-radius: 0 0 0 3px;
+      border-radius: 0 0 0 3px; }
+      .tf_wrap.tf_textarea_wrap.rte .tf_lng_list.active {
+        right: auto;
+        width: calc(100% - 4px); }
+    .tf_wrap.tf_textarea_wrap .tl_textarea {
+      width: 100% !important; }
+    .tf_wrap.tf_textarea_wrap .tf_lng_list {
+      z-index: 997;
+      top: 2px;
+      padding-top: 20px;
+      -webkit-border-radius: 0 3px 0 3px;
+      -moz-border-radius: 0 3px 0 3px;
+      border-radius: 0 3px 0 3px; }
+      .tf_wrap.tf_textarea_wrap .tf_lng_list.active {
+        left: auto;
+        right: 0; }
+
+/* Contao debug bar z-index fix */
+#debug > * {
+  z-index: 1000; }
+
+/*# sourceMappingURL=translationfields.css.map */
