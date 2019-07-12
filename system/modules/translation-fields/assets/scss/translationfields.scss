@@ -1,7 +1,11 @@
 .tf_wrap {
   display: inline-block;
   position: relative;
-  width: 320px;
+  width: 100%;
+
+  .wizard & {
+    width: calc(100% - 26px);
+  }
 
   .tf_field_wrap {
     display: block;
@@ -11,33 +15,16 @@
     }
 
     .tl_text {
-      width: 290px;
+      width: 100%;
       padding-right: 26px;
-    }
-
-    .wizard & {
-      width: 296px;
-
-      .tl_text {
-        width: 266px;
-        padding-right: 26px;
-      }
-    }
-
-    .long & {
-      width: 670px;
-
-      .tl_text {
-        width: 640px;
-      }
     }
   }
 
   .tf_button {
     position: absolute;
     z-index: 998;
-    top: 6px;
-    right: 6px;
+    top: 8px;
+    right: 8px;
     cursor: pointer;
   }
 
@@ -46,7 +33,7 @@
     z-index: 999;
     top: 20px;
     left: -9000px;
-    width: 315px;
+    width: calc(100% - 6px);
     padding: 5px 2px 3px;
     border: 1px solid #b8b8b8;
     border-top: none;
@@ -56,7 +43,7 @@
     border-radius: 0 0 3px 3px;
 
     &.active {
-      left: 0px;
+      left: 0;
     }
 
     .tf_lng_item {
@@ -78,18 +65,8 @@
       }
 
       img {
-        margin: -2px 7px 0px 0px;
+        margin: -2px 7px 0 0;
         vertical-align: middle;
-      }
-    }
-  }
-
-  &.tf_text_wrap {
-    .long & {
-      width: 671px;
-
-      .tf_lng_list {
-        width: 665px;
       }
     }
   }
@@ -98,45 +75,42 @@
     .tf_button {
       right: 70px;
     }
-
-    .tf_lng_list {
-      width: 250px;
-    }
   }
 
   &.tf_textarea_wrap {
-    width: 686px;
+    width: 100%;
 
     &.rte {
       .tf_lng_list {
-        top: 1px;
+        top: 3px;
         border: 1px solid #ccc;
         border-top: none;
-        -webkit-border-radius: 0 0px 0px 3px;
-        -moz-border-radius: 0 0px 0px 3px;
-        border-radius: 0 0px 0px 3px;
+        -webkit-border-radius: 0 0 0 3px;
+        -moz-border-radius: 0 0 0 3px;
+        border-radius: 0 0 0 3px;
+
+        &.active {
+          right: auto;
+          width: calc(100% - 4px);
+        }
       }
     }
 
     .tl_textarea {
-      width: 678px !important;
-    }
-
-    .mceToolbar > div {
-      width: 682px;
+      width: 100% !important;
     }
 
     .tf_lng_list {
       z-index: 997;
       top: 2px;
       padding-top: 20px;
-      -webkit-border-radius: 0 3px 0px 3px;
-      -moz-border-radius: 0 3px 0px 3px;
-      border-radius: 0 3px 0px 3px;
+      -webkit-border-radius: 0 3px 0 3px;
+      -moz-border-radius: 0 3px 0 3px;
+      border-radius: 0 3px 0 3px;
 
       &.active {
         left: auto;
-        right: 0px;
+        right: 0;
       }
     }
   }
